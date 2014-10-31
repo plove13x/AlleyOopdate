@@ -1,0 +1,85 @@
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+* {
+    // outline: 1px solid blue;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.everythingContainer {
+    margin: 0 auto;
+    max-width: 1024px;
+}
+
+header {
+    border-bottom: 1px solid silver;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.secondaryBG {
+    position: relative;
+    height: 250px;
+    background-color: chartreuse;
+    background: url("http://wannadunk.com/wp-content/themes/eVid/timthumb.php?src=http://wannadunk.com/wp-content/uploads/2010/10/campbell-park.jpg&h=200&w=591&zc=1&q=90");
+    background: url("http://image.shutterstock.com/display_pic_with_logo/557335/557335,1284561818,2/stock-vector-vector-illustration-of-street-basketball-court-on-blacktop-61047421.jpg");
+    border-bottom: 1px solid silver;
+}
+
+.avatarBox {
+    position: absolute;
+    top: 200px;         /* 186 vs. 400 px depending on what's vertial-align: middle above */
+    left: 1.2em;
+    z-index: 1000;    
+    height: 150px;
+
+    img {
+        border-radius: 9px;
+    }
+}
+
+.navBar {
+    // position: relative;
+    height: 50px;
+    border-bottom: 1px solid silver;
+    text-align: right;
+    
+    // form {
+    //     height: 100%;
+    //     display: inline-block;
+    //     // vertical-align: middle;
+
+    .ollie {
+        display: inline-block;
+        margin: 1em 0;
+    }
+
+}
+
+
+
+.mainSection {
+
+}
+
+.pinnedMap {
+    width: 40em;
+    margin: 0 auto;
+}
+
+.mainSection img {
+    width: 100%;
+}
+
+.courtFilterBox {
+    text-align: center;
+}
+
+footer {
+    border-top: 1px solid silver;
+}
+

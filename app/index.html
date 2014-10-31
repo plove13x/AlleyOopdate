@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>WhozGotNext</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <script type="text/x-handlebars" data-template-name="application">    
+    <div class="everythingContainer">
+        <header>
+            Who&#8217;s Got Next Logo | Language: <select><option>English</option></select> | <a href="">Edit Profile</a> | <a href="">Log Out</a>
+        </header>
+
+        <div class="secondaryBG">
+            <div class="avatarBox">
+                <img src="http://fillmurray.com/150/150" />
+            </div>
+        </div>
+
+        <div class="navBar">
+            
+            <div class="ollie">
+            <!-- <form> -->
+                <label>Set Zip Code</label> <input type="text">
+                <button type="submit">Peep Courts</button>
+            <!-- </form> -->
+            
+            <!-- <a href="">Edit Profile</a> -->
+            </div>
+        </div>
+
+
+        <div class="mainSection">
+            <div class="pinnedMap">
+                <img src="/images/sf-vehicles.png" />
+            </div>
+
+            <div class="courtFilterBox"><label>Filter by Name</label> <input type="text"></div>
+            <ul>
+                <li>Court 1</li>
+                <li>Court 2</li>
+                <li>Court 3</li>
+            </ul>
+        </div>
+
+        <footer>
+            Who&#8217;s Got Next Copyright 2014 Pat Love.
+        </footer>
+    </div>      <!-- END EVERYTHING CONTAINER -->
+    </script>
+
+
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/firebase/firebase.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/ember/ember.js"></script>
+        <script src="bower_components/ember-data/index.js"></script>
+        <script src="bower_components/emberfire/dist/emberfire.min.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:js scripts/main.js -->
+        <!-- <script src="scripts/main.js"></script> -->
+        <script src="scripts/application.js"></script>
+        <script src="scripts/router.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
