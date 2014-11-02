@@ -26,48 +26,119 @@
         <![endif]-->
 
 
+
     <script type="text/x-handlebars" data-template-name="application">    
-    <div class="everythingContainer">
-        <header>
-            Who&#8217;s Got Next Logo | Language: <select><option>English</option></select> | <a href="">Edit Profile</a> | <a href="">Log Out</a>
-        </header>
 
-        <div class="secondaryBG">
-            <div class="avatarBox">
-                <img src="http://fillmurray.com/150/150" />
+        <div class="everythingContainer">
+            <header>
+                Who&#8217;s Got Next Logo | Language: <select><option>English</option></select> | <a href="">Edit Profile</a> | <a href="">Log Out</a>
+            </header>
+
+            <div class="notHeader">
+
+                {{outlet}}
+
+                <footer>
+                    Who&#8217;s Got Next &#169; 2014 Pat Love
+                </footer>  
+
+            </div>  <!-- END NOT HEADER -->
+        </div>      <!-- END EVERYTHING CONTAINER -->
+
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name="index">
+       
+        <div class="leftColumn">
+            <h1>Who&#8217;s Got Next?</h1>
+            <p>
+                top-fermenting yeast, "imperial, conditioning tank cask conditioned ale." mash tun, heat exchanger terminal gravity cask conditioning balthazar? berliner weisse; bung bright beer trappist autolysis anaerobic imperial top-fermenting yeast pitch. scotch ale heat exchanger, ale top-fermenting yeast imperial wort chiller.
+            </p>
+            <div>
+                <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
+            </div>
+        </div>
+        <div class="rightColumn">
+            <div class="signIn">
+                <form>
+                    <div>
+                        <input type="text" placeholder="handle/email">
+                    </div>
+                    <div>
+                        <input type="password" placeholder="password">
+                        <button>Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="register">
+                Never asked "Who's Got Next before?" Get in the game in ten seconds!
+                <form>
+                    <div>
+                        <input type="text" placeholder="handle (name you go by on the court)" size=40> 
+                    </div>
+                    <div>
+                        {{input type="email" value=email placeholder="email"}}
+                    </div>
+                    <div>
+                        {{input type="password" value=password placeholder="password"}}
+                    </div>
+                    <div>    
+                        <button {{action "createUser"}}>Join "Who's Got Next!"</button>
+                    </div>
+                </form>
             </div>
         </div>
 
-        <div class="navBar">
+    </script>
+
+
+                <!-- <form>
+                    <label>Set Zip Code</label> <input type="text">
+                    <button type="submit">Peep Courts</button>
+                </form> -->
+                
+                <!-- <a href="">Edit Profile</a> -->
+    <script type="text/x-handlebars" data-template-name="courts">
+    
+            <div class="secondaryBG">
+                <div class="avatarBox">
+                    <img src="http://fillmurray.com/150/150" />
+                </div>
+            </div>
+
+            <div class="navBar">
+                
+                <div class="ollie">
+
+                    <label>Set Zip Code</label> <input type="text">
+                    <button type="submit">Peep Courts</button>
+
+                
+
+                </div>
+            </div>
             
-            <div class="ollie">
-            <!-- <form> -->
-                <label>Set Zip Code</label> <input type="text">
-                <button type="submit">Peep Courts</button>
-            <!-- </form> -->
-            
-            <!-- <a href="">Edit Profile</a> -->
+            <div class="mainSection">
+                <div class="pinnedMap">
+                    <img src="/images/sf-vehicles.png" />
+                </div>
+
+                <div class="courtFilterBox">
+                    <label>Filter by Name</label> <input type="text">
+                </div>
+                <div class="leftColumn">
+                    <ul>
+                        <li>Court 1</li>
+                        <li>Court 2</li>
+                        <li>Court 3</li>
+                    </ul>
+                </div>
+                <div class="rightColumn">
+                    Add a new court!
+                </div>
             </div>
-        </div>
 
-
-        <div class="mainSection">
-            <div class="pinnedMap">
-                <img src="/images/sf-vehicles.png" />
-            </div>
-
-            <div class="courtFilterBox"><label>Filter by Name</label> <input type="text"></div>
-            <ul>
-                <li>Court 1</li>
-                <li>Court 2</li>
-                <li>Court 3</li>
-            </ul>
-        </div>
-
-        <footer>
-            Who&#8217;s Got Next Copyright 2014 Pat Love.
-        </footer>
-    </div>      <!-- END EVERYTHING CONTAINER -->
     </script>
 
 
@@ -98,6 +169,9 @@
         <!-- <script src="scripts/main.js"></script> -->
         <script src="scripts/application.js"></script>
         <script src="scripts/router.js"></script>
+        <script src="scripts/models/user.js"></script>
+        <script src="scripts/controllers/session_controller.js"></script>
+        <script src="scripts/controllers/index_controller.js"></script>
         <!-- endbuild -->
 </body>
 </html>

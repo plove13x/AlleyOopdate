@@ -16,23 +16,48 @@ body {
 }
 
 header {
-    border-bottom: 1px solid silver;
-    padding: 10px 0;
+    border-bottom: 0.1em solid silver;
+    padding: 1em 0;
     text-align: center;
 }
 
+// BEGIN index Style
+
+.leftColumn {
+    display: inline-block;
+    width: 50%;
+}
+
+.rightColumn {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.signIn {
+    margin-top: 2em;
+    background-color: chartreuse;
+}
+
+.register {
+    margin-top: 1em;
+    background-color: fuchsia;
+}
+
+// BEGIN courts Style
+
 .secondaryBG {
     position: relative;
-    height: 250px;
+    height: 17em;       /* 250px */
     background-color: chartreuse;
     background: url("http://wannadunk.com/wp-content/themes/eVid/timthumb.php?src=http://wannadunk.com/wp-content/uploads/2010/10/campbell-park.jpg&h=200&w=591&zc=1&q=90");
     background: url("http://image.shutterstock.com/display_pic_with_logo/557335/557335,1284561818,2/stock-vector-vector-illustration-of-street-basketball-court-on-blacktop-61047421.jpg");
-    border-bottom: 1px solid silver;
+    border-bottom: 0.1em solid silver;
 }
 
 .avatarBox {
     position: absolute;
-    top: 200px;         /* 186 vs. 400 px depending on what's vertial-align: middle above */
+    top: 14em;       /* 200px; */
     left: 1.2em;
     z-index: 1000;    
     height: 150px;
@@ -44,8 +69,8 @@ header {
 
 .navBar {
     // position: relative;
-    height: 50px;
-    border-bottom: 1px solid silver;
+    height: 3.5em;            /* 50px; */
+    border-bottom: 0.1em solid silver;
     text-align: right;
     
     // form {
@@ -61,13 +86,13 @@ header {
 }
 
 
-
 .mainSection {
 
 }
 
+
 .pinnedMap {
-    width: 40em;
+    width: 40em;    /*  %!!!!! */
     margin: 0 auto;
 }
 
@@ -79,7 +104,10 @@ header {
     text-align: center;
 }
 
+// END courts Style
+
 footer {
-    border-top: 1px solid silver;
+    border-top: 0.1em solid silver;
+    text-align: center;
 }
 
