@@ -1,13 +1,16 @@
+/* global Ember, WGN, Firebase, DS */
+
 (function(){
 'use strict';
 
-window.WGN = Ember.Application.create();
 
-WGN.ref = new Firebase('https://whosgotnext.firebaseio.com/');
+	window.WGN = Ember.Application.create();
 
-WGN.ApplicationAdapter = DS.FirebaseAdapter.extend({
-	firebase: WGN.ref
-});
+	WGN.ref = new Firebase('https://whosgotnext.firebaseio.com/');
+
+	WGN.ApplicationAdapter = DS.FirebaseAdapter.extend({
+		firebase: WGN.ref
+	});
 
 
 })();
