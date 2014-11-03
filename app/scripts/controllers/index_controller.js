@@ -24,7 +24,8 @@
 								  handle: handle,
 								});
 								user.save();
-								localStorage.setItem('currentUser', user);
+								// localStorage.setItem('currentUser', user);
+								localStorage.setItem('firebaseToken', authData.token);
 	              				self.set('controllers.session.currentUser', user);
 	              				// console.log(self.get('controllers.session.currentUser'));
 	              				
@@ -49,8 +50,8 @@
 						WGN.ref.authWithPassword(credentials, function(error, authData){
 							if ( ! error ) {
 								self.store.find('user', authData.uid).then(function(user){
-									self.set('controllers.session.currentUser', user);
-									localStorage.setItem('currentUser', user);
+									localStorage.setItem('firebaseToken', authData.token);
+	              					self.set('controllers.session.currentUser', user);
 
 									self.set('email', '');	
 									self.set('password','');
