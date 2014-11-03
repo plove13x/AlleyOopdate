@@ -21,17 +21,19 @@ WGN.IndexController = Ember.Controller.extend({
 							localStorage.setItem('currentUser', user);
               				self.set('controllers.session.currentUser', user);
               				// console.log(self.get('controllers.session.currentUser'));
+              				
+              				self.set('emailNU', '');	
+							self.set('passwordNU','');
+							self.set('handleNU', '');
+
               				resolve(authData);
-              				// self.transitionToRoute('courts');	 Will be reg. success page tho!
+              				self.transitionToRoute('welcome');	 
 						});
 
             		} else {
             			console.log('error!');
             		}
             	});
-          		// self.set('email', '');	
-          		// self.set('password','');
-          		// self.set('handle', '');
 	        });
 	    },
 	    signIn: function(){
@@ -43,6 +45,10 @@ WGN.IndexController = Ember.Controller.extend({
 							self.store.find('user', authData.uid).then(function(user){
 								self.set('controllers.session.currentUser', user);
 								localStorage.setItem('currentUser', user);
+
+								self.set('email', '');	
+								self.set('password','');
+
 								resolve(authData);
 								self.transitionToRoute('courts');	
 							});

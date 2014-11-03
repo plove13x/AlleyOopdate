@@ -5,6 +5,7 @@
 
 WGN.Router.map(function(){
 	this.route('index', {path: '/'});
+	this.route('welcome', {path:'/welcome'});
 	this.resource('courts', {path:'/courts'});
 });
 
