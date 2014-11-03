@@ -5,9 +5,9 @@ WGN.User = DS.Model.extend({
 	// snapshots: DS.hasMany('snapshot'),
 	avatarUrl: DS.attr('string'),
 	// courts: DS.hasMany('court'),
-	// latitude: DS.attr('number'),
-	// longitude: DS.attr('number'),
-	// location: function(){
-	//   return this.getProperties('latitude', 'longitude');
-	// }.property('latitude', 'longitude')
+	latitude: DS.attr('number'),
+	longitude: DS.attr('number'),
+	location: function(){
+		return this.getProperties('latitude', 'longitude');
+	}.property('latitude', 'longitude')
 });

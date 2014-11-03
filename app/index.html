@@ -32,7 +32,7 @@
         <div class="everythingContainer">
             <header>
                 Who&#8217;s Got Next Logo | Language: <select><option>English</option></select> 
-                {{#if currentUser}} | <a href="">Edit Profile</a> | <button {{action "signOut"}}>Sign Out</button>{{/if}}
+                {{#if currentUser}} | {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>{{/if}}
             </header>
 
             <div class="notHeader">
@@ -100,6 +100,16 @@
         <p>Add an avatar now?</p>
         <button {{action "proceedToCourts"}}>I&#8217;m ready to ball</button>
     </script>
+
+
+    <script type="text/x-handlebars" data-template-name="editProfile">
+        Yo.
+        {{this.model.handle}}
+        {{input type="text" value=this.model.handle}}
+        <button {{action "updateProfile"}}>Update Profile</button>
+    </script>
+
+
 
 
                 <!-- <form>
@@ -179,10 +189,12 @@
         <script src="scripts/application.js"></script>
         <script src="scripts/router.js"></script>
         <script src="scripts/models/user.js"></script>
+        <script src="scripts/models/court.js"></script>
         <script src="scripts/controllers/session_controller.js"></script>
         <script src="scripts/controllers/application_controller.js"></script>
         <script src="scripts/controllers/index_controller.js"></script>
         <script src="scripts/controllers/welcome_controller.js"></script>
+        <script src="scripts/controllers/editProfile_controller.js"></script>
         <!-- endbuild -->
 </body>
 </html>
