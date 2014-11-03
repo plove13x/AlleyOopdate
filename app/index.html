@@ -63,11 +63,11 @@
             <div class="signIn">
                 <form>
                     <div>
-                        <input type="text" placeholder="handle/email">
+                        {{input type="email" value=abc placeholder="email"}}
                     </div>
                     <div>
-                        <input type="password" placeholder="password">
-                        <button>Sign In</button>
+                        {{input type="password" value=def placeholder="password"}}
+                        <button {{action "signIn"}}>Sign In</button>
                     </div>
                 </form>
             </div>
@@ -75,13 +75,13 @@
                 Never asked "Who's Got Next before?" Get in the game in ten seconds!
                 <form>
                     <div>
-                        <input type="text" placeholder="handle (name you go by on the court)" size=40> 
-                    </div>
-                    <div>
                         {{input type="email" value=email placeholder="email"}}
                     </div>
                     <div>
                         {{input type="password" value=password placeholder="password"}}
+                    </div>
+                    <div>
+                        {{input type="text" value=handle placeholder="handle (name you go by on the court)" size=40}} 
                     </div>
                     <div>    
                         <button {{action "createUser"}}>Join "Who's Got Next!"</button>
