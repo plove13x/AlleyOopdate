@@ -2,9 +2,10 @@ WGN.IndexController = Ember.Controller.extend({
 	needs: ['session'],
 	actions: {
 	    createUser: function(){
-			var credentials = this.getProperties('email', 'password');
+			var newUserCred = this.getProperties('emailNU', 'passwordNU');
+			var credentials = {email: newUserCred.emailNU, password: newUserCred.passwordNU}
 			var self = this;
-			var handle = this.get('handle');
+			var handle = this.get('handleNU');
 
 			return new Ember.RSVP.Promise(function(resolve, reject){
           		WGN.ref.createUser(credentials, function(error){
@@ -24,6 +25,8 @@ WGN.IndexController = Ember.Controller.extend({
               				// self.transitionToRoute('courts');	 Will be reg. success page tho!
 						});
 
+            		} else {
+            			console.log('error!');
             		}
             	});
           		// self.set('email', '');	
