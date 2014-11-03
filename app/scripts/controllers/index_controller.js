@@ -31,5 +31,23 @@ WGN.IndexController = Ember.Controller.extend({
           		// self.set('handle', '');
 	        });
 	    },
+	    signIn: function(){
+	    	var credentials = this.getProperties('email', 'password');
+	    	var self = this;
+				return new Ember.RSVP.Promise(function(resolve, reject){
+					WGN.ref.authWithPassword(credentials, function(error, authData){
+						if ( ! error ) {
+							self.store.find('user', authData.uid).then(function(user){
+								self.set('controllers.session.currentUser', user);
+								localStorage.setItem('currentUser', user);
+								resolve(authData);
+								self.transitionToRoute('courts');	
+							});
+						} else {
+							console.log('error!');
+						}
+					});	
+				});
+	    }
 	},
 });
