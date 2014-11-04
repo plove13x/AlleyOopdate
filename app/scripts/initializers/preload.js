@@ -14,43 +14,32 @@
 				var seshController = container.lookup('controller:session');
 				console.log(1);
 				WGN.ref.authWithCustomToken(fToken, function(error, authData){
-							if ( ! error ) {
-								console.log(2);
-								store.find('user', authData.uid).then(function(user){
+					if ( ! error ) {
+						console.log(2);
+						store.find('user', authData.uid).then(function(user){
 
-									seshController.set('currentUser', user);
-									console.log(3);
-									localStorage.setItem('currentUser', user);
-									WGN.advanceReadiness();
+							seshController.set('currentUser', user);
+							console.log(3);
+							// localStorage.setItem('currentUser', user);		/* UNNECESSARY? */
+							WGN.advanceReadiness();
 
-									// self.set('email', '');	
-									// self.set('password','');
+							// self.set('email', '');	
+							// self.set('password','');
 
-									// resolve(authData);
-									// self.transitionToRoute('courts');	
-								});
-							} else {
-								console.log('error!');
-							}
+							// resolve(authData);
+							// self.transitionToRoute('courts');	
+						});
+					} else {
+						console.log('no Token!');
+					}
 				});	
 			}
 		}				
 			// } else {
 			// 	console.log('login');
 			// }
-
-
-			// var self = this;
-			// Ember.$.getJSON('/preload.json', function(json){
-				// WGN.handlePreloadData(json);
-				// WGN.advanceReadiness();
-			// });
 		
 	});
-
-	// WGN.ready = function(){
-	// 	Ember.debug(WGN.hasPreloadedData()); //prints true
-	// };
 
 
 })();

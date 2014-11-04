@@ -103,8 +103,14 @@
 
 
     <script type="text/x-handlebars" data-template-name="editProfile">
-        Yo.
-        {{this.model.handle}}
+        <div>
+            {{#if url}}
+                <img class="" {{bind-attr src=url}}>
+                {{else}}
+                <button {{action "addAvatar"}}>Add Avatar!</button>
+            {{/if}}
+        </div>
+        Tighten your Handle: 
         {{input type="text" value=this.model.handle}}
         <button {{action "updateProfile"}}>Update Profile</button>
     </script>
@@ -186,9 +192,6 @@
 
         <!-- build:js scripts/main.js -->
         <!-- <script src="scripts/main.js"></script> -->
-<!--         <script src="preload.json"></script>
-        <script src="scripts/preload.json"></script>
-        <script src="scripts/initializers/preload.json"></script> -->
         <script src="scripts/application.js"></script>
         <script src="scripts/initializers/preload.js"></script>
         <script src="scripts/router.js"></script>

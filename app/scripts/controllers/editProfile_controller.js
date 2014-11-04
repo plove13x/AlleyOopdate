@@ -9,6 +9,7 @@
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		actions: {
 			updateProfile: function(){
+				this.model.save();
 				this.transitionToRoute('courts');
 				console.log(this.model);
 			}

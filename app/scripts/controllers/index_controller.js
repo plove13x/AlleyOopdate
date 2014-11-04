@@ -19,9 +19,9 @@
 
 							WGN.ref.authWithPassword(credentials, function(error, authData){
 								var user = self.store.createRecord('user', {
-								  id: authData.uid,
-								  email: credentials.email,
-								  handle: handle,
+									id: authData.uid,
+									email: credentials.email,
+									handle: handle,
 								});
 								user.save();
 								// localStorage.setItem('currentUser', user);
