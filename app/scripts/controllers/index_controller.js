@@ -22,6 +22,7 @@
 									id: authData.uid,
 									email: credentials.email,
 									handle: handle,
+									avatarUrl: ''
 								});
 								user.save();
 								// localStorage.setItem('currentUser', user);

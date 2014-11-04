@@ -104,15 +104,20 @@
 
     <script type="text/x-handlebars" data-template-name="editProfile">
         <div>
-            {{#if url}}
-                <img class="" {{bind-attr src=url}}>
-                {{else}}
-                <button {{action "addAvatar"}}>Add Avatar!</button>
+
+            <button {{action "addAvatar"}}>Rip a pic</button>
+            {{#if avatarUrl}}
+            <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
+            {{else}}
+            <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
             {{/if}}
+
+
         </div>
         Tighten your Handle: 
         {{input type="text" value=this.model.handle}}
         <button {{action "updateProfile"}}>Update Profile</button>
+        <button {{action "doNotUpdate"}}>Cancel</button>
     </script>
 
 
@@ -187,6 +192,7 @@
         <script src="bower_components/ember/ember.js"></script>
         <script src="bower_components/ember-data/index.js"></script>
         <script src="bower_components/emberfire/dist/emberfire.min.js"></script>
+        <script src="bower_components/filepicker/filepicker.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

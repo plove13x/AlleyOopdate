@@ -24,7 +24,12 @@
 			// return this.store.find('user', localStorage.getItem('currentUser').id;
 			return this.store.find('user', this.controllerFor('session').get('currentUser').id);
 			// return this.store.find('user', this.get('controllers.session.currentUser').id);
-		}
+		},
+
+		setupController: function(controller, model){
+    		this._super(controller, model);
+    		controller.set('avatarUrl', '');
+    	}
 	});
 
 

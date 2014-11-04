@@ -44,6 +44,16 @@ header {
     background-color: fuchsia;
 }
 
+
+// BEGIN editProfile Style
+
+.avatarToUpload {
+    object-fit: contain;
+    width: 300px;
+    height: 300px;    
+}
+
+
 // BEGIN courts Style
 
 .secondaryBG {
