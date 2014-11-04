@@ -28,7 +28,7 @@
 
 		setupController: function(controller, model){
     		this._super(controller, model);
-    		controller.set('avatarUrl', '');
+    		controller.set('avatarUrl', null);
     	}
 	});
 

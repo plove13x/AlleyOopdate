@@ -1,4 +1,4 @@
-/* global Ember, WGN, Firebase, DS */
+/* global Ember, WGN, Firebase, DS, filepicker */
 
 (function(){
 'use strict';
@@ -6,7 +6,7 @@
 
 	window.WGN = Ember.Application.create();
 
-	filepicker.setKey("AnhJmKBYSEWpXfytA3RKQz");
+	filepicker.setKey('AnhJmKBYSEWpXfytA3RKQz');
 
 	WGN.ref = new Firebase('https://whosgotnext.firebaseio.com/');
 

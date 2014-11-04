@@ -48,9 +48,10 @@ header {
 // BEGIN editProfile Style
 
 .avatarToUpload {
-    object-fit: contain;
+    // object-fit: contain;
     width: 300px;
-    height: 300px;    
+    height: 300px;
+    border-radius: 9px;    
 }
 
 
@@ -68,11 +69,13 @@ header {
 .avatarBox {
     position: absolute;
     top: 14em;       /* 200px; */
-    left: 1.2em;
+    left: 1.7em;
     z-index: 1000;    
     height: 150px;
 
     img {
+        height: 150px;
+        width: 150px;
         border-radius: 9px;
     }
 }
@@ -102,7 +105,7 @@ header {
 
 
 .pinnedMap {
-    width: 40em;    /*  %!!!!! */
+    width: 38em;    /*  %!!!!! */
     margin: 0 auto;
 }
 

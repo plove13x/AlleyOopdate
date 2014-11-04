@@ -89,6 +89,9 @@
                     </div>
                 </form>
             </div>
+            <div class="ad">
+            Stupid Ad to keep this thang runnin&#8217?;
+            </div>
         </div>
 
     </script>
@@ -104,12 +107,17 @@
 
     <script type="text/x-handlebars" data-template-name="editProfile">
         <div>
-
-            <button {{action "addAvatar"}}>Rip a pic</button>
+            Current Poster: 
+            {{#if this.model.avatarUrl}}
+                <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
+            {{else}}
+            <img src="http://fillmurray.com/150/150" />
+            {{/if}}
+            <button {{action "addAvatar"}}>Rip a new pic</button>
+            {{log avatarUrl}}
             {{#if avatarUrl}}
             <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
-            {{else}}
-            <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
+
             {{/if}}
 
 
@@ -133,7 +141,11 @@
     
             <div class="secondaryBG">
                 <div class="avatarBox">
+                {{#if currentUser.avatarUrl}}
+                    <img {{bind-attr src=currentUser.avatarUrl}}/>
+                {{else}}
                     <img src="http://fillmurray.com/150/150" />
+                {{/if}}
                 </div>
             </div>
 
@@ -165,7 +177,9 @@
                     </ul>
                 </div>
                 <div class="rightColumn">
-                    Add a new court!
+                    {{input type="text" value=courtName placeholder="Court Name"}}
+                    {{input type="text" value=whenClosed placeholder="When Closed"}}
+                    <button {{action "createCourt"}}>Add a new court!</button>
                 </div>
             </div>
 
@@ -208,6 +222,7 @@
         <script src="scripts/controllers/index_controller.js"></script>
         <script src="scripts/controllers/welcome_controller.js"></script>
         <script src="scripts/controllers/editProfile_controller.js"></script>
+        <script src="scripts/controllers/courts_controller.js"></script>
 
 
         
