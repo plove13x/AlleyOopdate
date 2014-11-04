@@ -171,15 +171,23 @@
                 </div>
                 <div class="leftColumn">
                     <ul>
-                        <li>Court 1</li>
-                        <li>Court 2</li>
-                        <li>Court 3</li>
+                        {{#each}}
+                            <li>{{name}}</li>
+                        {{/each}}
+                        <li>Fixture Court</li>
                     </ul>
                 </div>
                 <div class="rightColumn">
-                    {{input type="text" value=courtName placeholder="Court Name"}}
-                    {{input type="text" value=whenClosed placeholder="When Closed"}}
-                    <button {{action "createCourt"}}>Add a new court!</button>
+                    {{#if isEditing}}
+                        {{input type="text" value=courtName placeholder="Court Name"}}
+                        {{input type="text" value=whenClosed placeholder="When Closed"}}
+                        {{input type="text" value=latitude placeholder="Latitude"}}
+                        {{input type="text" value=longitude placeholder="Longitude"}}
+                        <button {{action "submitCourt"}}>Add Court to Database</button>
+                        <button {{action "cancelSubmit"}}>Cancel</button>
+                    {{else}}
+                        <button {{action "drawCourt"}}>Add a Court!</button>
+                    {{/if}}
                 </div>
             </div>
 
