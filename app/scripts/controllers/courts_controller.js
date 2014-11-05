@@ -33,7 +33,13 @@
 						longitude: longitude,
 						whenClosed: whenClosed
 					});
-					court.save();
+					court.save().then(function(){
+						WGN.geoFire.set('court:'+court.get('id'), [latitude, longitude]).then(function() {
+								console.log('Provided key has been added to GeoFire');
+							}, function(error) {
+								console.log('Error: ' + error);
+							});
+					});
 		    	});
 
 				this.set('courtName', '');	

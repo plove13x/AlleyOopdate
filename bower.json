@@ -6,7 +6,8 @@
     "jquery": "~1.11.0",
     "underscore": "~1.7.0",
     "emberfire": "~1.2.7",
-    "filepicker": "*"
+    "filepicker": "*",
+    "geofire": "~3.0.3"
   },
   "devDependencies": {}
 }
