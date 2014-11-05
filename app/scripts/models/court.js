@@ -6,6 +6,7 @@
 
     WGN.Court = DS.Model.extend({
         name: DS.attr('string'),
+        address: DS.attr('string'),
         latitude: DS.attr('number'),
       	longitude: DS.attr('number'),
       	location: function(){
