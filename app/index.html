@@ -178,6 +178,8 @@
                     </ul>
                 </div>
                 <div class="rightColumn">
+                        {{input type="text" value=newAddress placeholder="Court Address"}}
+                        <button {{action "fetchJSON"}}>fetchJSON</button>
                     {{#if isEditing}}
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=whenClosed placeholder="When Closed"}}
@@ -233,7 +235,6 @@
         <script src="scripts/controllers/courts_controller.js"></script>
 
 
-        
 
         <!-- endbuild -->
 </body>

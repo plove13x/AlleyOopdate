@@ -27,11 +27,31 @@
 					longitude: longitude
 				});
 				court.save();
+
+				this.set('courtName', '');	
+				this.set('whenClosed',''); 
+				this.set('latitude', ''); 
+				this.set('longitude', ''); 
+
 				this.set('isEditing', false);
 		    },
 
 		    cancelSubmit: function(){
 		    	this.set('isEditing', false);
+		    },
+
+		    fetchJSON: function(){
+		    	var newAddress = this.get('newAddress');
+		    	newAddress = newAddress.replace(/\s+/g, '+');
+
+		    	$.getJSON( 'https://maps.googleapis.com/maps/api/geocode/json?address=' + newAddress + 
+		    		'&key=AIzaSyCL3fbgwq4b6nGdezKibSCXF5SfvKJQ-IM', function( data ) {
+		    		// console.log(data.results[0].geometry.location.lat);
+		    		var newLat = data.results[0].geometry.location.lat;
+		    		var newLng = data.results[0].geometry.location.lng;
+		    		console.log(newLat, newLng);
+		    		
+		    	});
 		    }
 		}
 	});
