@@ -25,7 +25,8 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
+            <div id="pinnedMapz">
+            </div>
 
     <script type="text/x-handlebars" data-template-name="application">    
 
@@ -137,6 +138,9 @@
                 </form> -->
                 
                 <!-- <a href="">Edit Profile</a> -->
+
+
+                                    <!-- <img src="/images/sf-vehicles.png" /> -->
     <script type="text/x-handlebars" data-template-name="courts">
     
             <div class="secondaryBG">
@@ -162,8 +166,8 @@
             </div>
             
             <div class="mainSection">
-                <div class="pinnedMap">
-                    <img src="/images/sf-vehicles.png" />
+                <div id="pinnedMap">
+
                 </div>
 
                 <div class="courtFilterBox">
@@ -205,6 +209,9 @@
             ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
 
+
+
+
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -220,6 +227,9 @@
         <!-- endbower -->
         <!-- endbuild -->
 
+
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
         <!-- build:js scripts/main.js -->
         <!-- <script src="scripts/main.js"></script> -->
         <script src="scripts/application.js"></script>
@@ -233,6 +243,11 @@
         <script src="scripts/controllers/welcome_controller.js"></script>
         <script src="scripts/controllers/editProfile_controller.js"></script>
         <script src="scripts/controllers/courts_controller.js"></script>
+        <script src="scripts/views/courts_view.js"></script>
+<!--         <script type="text/javascript">
+            google.maps.event.addDomListener(window, "load", initializeMap);
+        </script> -->
+
 
 
 
