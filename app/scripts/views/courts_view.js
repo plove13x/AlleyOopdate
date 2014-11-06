@@ -13,10 +13,6 @@
 		    this.initializeMap();
 		},
 
-		willDestroyElement: function() {
-
-		},
-
 		userCoords: [32.830849, -96.769813],
 
 		getUserCoords: function(){
@@ -57,6 +53,8 @@
 				radius: radiusInKm
 			});
 
+			var self = this;
+			self.set('geoQuery', geoQuery);
 
 			geoQuery.on('key_entered', function(courtId, courtLocation) {
 				console.log('fired');
@@ -160,6 +158,12 @@
 			    return marker;
 			}
 		
+		},
+
+		willDestroyElement: function() {
+			var self = this;
+			console.log('no');
+			self.geoQuery.cancel();
 		},
 
 		// loadGoogleMapsScript: function(){
