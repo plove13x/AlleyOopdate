@@ -6,6 +6,7 @@
 
 	WGN.SessionController = Ember.Controller.extend({
 		currentUser: null,
+		userCoords: null,
 		// authenticate: function(credentials){
 		// 	var self = this;
 		// 	return new Ember.RSVP.Promise(function(resolve, reject){

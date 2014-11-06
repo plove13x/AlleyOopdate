@@ -20,6 +20,24 @@
 
 							seshController.set('currentUser', user);
 							console.log(3);
+
+
+
+
+									// (function(){
+									// 	navigator.geolocation.getCurrentPosition(function(position){
+									// 		var testLat = position.coords.latitude;
+									// 		var testLng = position.coords.longitude;
+									// 		var userCoords = [testLat, testLng];
+									// 		console.log(testLat);
+									// 	});
+									// })().done(function(){
+									// 	seshController.set('userCoords', userCoords);
+									// });
+
+									
+
+
 							// localStorage.setItem('currentUser', user);		/* UNNECESSARY? */
 							WGN.advanceReadiness();
 

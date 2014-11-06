@@ -175,13 +175,15 @@
                 <div class="leftColumn">
                     <ul>
                         {{#each}}
-                            <li><p>{{name}}</p>{{address}}</li>
+                            <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
                         {{/each}}
                         <li>Fixture Court</li>
                     </ul>
                 </div>
                 <div class="rightColumn">
-
+                    
+                    {{outlet}}
+                    
                     {{#if isEditing}}
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=newAddress placeholder="Court Address"}}
@@ -196,6 +198,10 @@
 
     </script>
 
+
+    <script type="text/x-handlebars" data-template-name="courts/profile">
+            {{name}}: {{whenClosed}}
+    </script>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

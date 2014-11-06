@@ -9,10 +9,12 @@
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		actions: {
 		    signOut: function(){
+		    	WGN.ref.unauth();
 		    	console.log('Trying to sign you out...');
 				localStorage.removeItem('firebaseToken');
   				this.set('controllers.session.currentUser', null);
 				this.transitionToRoute('index');
+
 		    }
 		}
 	});

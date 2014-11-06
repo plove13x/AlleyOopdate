@@ -8,11 +8,16 @@
 
 	// var self = this;
 
+
+
+	// 
 	WGN.Router.map(function(){
 		this.route('index', {path: '/'});
 		this.route('welcome', {path:'/welcome'});
 		this.route('editProfile', {path:'/editProfile'});
-		this.resource('courts', {path:'/courts'});
+		this.resource('courts', function(){
+			this.route('profile', {path: ':court_id'});
+		});
 	});
 
 	WGN.IndexRoute = Ember.Route.extend({
