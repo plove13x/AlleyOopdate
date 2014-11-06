@@ -15,6 +15,15 @@
 
 		userCoords: [32.830849, -96.769813],
 
+		searchQueryChanged: function() {
+			var searchCoords = this.get('controller.searchCoords');
+			// this.set('userCoords', searchCoords);
+			if (searchCoords) {
+				console.log(searchCoords);
+			}			
+			// console.log(searchCoords);
+		}.observes('controller.searchCoords'),
+
 		getUserCoords: function(){
 			var self = this;
 			navigator.geolocation.getCurrentPosition(function(position){
@@ -76,8 +85,8 @@
 							// Create a new marker for the court
 							// court.marker = createCourtMarker(court, getCourtColor(court));
 							court.marker = createCourtMarker(court);
-							console.log(court);
-							console.log(court.marker);
+							// console.log(court);
+							// console.log(court.marker);
 						}
 
 					});
@@ -145,8 +154,8 @@
 			/* Adds a marker for the inputted court to the map */						/* see if this is getting called w/o refresh!!! could just be not rendering to DOM */
 			// function createCourtMarker(court, courtColor) {
 			function createCourtMarker(court) {
-				console.log(court);
-				console.log(court.latitude);
+				// console.log(court);
+				// console.log(court.latitude);
 				var marker = new google.maps.Marker({
 					// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
 					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',

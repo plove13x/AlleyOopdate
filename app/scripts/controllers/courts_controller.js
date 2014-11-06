@@ -8,7 +8,24 @@
 		needs: ['session'],
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		isEditing: false,
+		searchCoords: null,
 		actions: {
+
+			updateQueryLocation: function(){
+				var newSearch = this.get('newSearchLocation');
+				newSearch = newSearch.replace(/\s+/g, '+');
+				var self = this;
+
+				$.getJSON( 'https://maps.googleapis.com/maps/api/geocode/json?address=' + newSearch + 
+		    		'&key=AIzaSyCL3fbgwq4b6nGdezKibSCXF5SfvKJQ-IM', function( data ) {
+		    		// console.log(data.results[0].geometry.location.lat);
+		    	}).then(function(data){
+		    		var latitude = data.results[0].geometry.location.lat;
+		    		var longitude = data.results[0].geometry.location.lng;
+		    		self.set('searchCoords', [latitude, longitude]);
+		    	});
+			},
+
 			drawCourt: function(){
 				this.set('isEditing', true);
 			},
