@@ -22,7 +22,7 @@ WGN.CourtsView = Ember.View.extend({
 		};
 		var center = locations['GranadaTheater'];
 
-		var radiusInKm = 0.5;
+		var radiusInKm = 8;					/* was 0.5. 1? */
 
 
 		/*************/
@@ -65,6 +65,25 @@ WGN.CourtsView = Ember.View.extend({
 		});
 
 
+		/* Removes court markers from the map when they exit the query */
+		geoQuery.on('key_exited', function(courtId, courtLocation) {
+			// Get the court from the list of courts in the query
+			courtId = courtId.split(":")[1];
+			var court = courtsInQuery[courtId];
+
+			// If the court's data has already been loaded from the Open Data Set, remove its marker from the map
+			if (court !== true) {
+				court.marker.setMap(null);
+			}
+
+			// Remove the court from the list of courts in the query
+			delete courtsInQuery[courtId];
+		});
+
+
+
+
+
 		/*****************/
 		/*  GOOGLE MAPS  */
 		/*****************/		
@@ -74,7 +93,7 @@ WGN.CourtsView = Ember.View.extend({
 		// Create the Google Map
 		map = new google.maps.Map(document.getElementById('pinnedMap'), {
 			center: mapCenter,
-			zoom: 15,
+			zoom: 12,							/* Was 15. 13? */
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
@@ -87,7 +106,7 @@ WGN.CourtsView = Ember.View.extend({
 			fillOpacity: 0.35,
 			map: map,
 			center: mapCenter,
-			radius: ((radiusInKm) * 1000),
+			radius: ((radiusInKm) * 1000),		/* Was 1000. 7500? */
 			draggable: true
 		});
 
@@ -117,7 +136,6 @@ WGN.CourtsView = Ember.View.extend({
 				optimized: true,
 				map: map
 		  	});
-		    console.log(court.lat);
 
 		    return marker;
 		}
