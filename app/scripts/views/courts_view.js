@@ -10,19 +10,11 @@
 		didInsertElement: function() {
 		    this._super();
 		    this.getUserCoords();
-		    this.initializeMap();
+		    // this.initializeMap();
 		},
 
 		userCoords: [32.830849, -96.769813],
 
-		searchQueryChanged: function() {
-			var searchCoords = this.get('controller.searchCoords');
-			// this.set('userCoords', searchCoords);
-			if (searchCoords) {
-				console.log(searchCoords);
-			}			
-			// console.log(searchCoords);
-		}.observes('controller.searchCoords'),
 
 		getUserCoords: function(){
 			var self = this;
@@ -66,7 +58,7 @@
 			self.set('geoQuery', geoQuery);
 
 			geoQuery.on('key_entered', function(courtId, courtLocation) {
-				console.log('fired');
+				console.log('key_entered fired');
 				// Specify that the court has entered this query
 				courtId = courtId.split(":")[1];
 				courtsInQuery[courtId] = true;
@@ -123,6 +115,7 @@
 				zoom: 12,							/* Was 15. 13? */
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			});
+			this.set('map', map);	
 
 			// Create a draggable circle centered on the map
 			var circle = new google.maps.Circle({
@@ -156,6 +149,7 @@
 			function createCourtMarker(court) {
 				// console.log(court);
 				// console.log(court.latitude);
+				console.log('createCourtMarker', map);
 				var marker = new google.maps.Marker({
 					// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
 					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
@@ -173,7 +167,32 @@
 			var self = this;
 			console.log('no');
 			self.geoQuery.cancel();
+			this.set('map', null);
 		},
+
+
+		searchQueryChanged: function() {
+			var searchCoords = this.get('controller.searchCoords');
+			// this.set('userCoords', searchCoords);
+			if (searchCoords) {
+				console.log(searchCoords);
+
+				this.set('userCoords', searchCoords);
+				console.log(this.get('userCoords'));
+				console.log(this.geoQuery);
+
+				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
+				this.geoQuery.cancel();
+				// document.getElementById('pinnedMap').innerHTML = "";
+				this.get('geoQuery').cancel();
+				console.log(this.geoQuery);
+				// ($('#pinnedMap')).html('');
+				this.initializeMap();
+				console.log(this.map);
+
+			};			
+			// console.log(searchCoords);
+		}.observes('controller.searchCoords'),
 
 		// loadGoogleMapsScript: function(){
 
