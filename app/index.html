@@ -191,7 +191,9 @@
                         <button {{action "submitCourt"}}>Add Court to Database</button>
                         <button {{action "cancelSubmit"}}>Cancel</button>
                     {{else}}
-                        <button {{action "drawCourt"}}>Add a Court!</button>
+                        <p>
+                            <button {{action "drawCourt"}}>Add a Court!</button>
+                        </p>
                     {{/if}}
                 </div>
             </div>
@@ -199,8 +201,28 @@
     </script>
 
 
+    <!--            <p>
+            {{#each}}
+            {{this.snapshot.snapshotText}}
+            {{/each}}
+            </p>
+            -->
     <script type="text/x-handlebars" data-template-name="courts/profile">
             {{name}}: {{whenClosed}}
+
+            {{#if isPosting}}
+                {{input type="text" value=a placeholder="a"}}
+                {{input type="text" value=b placeholder="b"}}
+                {{input type="text" value=snapshotText placeholder="snapshotText"}}
+                <button {{action "postSnapshot"}}>Post Snapshot</button>
+                <button {{action "cancelSnapshot"}}>Cancel Snapshot</button>
+            {{else}}
+                <button {{action "addSnapshot"}}>Add Snapshot</button>
+            {{/if}}
+
+
+
+            
     </script>
 
 
@@ -242,12 +264,14 @@
         <script src="scripts/router.js"></script>
         <script src="scripts/models/user.js"></script>
         <script src="scripts/models/court.js"></script>
+        <script src="scripts/models/snapshot.js"></script>
         <script src="scripts/controllers/session_controller.js"></script>
         <script src="scripts/controllers/application_controller.js"></script>
         <script src="scripts/controllers/index_controller.js"></script>
         <script src="scripts/controllers/welcome_controller.js"></script>
         <script src="scripts/controllers/editProfile_controller.js"></script>
         <script src="scripts/controllers/courts_controller.js"></script>
+        <script src="scripts/controllers/courtsProfile_controller.js"></script>
         <script src="scripts/views/courts_view.js"></script>
 <!--         <script type="text/javascript">
             google.maps.event.addDomListener(window, "load", initializeMap);
