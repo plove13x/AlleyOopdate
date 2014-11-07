@@ -7,9 +7,14 @@
 
 	WGN.CourtsView = Ember.View.extend({
 
+
 		didInsertElement: function() {
 		    this._super();
-		    this.getUserCoords();
+		    var self = this;
+		    if (!WGN.map) {
+				self.instantiateMap();
+		    };
+			this.getUserCoords();
 		    // this.initializeMap();
 		},
 
@@ -17,20 +22,34 @@
 
 
 		getUserCoords: function(){
-			var self = this;
-			navigator.geolocation.getCurrentPosition(function(position){
-				var testLat = position.coords.latitude;
-				var testLng = position.coords.longitude;
-				var userCoords = [testLat, testLng];
-				console.log(testLat);
-				self.set('userCoords', userCoords);				/* check to make sure controller is still there */
+			console.log($('#pinnedMap').html());
+			if ($('#pinnedMap')) {
+
+				var self = this;
+				navigator.geolocation.getCurrentPosition(function(position){
+					var testLat = position.coords.latitude;
+					var testLng = position.coords.longitude;
+					var userCoords = [testLat, testLng];
+					console.log(testLat);
+					self.set('userCoords', userCoords)			/* check to make sure controller is still there */
+				});
 				self.initializeMap();
+			}
+
+		},
+
+		instantiateMap: function(){
+			var mapCenter = new google.maps.LatLng(this.get('userCoords'));
+			WGN.map = new google.maps.Map(document.getElementById('pinnedMap'), {			/* Use ember get view's element */
+				center: mapCenter,
+				zoom: 12,							/* Was 15. 13? */
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
 			});
 		},
 
 		initializeMap: function() {
 
-			var map;
+			// WGN.map;
 
 			// Set the center as Granada Theater
 			var locations = {
@@ -107,15 +126,29 @@
 			/*  GOOGLE MAPS  */
 			/*****************/		
 			// Get the location as a Google Maps latitude-longitude object
-			var mapCenter = new google.maps.LatLng(center[0], center[1]);
+			// var mapCenter = new google.maps.LatLng(center[0], center[1]);
 
-			// Create the Google Map
-			map = new google.maps.Map(document.getElementById('pinnedMap'), {			/* Use ember get view's element */
-				center: mapCenter,
-				zoom: 12,							/* Was 15. 13? */
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			});
-			this.set('map', map);	
+			// // Create the Google Map
+			// WGN.map = new google.maps.Map(document.getElementById('pinnedMap'), {			/* Use ember get view's element */
+			// 	center: mapCenter,
+			// 	zoom: 12,							/* Was 15. 13? */
+			// 	mapTypeId: google.maps.MapTypeId.ROADMAP,
+			// 	// searchQueryChanged: function() {
+			// 	// 	var self = this;
+			// 	// 	var searchCoords = self.get('controller.searchCoords');
+			// 	// 	// this.set('userCoords', searchCoords);
+			// 	// 	if (searchCoords) {
+			// 	// 		console.log(searchCoords);
+			// 	// 		mapCenter = new google.maps.LatLng(2, 4);
+			// 	// 		self.set('userCoords', searchCoords);
+			// 	// 		console.log(this.center);
+			// 	// 	};		
+			// 	// 	console.log(this.center);	
+			// 	// 	// console.log(searchCoords);
+			// 	// }.observes('this.controller.searchCoords'),
+
+			// });
+			// this.set('map', WGN.map);	
 
 			// Create a draggable circle centered on the map
 			var circle = new google.maps.Circle({
@@ -124,11 +157,13 @@
 				strokeWeight: 1,
 				fillColor: '#B650FF',
 				fillOpacity: 0.35,
-				map: map,
-				center: mapCenter,
+				map: WGN.map,
+				center: {lat: this.get('userCoords')[0], lng: this.get('userCoords')[1]},
 				radius: ((radiusInKm) * 1000),		/* Was 1000. 7500? */
 				draggable: true
 			});
+
+			this.set('circle', circle);
 
 			//Update the query's criteria every time the circle is dragged
 			var updateCriteria = _.debounce(function() {
@@ -149,13 +184,13 @@
 			function createCourtMarker(court) {
 				// console.log(court);
 				// console.log(court.latitude);
-				console.log('createCourtMarker', map);
+				console.log('createCourtMarker', WGN.map);
 				var marker = new google.maps.Marker({
 					// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
 					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
 					position: new google.maps.LatLng(court.latitude, court.longitude),
 					optimized: true,
-					map: map
+					map: WGN.map
 			  	});
 
 			    return marker;
@@ -179,17 +214,31 @@
 
 				this.set('userCoords', searchCoords);
 				console.log(this.get('userCoords'));
+				WGN.map.setCenter({lat: searchCoords[0], lng: searchCoords[1]});
 				console.log(this.geoQuery);
+				// this.geoQuery.cancel();
+				// console.log(this.geoQuery);
 
-				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
-				this.geoQuery.cancel();
-				// document.getElementById('pinnedMap').innerHTML = "";
-				this.get('geoQuery').cancel();
-				console.log(this.geoQuery);
-				// ($('#pinnedMap')).html('');
-				this.initializeMap();
-				console.log(this.map);
+				var self = this;
+				// this.set('geoQuery'.center, ({lat: searchCoords[0], lng: searchCoords[1]}) );
 
+				// var query2 = this.get('geoQuery');
+				// // query2.center = {lat: searchCoords[0], lng: searchCoords[1]};
+				// this.set('geoQuery', query2);
+				var radiusInKm = 8;
+				var circle = new google.maps.Circle({
+					strokeColor: '#6D3099',
+					strokeOpacity: 0.7,
+					strokeWeight: 1,
+					fillColor: '#B650FF',
+					fillOpacity: 0.35,
+					map: WGN.map,
+					center: {lat: searchCoords[0], lng: searchCoords[1]},
+					radius: ((radiusInKm) * 1000),		/* Was 1000. 7500? */
+					draggable: true
+				});
+				// this.get('circle').setCenter({lat: searchCoords[0], lng: searchCoords[1]});
+			self.initializeMap();
 			};			
 			// console.log(searchCoords);
 		}.observes('controller.searchCoords'),
