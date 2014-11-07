@@ -67,7 +67,7 @@
 					WGN.ref.child("courts").child(courtId).once("value", function(dataSnapshot) {
 						// Get the court data from the Open Data Set
 						var court = dataSnapshot.val();						/* I ADDED THIS VAR!!!!! */
-
+						court.id = courtId;
 						// If the court has not already exited this query in the time it took to look up its data in the Open Data
 						// Set, add it to the map
 						if (court !== null && courtsInQuery[courtId] === true) {
@@ -140,7 +140,7 @@
 			}, 10);
 			google.maps.event.addListener(circle, "drag", updateCriteria);				/* use ember dom event for drag */
 
-
+			var self = this;
 			/**********************/
 			/*  HELPER FUNCTIONS  */
 			/**********************/
@@ -155,7 +155,17 @@
 					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
 					position: new google.maps.LatLng(court.latitude, court.longitude),
 					optimized: true,
-					map: map
+					map: map,
+					clickable: true,
+					click: console.log('test')
+					// anchorPoint: (x:2, y:4)
+			  	});
+
+				
+			  	google.maps.event.addListener(marker, "click", function(){
+			  		console.log(self.get('controller'));
+			  		self.get('controller').transitionToRoute('/courts/'+court.id);
+			  		console.log(court);
 			  	});
 
 			    return marker;
