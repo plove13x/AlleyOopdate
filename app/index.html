@@ -201,11 +201,7 @@
     </script>
 
 
-    <!--            <p>
-            {{#each}}
-            {{this.snapshot.snapshotText}}
-            {{/each}}
-            </p>
+    <!--                      
             -->
     <script type="text/x-handlebars" data-template-name="courts/profile">
             {{name}}: {{whenClosed}}
@@ -219,6 +215,14 @@
             {{else}}
                 <button {{action "addSnapshot"}}>Add Snapshot</button>
             {{/if}}
+
+            <p>
+            {{#each snapshots}}
+            {{snapshotText}}
+            {{/each}}
+            </p> 
+
+
 
 
 

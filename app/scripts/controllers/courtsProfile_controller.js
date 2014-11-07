@@ -23,7 +23,9 @@
 						user: this.get('controllers.session.currentUser'),
 						court: this.model
 				});
+				this.get('model.snapshots').addObject(snapshot);
 				snapshot.save();
+				this.get('model').save();
 				this.set('isPosting', false);
 			},
 

@@ -8,7 +8,7 @@
 		handle: DS.attr('string'),
 	    email: DS.attr('string'),
 	    password: DS.attr('string'),
-		// snapshots: DS.hasMany('snapshot'),
+		snapshots: DS.hasMany('snapshot'),
 		avatarUrl: DS.attr('string'),
 		// courts: DS.hasMany('court'),
 		latitude: DS.attr('number'),

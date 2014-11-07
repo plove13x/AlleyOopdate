@@ -44,5 +44,12 @@
 
 	});
 
+	WGN.CourtsProfileRoute = Ember.Route.extend({
+		model: function(params){
+			return this.store.find('court', params.court_id);
+		},
+	});
+
+
 })();
 // });

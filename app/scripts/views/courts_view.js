@@ -182,9 +182,11 @@
 				console.log(this.geoQuery);
 
 				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
-				this.geoQuery.cancel();
+				// this.geoQuery.cancel();
 				// document.getElementById('pinnedMap').innerHTML = "";
-				this.get('geoQuery').cancel();
+				if (this.get('geoQuery')) {
+					this.get('geoQuery').cancel();
+				}
 				console.log(this.geoQuery);
 				// ($('#pinnedMap')).html('');
 				this.initializeMap();
