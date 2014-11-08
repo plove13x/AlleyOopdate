@@ -10,15 +10,17 @@
 		actions: {
 			addSnapshot: function(){
 				this.set('isPosting', true);
-				console.log('Yo!!!');
 			},
 
 			postSnapshot: function(){
-				console.log('Bo!!!');
 
+				var numberPeeps = this.get('numberPeeps');
+				var departureGuess = this.get('departureGuess');
 		    	var snapshotText = this.get('snapshotText');
 
 				var snapshot = this.store.createRecord('snapshot', {
+						numberPeeps: numberPeeps,
+						departureGuess: departureGuess,
 						snapshotText: snapshotText,
 						user: this.get('controllers.session.currentUser'),
 						court: this.model
@@ -31,7 +33,6 @@
 
 			cancelSnapshot: function(){
 				this.set('isPosting', false);
-				console.log('Ro!!!');
 			}
 		}
 	});

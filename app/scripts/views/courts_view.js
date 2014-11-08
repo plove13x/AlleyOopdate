@@ -60,11 +60,11 @@
 			geoQuery.on('key_entered', function(courtId, courtLocation) {
 				console.log('key_entered fired');
 				// Specify that the court has entered this query
-				courtId = courtId.split(":")[1];
+				courtId = courtId.split(':')[1];
 				courtsInQuery[courtId] = true;
 
 					// Look up the court's data in the Transit Open Data Set
-					WGN.ref.child("courts").child(courtId).once("value", function(dataSnapshot) {
+					WGN.ref.child('courts').child(courtId).once('value', function(dataSnapshot) {
 						// Get the court data from the Open Data Set
 						var court = dataSnapshot.val();						/* I ADDED THIS VAR!!!!! */
 						court.id = courtId;
@@ -89,7 +89,7 @@
 			/* Removes court markers from the map when they exit the query */
 			geoQuery.on('key_exited', function(courtId, courtLocation) {
 				// Get the court from the list of courts in the query
-				courtId = courtId.split(":")[1];
+				courtId = courtId.split(':')[1];
 				var court = courtsInQuery[courtId];
 
 				// If the court's data has already been loaded from the Open Data Set, remove its marker from the map
@@ -138,9 +138,8 @@
 			  		radius: radiusInKm
 				});
 			}, 10);
-			google.maps.event.addListener(circle, "drag", updateCriteria);				/* use ember dom event for drag */
+			google.maps.event.addListener(circle, 'drag', updateCriteria);				/* use ember dom event for drag */
 
-			var self = this;
 			/**********************/
 			/*  HELPER FUNCTIONS  */
 			/**********************/
@@ -162,7 +161,7 @@
 			  	});
 
 				
-			  	google.maps.event.addListener(marker, "click", function(){
+			  	google.maps.event.addListener(marker, 'click', function(){
 			  		console.log(self.get('controller'));
 			  		self.get('controller').transitionToRoute('/courts/'+court.id);
 			  		console.log(court);

@@ -5,10 +5,22 @@
 
 
 	WGN.CourtsController = Ember.ArrayController.extend({
-		needs: ['session'],
+		needs: ['session'], 
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		isEditing: false,
 		searchCoords: null,
+		// sortAscending: true,
+  		// sortProperties: ['name'],
+		courtFilter: '',
+
+		filteredContent: function() {
+			var regExp = new RegExp(this.get('courtFilter').toLowerCase());
+				return this.get('content').filter(function(item) {
+		  		return regExp.test(item.get('name').toLowerCase());
+			});
+		}.property('courtFilter', 'model.name'),
+
+
 		actions: {
 
 			updateQueryLocation: function(){
@@ -69,6 +81,15 @@
 		    cancelSubmit: function(){
 		    	this.set('isEditing', false);
 		    },
+  
+
+		    // filteredContent : function() {
+		    //     var searchText = this.get('searchText'), regex = new RegExp(searchText, 'i');
+
+		    //     return this.model.filter(function(item) {
+		    //         return regex.test(item.name);
+		    //     });
+		    // }.property('searchText', 'model')
 
 		}
 	});

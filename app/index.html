@@ -54,7 +54,7 @@
         <div class="leftColumn">
             <h1>Who&#8217;s Got Next?</h1>
             <p>
-                top-fermenting yeast, "imperial, conditioning tank cask conditioned ale." mash tun, heat exchanger terminal gravity cask conditioning balthazar? berliner weisse; bung bright beer trappist autolysis anaerobic imperial top-fermenting yeast pitch. scotch ale heat exchanger, ale top-fermenting yeast imperial wort chiller.
+                Who&#8217;s Got Next takes the guessing game out of determining where to find a good pickup game. Know where the action&#8217;s at before you go. Simply search for courts around you and see where snapshots have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park. Just make sure you&#8217;re ready to ball.
             </p>
             <div>
                 <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
@@ -99,8 +99,7 @@
 
     <script type="text/x-handlebars" data-template-name="welcome">
         <h1>You Got Next.</h1>
-        <p>Site Demo</p>
-        <p>Add an avatar now?</p>
+        <p>{{#link-to 'editProfile'}}Add an avatar now?{{/link-to}}</p>
         <button {{action "proceedToCourts"}}>I&#8217;m ready to ball</button>
     </script>
 
@@ -131,13 +130,6 @@
 
 
 
-                <!-- <form>
-                    <label>Set Zip Code</label> <input type="text">
-                    <button type="submit">Peep Courts</button>
-                </form> -->
-                
-                <!-- <a href="">Edit Profile</a> -->
-
 
                                     <!-- <img src="/images/sf-vehicles.png" /> -->
     <script type="text/x-handlebars" data-template-name="courts">
@@ -149,6 +141,10 @@
                 {{else}}
                     <img src="http://fillmurray.com/150/150" />
                 {{/if}}
+
+                </div>
+                <div class="handleDisplay">
+                    <span>{{currentUser.handle}}</span>
                 </div>
             </div>
 
@@ -156,7 +152,7 @@
                 
                 <div class="ollie">
 
-                    <label>Set Zip Code</label> {{input type="text" value=newSearchLocation}}
+                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation}}
                     <button {{action "updateQueryLocation"}}>Peep Courts</button>
 
                 
@@ -170,14 +166,19 @@
                 </div>
 
                 <div class="courtFilterBox">
-                    <label>Filter by Name</label> <input type="text">
+                    <label>Filter by Name</label>
+                    {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+
                 </div>
                 <div class="leftColumn">
                     <ul>
-                        {{#each}}
-                            <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
-                        {{/each}}
-                        <li>Fixture Court</li>
+                        {{#if this.model}}
+                            {{#each filteredContent}}
+                                <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                            {{/each}}
+                        {{else}}
+                            No Courts in this location yet. Maybe you should add one!
+                        {{/if}}
                     </ul>
                 </div>
                 <div class="rightColumn">
@@ -192,7 +193,9 @@
                         <button {{action "cancelSubmit"}}>Cancel</button>
                     {{else}}
                         <p>
+                    {{#if 'controllers.session.currentUser'}}
                             <button {{action "drawCourt"}}>Add a Court!</button>
+                    {{/if}}
                         </p>
                     {{/if}}
                 </div>
@@ -207,11 +210,21 @@
             {{name}}: {{whenClosed}}
 
             {{#if isPosting}}
-                {{input type="text" value=a placeholder="a"}}
-                {{input type="text" value=b placeholder="b"}}
-                {{input type="text" value=snapshotText placeholder="snapshotText"}}
-                <button {{action "postSnapshot"}}>Post Snapshot</button>
-                <button {{action "cancelSnapshot"}}>Cancel Snapshot</button>
+                <ul>
+                    <li>
+                        <label>How many people are there that seem down for a game?</label>{{input type="text" value=numberPeeps}}
+                    </li>
+                    <li>
+                        <label>About what time would you guess you&#8217;re gonna leave?</label>{{input type="text" value=departureGuess}}
+                    </li>
+                    <li>    
+                        <label>You got anything else to say?</label>{{input type="text" value=snapshotText}}
+                    </li>
+                    <li>
+                        <button {{action "postSnapshot"}}>Post Snapshot</button>
+                        <button {{action "cancelSnapshot"}}>Nah Not Sure Yet</button>
+                    </li>
+                </ul>
             {{else}}
                 <button {{action "addSnapshot"}}>Add Snapshot</button>
             {{/if}}

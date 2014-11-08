@@ -78,6 +78,20 @@ header {
         width: 150px;
         border-radius: 9px;
     }
+
+}
+
+.handleDisplay {
+    position: absolute;
+    top: 18em;       /* 200px; */
+    left: 12em;
+    z-index: 1000;    
+    height: 150px;
+
+    span {
+        font-weight: 700;
+    }
+
 }
 
 .navBar {
