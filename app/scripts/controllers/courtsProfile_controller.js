@@ -69,6 +69,10 @@
 
 				this.set('isEditingCourt', false);
 			},
+
+			cancelCourtProfileUpdate: function(){
+				this.set('isEditingCourt', false);
+			}
 		}
 	});
 

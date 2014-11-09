@@ -93,7 +93,7 @@
                 </form>
             </div>
             <div class="ad">
-            Stupid Ad to keep this thang runnin&#8217; or maybe just above the footer?
+                Stupid Ad to keep this thang runnin&#8217; or maybe just above the footer?
             </div>
         </div>
 
@@ -176,7 +176,7 @@
                 
                 <div class="ollie">
 
-                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation}}
+                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation placeholder="address"}}
                     <button {{action "updateQueryLocation"}}>Peep Courts</button>
 
                 
@@ -192,6 +192,9 @@
                 <div class="courtFilterBox">
                     <label>Filter by Name</label>
                     {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+                    {{#unless isEditing}}
+                        <button {{action "drawCourt"}}>Add a Court!</button>
+                    {{/unless}}
 
                 </div>
                 <div class="leftColumn">
@@ -205,21 +208,16 @@
                         {{/if}} 
                     </ul>
 
+                </div>
+                <div class="rightColumn">
                     {{#if isEditing}}
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=newAddress placeholder="Court Address"}}
                         {{input type="text" value=whenClosed placeholder="When Closed"}}
                         <button {{action "submitCourt"}}>Add Court to Database</button>
                         <button {{action "cancelSubmit"}}>Cancel</button>
-                    {{else}}
-                        <p>
-                            <button {{action "drawCourt"}}>Add a Court!</button>
-                        </p>
                     {{/if}}
 
-                </div>
-                <div class="rightColumn">
-                    
                     {{outlet}}
                     
                     {{#if 'controllers.session.currentUser'}}
@@ -242,9 +240,15 @@
                 {{input type="text" value=address placeholder="Court Address"}}
                 {{input type="text" value=whenClosed placeholder="When Closed"}}
                 <button {{action "updateCourt"}}>Update Court Profile</button>
+                <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
             {{/unless}}
-            Closes: {{whenClosed}}
-
+            <div class="">
+                Address: {{address}} <br />
+                Closes: {{whenClosed}}
+                {{#if otherNotes}}
+                    Other Notes: {{otherNotes}}
+                {{/if}}
+            </div>
             {{#if isPosting}}
                 <ul>
                     <li>
@@ -269,7 +273,25 @@
                     {{#if alleyOopdates}}
                         {{#each alleyOopdates}}
                             <li>
-                                {{alleyOopdateText}}&nbsp;- {{user.handle}}&nbsp;{{timestamp}}
+                                <ul>
+
+                                    {{#if verifiedAtCourt}}
+                                    <li>
+                                        +VERIFIED!
+                                        {{numberPeeps}}
+                                    </li>
+                                    {{/if}}
+                                    <li>
+                                        {{timestamp}}&nbsp;
+                                        -&nbsp;{{user.handle}}
+                                    </li>
+                                    <li>
+                                    Might stay until: {{departureGuess}}
+                                    </li>
+                                    <li>
+                                    Comments: "{{alleyOopdateText}}"
+                                    </li>
+                                <ul>
                             </li>
                         {{/each}}
                     {{else}}
