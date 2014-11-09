@@ -4,35 +4,42 @@
 'use strict';
 
 
-	WGN.CourtsProfileController = Ember.ObjectController.extend({			/* Object Controller for court to which snapshot being posted to, but array controller to display them all */
+	WGN.CourtsProfileController = Ember.ObjectController.extend({			/* Object Controller for court to which Alley Oopdate is being posted to, but array controller to display them all */
 		needs: ['session'],
 		isPosting: false,
+		isEditingCourt: false,
 		actions: {
-			addSnapshot: function(){
+			addAlleyOopdate: function(){
 				this.set('isPosting', true);
 			},
 
-			postSnapshot: function(){
+			postAlleyOopdate: function(){
 
 				var numberPeeps = this.get('numberPeeps');
 				var departureGuess = this.get('departureGuess');
-		    	var snapshotText = this.get('snapshotText');
+		    	var alleyOopdateText = this.get('alleyOopdateText');
 
-				var snapshot = this.store.createRecord('snapshot', {
+				var alleyOopdate = this.store.createRecord('alleyOopdate', {
 						numberPeeps: numberPeeps,
 						departureGuess: departureGuess,
-						snapshotText: snapshotText,
+						alleyOopdateText: alleyOopdateText,
+						timestamp: Date.now(),
 						user: this.get('controllers.session.currentUser'),
 						court: this.model
 				});
-				this.get('model.snapshots').addObject(snapshot);
-				snapshot.save();
+				this.get('model.alleyOopdates').addObject(alleyOopdate);
+				alleyOopdate.save();
 				this.get('model').save();
 				this.set('isPosting', false);
 			},
 
-			cancelSnapshot: function(){
+			cancelAlleyOopdate: function(){
 				this.set('isPosting', false);
+			},
+
+			editCourt: function(){
+				this.set('isEditingCourt', true);
+				console.log('true', this.model);
 			}
 		}
 	});

@@ -12,7 +12,7 @@
       	location: function(){
         	return this.getProperties('latitude', 'longitude');
       	}.property('latitude', 'longitude'),
-      	snapshots: DS.hasMany('snapshot', { async: true }),
+      	alleyOopdates: DS.hasMany('alleyOopdate', { async: true }),
         whenClosed: DS.attr('string'),
         otherNotes: DS.attr('string'),
         // visuals: DS.hasMany('attachment', {embedded: true}),

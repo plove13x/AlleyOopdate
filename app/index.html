@@ -54,7 +54,10 @@
         <div class="leftColumn">
             <h1>Who&#8217;s Got Next?</h1>
             <p>
-                Who&#8217;s Got Next takes the guessing game out of determining where to find a good pickup game. Know where the action&#8217;s at before you go. Simply search for courts around you and see where snapshots have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park. Just make sure you&#8217;re ready to ball.
+                Know where the action&#8217;s at before you go.
+            </p>
+            <p>
+                Who&#8217;s Got Next takes the guesswork out of determining where to find a good pickup hoops game. Simply search for courts around you and see where Alley Oopdates have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
             </p>
             <div>
                 <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
@@ -132,7 +135,28 @@
 
 
                                     <!-- <img src="/images/sf-vehicles.png" /> -->
-    <script type="text/x-handlebars" data-template-name="courts">
+
+
+
+                                    <!-- {{#unless 'controller.filteredContent'}}
+                                {{#if this.model}}
+                                    {{#each}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}}
+
+                            {{else}}
+                                {{#if this.model}}
+                                    {{#each filteredContent}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}}
+                            {{/unless}}
+ -->    <script type="text/x-handlebars" data-template-name="courts">
     
             <div class="secondaryBG">
                 <div class="avatarBox">
@@ -178,13 +202,9 @@
                             {{/each}}
                         {{else}}
                             No Courts in this location yet. Maybe you should add one!
-                        {{/if}}
+                        {{/if}} 
                     </ul>
-                </div>
-                <div class="rightColumn">
-                    
-                    {{outlet}}
-                    
+
                     {{#if isEditing}}
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=newAddress placeholder="Court Address"}}
@@ -193,10 +213,17 @@
                         <button {{action "cancelSubmit"}}>Cancel</button>
                     {{else}}
                         <p>
-                    {{#if 'controllers.session.currentUser'}}
                             <button {{action "drawCourt"}}>Add a Court!</button>
-                    {{/if}}
                         </p>
+                    {{/if}}
+
+                </div>
+                <div class="rightColumn">
+                    
+                    {{outlet}}
+                    
+                    {{#if 'controllers.session.currentUser'}}
+                        <button {{action "drawCourt"}}>Add a Court!</button>
                     {{/if}}
                 </div>
             </div>
@@ -207,7 +234,15 @@
     <!--                      
             -->
     <script type="text/x-handlebars" data-template-name="courts/profile">
-            {{name}}: {{whenClosed}}
+            <h2>{{name}}</h2> 
+            {{#unless isEditingCourt}}
+                <button {{action "editCourt"}}>Edit Court Profile</button>
+            {{else}}
+                {{input type="text" value=name placeholder="Court Name"}}
+                {{input type="text" value=address placeholder="Court Address"}}
+                {{input type="text" value=whenClosed placeholder="When Closed"}}
+            {{/unless}}
+            Closes: {{whenClosed}}
 
             {{#if isPosting}}
                 <ul>
@@ -218,21 +253,28 @@
                         <label>About what time would you guess you&#8217;re gonna leave?</label>{{input type="text" value=departureGuess}}
                     </li>
                     <li>    
-                        <label>You got anything else to say?</label>{{input type="text" value=snapshotText}}
+                        <label>You got anything else to say?</label>{{input type="text" value=alleyOopdateText}}
                     </li>
                     <li>
-                        <button {{action "postSnapshot"}}>Post Snapshot</button>
-                        <button {{action "cancelSnapshot"}}>Nah Not Sure Yet</button>
+                        <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
+                        <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
                     </li>
                 </ul>
-            {{else}}
-                <button {{action "addSnapshot"}}>Add Snapshot</button>
             {{/if}}
 
             <p>
-            {{#each snapshots}}
-                {{snapshotText}}
-            {{/each}}
+            <h4>Recent Alley Oopdates</h4>{{#unless isPosting}}&nbsp;<button {{action "addAlleyOopdate"}}>Throw down a new Alley Oopdate</button>{{/unless}}
+                <ul>        
+                    {{#if alleyOopdates}}
+                        {{#each alleyOopdates}}
+                            <li>
+                                {{alleyOopdateText}}&nbsp;- {{user.handle}}
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        No recent Alley Oopdates for this court.
+                    {{/if}}
+                </ul>
             </p> 
 
 
@@ -281,7 +323,7 @@
         <script src="scripts/router.js"></script>
         <script src="scripts/models/user.js"></script>
         <script src="scripts/models/court.js"></script>
-        <script src="scripts/models/snapshot.js"></script>
+        <script src="scripts/models/alleyOopdate.js"></script>
         <script src="scripts/controllers/session_controller.js"></script>
         <script src="scripts/controllers/application_controller.js"></script>
         <script src="scripts/controllers/index_controller.js"></script>

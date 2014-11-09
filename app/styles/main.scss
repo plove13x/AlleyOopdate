@@ -32,6 +32,18 @@ header {
     display: inline-block;
     width: 40%;
     vertical-align: top;
+
+    h2 {
+        display: inline-block;
+    }
+
+    h4 {
+        display: inline-block;
+    }
+
+    button {
+        display: inline-block;
+    }
 }
 
 .signIn {
