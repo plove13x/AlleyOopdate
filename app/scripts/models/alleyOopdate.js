@@ -10,7 +10,7 @@
         numberPeeps: DS.attr('string'),
         departureGuess: DS.attr('string'),
         alleyOopdateText: DS.attr('string'),
-        timestamp: DS.attr('number'),
+        timestamp: DS.attr('number'),				/* 'date'? */
         verifiedAtCourt: DS.attr('boolean')
     });
 

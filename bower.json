@@ -7,7 +7,8 @@
     "underscore": "~1.7.0",
     "emberfire": "~1.2.7",
     "filepicker": "*",
-    "geofire": "~3.0.3"
+    "geofire": "~3.0.3",
+    "moment-timezone": "~0.2.4"
   },
   "devDependencies": {}
 }
