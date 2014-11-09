@@ -21,16 +21,17 @@ header {
     text-align: center;
 }
 
+
 // BEGIN index Style
 
 .leftColumn {
     display: inline-block;
-    width: 50%;
+    width: 36%;
 }
 
 .rightColumn {
     display: inline-block;
-    width: 40%;
+    width: 62%;
     vertical-align: top;
 
     h2 {
@@ -137,11 +138,17 @@ header {
 }
 
 .mainSection img {
-    width: 100%;
+    // width: 100%;
 }
 
 .courtFilterBox {
     text-align: center;
+}
+
+.courtPhotoThumbnail {
+    // object-fit: contain;
+    width: 7em;
+    height: 7em;
 }
 
 // END courts Style

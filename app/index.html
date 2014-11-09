@@ -57,7 +57,7 @@
                 Know where the action&#8217;s at before you go.
             </p>
             <p>
-                Who&#8217;s Got Next takes the guesswork out of determining where to find a good pickup hoops game. Simply search for courts around you and see where Alley Oopdates have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
+                Who&#8217;s Got Next takes the guesswork out of determining where to find a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
             </p>
             <div>
                 <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
@@ -210,7 +210,7 @@
 
                 </div>
                 <div class="rightColumn">
-                    {{#if isEditing}}
+                    {{#if isAddingCourt}}
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=newAddress placeholder="Court Address"}}
                         {{input type="text" value=whenClosed placeholder="When Closed"}}
@@ -298,7 +298,20 @@
                         No recent Alley Oopdates for this court.
                     {{/if}}
                 </ul>
-            </p> 
+            </p>
+            <div class="courtPhotos">
+                <h4>Recent Photos</h4>&nbsp;<button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button> 
+                {{#if 'controller.newCourtPhoto'}}
+                    Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
+                    <button {{action "uploadPhoto"}}>Upload this photo</button> 
+                {{/if}}
+            
+                <div>
+                    {{#each courtVisuals}}
+                        <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
+                    {{/each}}
+                </div>
+            </div> 
 
 
 
@@ -349,6 +362,7 @@
         <script src="scripts/models/user.js"></script>
         <script src="scripts/models/court.js"></script>
         <script src="scripts/models/alleyOopdate.js"></script>
+        <script src="scripts/models/courtVisual.js"></script>
         <script src="scripts/controllers/session_controller.js"></script>
         <script src="scripts/controllers/application_controller.js"></script>
         <script src="scripts/controllers/index_controller.js"></script>

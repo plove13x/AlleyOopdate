@@ -23,7 +23,7 @@
 
 			updateProfile: function(){
 				var self = this;
-				if (self.avatarUrl !== '') {			/* Right now if I hit just update profile w/o an upload it's setting fillmurray */
+				if (self.avatarUrl !== '') {			/* HOOK UP CONTROLLER? Right now if I hit just update profile w/o an upload it's setting fillmurray */
 					this.model.set('avatarUrl', self.avatarUrl);	/* Perhaps I didn't even need to return a model in router here and just use session controller computed alias... */		
 				}
 				this.model.save();

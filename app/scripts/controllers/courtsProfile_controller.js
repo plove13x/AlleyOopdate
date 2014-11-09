@@ -8,6 +8,7 @@
 		needs: ['session'],
 		isPosting: false,
 		isEditingCourt: false,
+		photos: Ember.computed.filterBy('model.courtVisuals', 'type', 'photo'),
 		actions: {
 			addAlleyOopdate: function(){
 				this.set('isPosting', true);
@@ -72,7 +73,39 @@
 
 			cancelCourtProfileUpdate: function(){
 				this.set('isEditingCourt', false);
-			}
+			},
+
+			pickPhotoToUpload: function(){
+				filepicker.setKey('AtsLXZDyQjqLWfPEzKhfAz');
+				var self = this;
+				filepicker.pickAndStore({mimetype:'image/*'},{},function(InkBlobs){
+				  	var newCourtPhoto = InkBlobs[0].url;
+		        	self.set('newCourtPhoto', newCourtPhoto);
+		        	console.log(self.get('newCourtPhoto'));
+		        	// console.log(self.avatarUrl);
+				    // console.log(JSON.stringify(InkBlobs));
+				});
+			},
+
+			uploadPhoto: function(){
+				var self = this;
+				//connect upload to photo NEXT
+				var photo = this.store.createRecord('courtVisual', {
+					court: self.model,
+					type: 'photo',
+					content: self.get('newCourtPhoto')
+				});
+      			this.get('courtVisuals').addObject(photo);
+
+				// if (self.avatarUrl !== '') {			/* Right now if I hit just update profile w/o an upload it's setting fillmurray */
+				// 	this.model.set('avatarUrl', self.avatarUrl);	 /*Perhaps I didn't even need to return a model in router here and just use session controller computed alias...*/ 		
+				// }
+				this.model.save();
+				this.set('newCourtPhoto', '');
+				// console.log(this.model);
+			},
+
+
 		}
 	});
 

@@ -7,7 +7,7 @@
 	WGN.CourtsController = Ember.ArrayController.extend({
 		needs: ['session'], 
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
-		isEditing: false,
+		isAddingCourt: false,
 		searchCoords: null,
 		// sortAscending: true,
   		// sortProperties: ['name'],
@@ -39,7 +39,7 @@
 			},
 
 			drawCourt: function(){
-				this.set('isEditing', true);
+				this.set('isAddingCourt', true);
 			},
 
 		    submitCourt: function(){
@@ -75,11 +75,11 @@
 				this.set('whenClosed',''); 
 				this.set('newAddress', '');
 
-				this.set('isEditing', false);
+				this.set('isAddingCourt', false);
 		    },
 
 		    cancelSubmit: function(){
-		    	this.set('isEditing', false);
+		    	this.set('isAddingCourt', false);
 		    },
   
 

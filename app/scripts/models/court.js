@@ -15,7 +15,7 @@
       	alleyOopdates: DS.hasMany('alleyOopdate', { async: true }),
         whenClosed: DS.attr('string'),
         otherNotes: DS.attr('string'),
-        // visuals: DS.hasMany('attachment', {embedded: true}),
+        courtVisuals: DS.hasMany('courtVisual', {embedded: true}),
     });
 
 
