@@ -109,7 +109,21 @@
 
 			cancelUploadPhoto: function(){
 				this.set('newCourtPhoto', '');
-			}
+			},
+
+			enterVineUrl: function(){
+				var newVineUrl = this.get('newVineUrl');
+				var vine = this.store.createRecord('courtVisual', {
+					user: this.get('controllers.session.currentUser'),
+					court: this.model,
+					type: 'vine',
+					content: newVineUrl+'/embed/simple?audio=1',
+					vine: true
+				});
+      			this.get('courtVisuals').addObject(vine);
+      			this.model.save();
+				this.set('newVineUrl', '');
+			},
 
 
 		}

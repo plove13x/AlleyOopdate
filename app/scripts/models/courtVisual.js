@@ -8,7 +8,9 @@
     	user: DS.belongsTo('user'),
     	court: DS.belongsTo('court'),
     	type: DS.attr('string'), // 'vine' or 'photo'
-  		content: DS.attr('string') // url for photo???
+  		content: DS.attr('string'), // url for photo???
+  		photo: DS.attr('boolean'),
+  		vine: DS.attr('boolean')
     });
 
 

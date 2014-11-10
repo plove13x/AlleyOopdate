@@ -249,7 +249,7 @@
                         Address: {{address}}
                     </li>
                     <li>
-                        Closes: {{whenClosed}}
+                        Closes/Lights Go Off: {{whenClosed}}
                     </li>    
                     {{#if otherNotes}}
                         <li>
@@ -320,10 +320,22 @@
             
                 <div>
                     {{#each courtVisuals}}
-                        <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
+                        {{#unless vine}}
+                            <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
+                        {{/unless}}
                     {{/each}}
                 </div>
             </div> 
+            <div class="courtVines">
+                <h4>Recent Vine Videos</h4>&nbsp;{{input type="text" value=newVineUrl placeholder='new vine URL'}}&nbsp;<button {{action "enterVineUrl"}}>Add a new vine of this court</button>
+                <div>
+                    {{#each courtVisuals}}
+                        {{#if vine}}
+                            <iframe class="vine-embed" {{bind-attr src=content}} width="250" height="250" frameborder="0"></iframe>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
 
 
 
