@@ -18,7 +18,7 @@
 				return this.get('content').filter(function(item) {
 		  		return regExp.test(item.get('name').toLowerCase());
 			});
-		}.property('courtFilter', 'model.name'),
+		}.property('courtFilter', 'model.@each'),
 
 
 		actions: {

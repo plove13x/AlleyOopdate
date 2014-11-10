@@ -185,7 +185,7 @@
             
             <div class="mainSection">
                 <div id="pinnedMap">
-
+                    <img src="/images/loading-map.gif" />
                 </div>
 
                 <div class="courtFilterBox">
@@ -244,19 +244,17 @@
                 <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
             {{/unless}}
             <div class="">
-                <ul>
-                    <li>
-                        Address: {{address}}
-                    </li>
-                    <li>
-                        Closes/Lights Go Off: {{whenClosed}}
-                    </li>    
-                    {{#if otherNotes}}
-                        <li>
-                            Other Notes: {{otherNotes}}
-                        </li>
-                    {{/if}}
-                </ul>
+                <p>
+                    Address: {{address}}
+                </p>
+                <p>
+                    Closes/Lights Go Off: {{whenClosed}}
+                </p>    
+                {{#if otherNotes}}
+                    <p>
+                        Other Notes: {{otherNotes}}
+                    </p>
+                {{/if}}
             </div>
             {{#if isPosting}}
                 <ul>
@@ -282,25 +280,22 @@
                     {{#if alleyOopdates}}
                         {{#each alleyOopdates}}
                             <li>
-                                <ul>
-
-                                    {{#if verifiedAtCourt}}
-                                    <li>
+                                {{#if verifiedAtCourt}}
+                                    <p>
                                         +VERIFIED!
                                         {{numberPeeps}}
-                                    </li>
-                                    {{/if}}
-                                    <li>
-                                        {{timestamp}}&nbsp;
-                                        -&nbsp;{{user.handle}}
-                                    </li>
-                                    <li>
-                                        Might stay until: {{departureGuess}}
-                                    </li>
-                                    <li>
-                                        Comments: "{{alleyOopdateText}}"
-                                    </li>
-                                <ul>
+                                    </p>
+                                {{/if}}
+                                <p>
+                                    {{timestamp}}&nbsp;
+                                    -&nbsp;{{user.handle}}
+                                </p>
+                                <p>
+                                    Might stay until: {{departureGuess}}
+                                </p>
+                                <p>
+                                    Comments: "{{alleyOopdateText}}"
+                                </p>
                             </li>
                         {{/each}}
                     {{else}}

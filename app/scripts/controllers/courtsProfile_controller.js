@@ -59,10 +59,10 @@
 		    		var latitude = data.results[0].geometry.location.lat;
 		    		var longitude = data.results[0].geometry.location.lng;
 
-					self.store.find('court', self.model.id).then(function(court){
-						var updateEvent = {id: self.model.id, name: courtName, whenClosed: whenClosed, otherNotes: otherNotes, address: newAddress, latitude: latitude,
+					self.store.find('court', self.model.id).then(function(court){				// self.store.update?
+						var update = {id: self.model.id, name: courtName, whenClosed: whenClosed, otherNotes: otherNotes, address: newAddress, latitude: latitude,
 						longitude: longitude};
-	  					self.store.update('court', updateEvent);
+	  					self.store.update('court', update);
 						// Ember.set(court.get('name'): courtName);
 						court.save();
 					});
@@ -74,6 +74,7 @@
 
 			cancelCourtProfileUpdate: function(){
 				this.set('isEditingCourt', false);
+				this.get('model').rollback();
 			},
 
 			pickPhotoToUpload: function(){
@@ -120,7 +121,7 @@
 					content: newVineUrl+'/embed/simple?audio=1',
 					vine: true
 				});
-      			this.get('courtVisuals').addObject(vine);
+				this.get('courtVisuals').addObject(vine);
       			this.model.save();
 				this.set('newVineUrl', '');
 			},
