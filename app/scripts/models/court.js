@@ -16,6 +16,9 @@
         whenClosed: DS.attr('string'),
         otherNotes: DS.attr('string'),
         courtVisuals: DS.hasMany('courtVisual', {embedded: true}),
+        courtPhotos: DS.hasMany('courtPhoto', { async: true }),
+        courtVines: DS.hasMany('courtVine', { async: true })
+
     });
 
 

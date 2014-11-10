@@ -16,7 +16,9 @@
 		location: function(){
 			return this.getProperties('latitude', 'longitude');
 		}.property('latitude', 'longitude'),
-		courtVisuals: DS.hasMany('courtVisual')
+		courtVisuals: DS.hasMany('courtVisual'),
+		courtPhotos: DS.hasMany('courtPhoto'),
+		courtVines: DS.hasMany('courtVine')
 	});
 
 

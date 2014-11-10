@@ -92,18 +92,24 @@
 			uploadPhoto: function(){
 				var self = this;
 				//connect upload to photo NEXT
-				var photo = this.store.createRecord('courtVisual', {
+				var photo = this.store.createRecord('courtPhoto', {
 					user: self.get('controllers.session.currentUser'),
 					court: self.model,
-					type: 'photo',
 					content: self.get('newCourtPhoto')
 				});
-      			this.get('courtVisuals').addObject(photo);
+
+				this.get('model.courtPhotos').addObject(photo);
+				// this.get('courtPhotos').addObject(photo);
+				photo.save();
+				
 
 				// if (self.avatarUrl !== '') {			/* Right now if I hit just update profile w/o an upload it's setting fillmurray */
 				// 	this.model.set('avatarUrl', self.avatarUrl);	 /*Perhaps I didn't even need to return a model in router here and just use session controller computed alias...*/ 		
 				// }
+
+				
 				this.model.save();
+				// this.get('model').save();
 				this.set('newCourtPhoto', '');
 				// console.log(this.model);
 			},
@@ -114,15 +120,17 @@
 
 			enterVineUrl: function(){
 				var newVineUrl = this.get('newVineUrl');
-				var vine = this.store.createRecord('courtVisual', {
+				var vine = this.store.createRecord('courtVine', {
 					user: this.get('controllers.session.currentUser'),
 					court: this.model,
-					type: 'vine',
-					content: newVineUrl+'/embed/simple?audio=1',
-					vine: true
+					content: newVineUrl+'/embed/simple?audio=1'
 				});
-				this.get('courtVisuals').addObject(vine);
+
+				this.get('model.courtVines').addObject(vine);
+				// this.get('courtVines').addObject(vine);
+				vine.save();
       			this.model.save();
+      			// this.get('model').save();
 				this.set('newVineUrl', '');
 			},
 
