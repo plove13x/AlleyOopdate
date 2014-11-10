@@ -275,7 +275,7 @@
             {{/if}}
 
             <p>
-            <h4>Recent Alley Oopdates</h4>{{#unless isPosting}}&nbsp;<button {{action "addAlleyOopdate"}}>Throw down a new Alley Oopdate</button>{{/unless}}
+            <h4>Recent Alley Oopdates</h4>{{#unless isPosting}}<span> </span><button {{action "addAlleyOopdate"}}>Throw down a new Alley Oopdate</button>{{/unless}}
                 <ul>        
                     {{#if alleyOopdates}}
                         {{#each alleyOopdates}}
@@ -287,8 +287,8 @@
                                     </p>
                                 {{/if}}
                                 <p>
-                                    {{timestamp}}&nbsp;
-                                    -&nbsp;{{user.handle}}
+                                    {{timestamp}}<span> </span>
+                                    -<span> </span>{{user.handle}}
                                 </p>
                                 <p>
                                     Might stay until: {{departureGuess}}
@@ -304,7 +304,7 @@
                 </ul>
             </p>
             <div class="courtPhotos">
-                <h4>Recent Photos</h4>&nbsp;<button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button> 
+                <h4>Recent Photos</h4><span> </span><button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button> 
                 {{#if 'controller.newCourtPhoto'}}
                     <div>
                         Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
@@ -320,27 +320,15 @@
                 </div>
             </div> 
             <div class="courtVines">
-                <h4>Recent Vine Videos</h4>&nbsp;{{input type="text" value=newVineUrl placeholder='new vine URL'}}&nbsp;<button {{action "enterVineUrl"}}>Add a new vine of this court</button>
+                <h4>Recent Vine Videos</h4><span> </span>{{input type="text" value=newVineUrl placeholder='new vine URL'}}<span> </span><button {{action "enterVineUrl"}}>Add a new vine of this court</button>
                 <div>
                     {{#each courtVines}}
                         <iframe class="vine-embed" {{bind-attr src=content}} width="250" height="250" frameborder="0"></iframe>
                     {{/each}}
                 </div>
             </div>
-
             
     </script>
-                        <!-- {{#each courtVisuals}}
-                        {{#unless vine}}
-                            <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
-                        {{/unless}}
-                    {{/each}}
-
-                    {{#each courtVisuals}}
-                        {{#if vine}}
-                            <iframe class="vine-embed" {{bind-attr src=content}} width="250" height="250" frameborder="0"></iframe>
-                        {{/if}}
-                    {{/each}} -->
 
 
 

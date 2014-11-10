@@ -24,7 +24,7 @@
 						numberPeeps: numberPeeps,
 						departureGuess: departureGuess,
 						alleyOopdateText: alleyOopdateText,
-						timestamp: moment(),
+						timestamp: moment().format('Do MMMM YYYY > h:mm:ss a'),
 						user: this.get('controllers.session.currentUser'),
 						court: this.model
 				});
@@ -107,7 +107,7 @@
 				// 	this.model.set('avatarUrl', self.avatarUrl);	 /*Perhaps I didn't even need to return a model in router here and just use session controller computed alias...*/ 		
 				// }
 
-				
+
 				this.model.save();
 				// this.get('model').save();
 				this.set('newCourtPhoto', '');
