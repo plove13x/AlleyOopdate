@@ -113,12 +113,12 @@
             {{#if this.model.avatarUrl}}
                 <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
             {{else}}
-            <img src="http://fillmurray.com/150/150" />
+                <img src="http://fillmurray.com/150/150" />
             {{/if}}
             <button {{action "addAvatar"}}>Rip a new pic</button>
             {{log avatarUrl}}
             {{#if avatarUrl}}
-            <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
+                <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
 
             {{/if}}
 
@@ -180,7 +180,6 @@
                     <button {{action "updateQueryLocation"}}>Peep Courts</button>
 
                 
-
                 </div>
             </div>
             
@@ -214,6 +213,7 @@
                         {{input type="text" value=courtName placeholder="Court Name"}}
                         {{input type="text" value=newAddress placeholder="Court Address"}}
                         {{input type="text" value=whenClosed placeholder="When Closed"}}
+                        {{input type="text" value=otherNotes placeholder="Other Notes"}}
                         <button {{action "submitCourt"}}>Add Court to Database</button>
                         <button {{action "cancelSubmit"}}>Cancel</button>
                     {{/if}}
@@ -239,15 +239,24 @@
                 {{input type="text" value=name placeholder="Court Name"}}
                 {{input type="text" value=address placeholder="Court Address"}}
                 {{input type="text" value=whenClosed placeholder="When Closed"}}
+                {{input type="text" value=otherNotes placeholder="Other Notes"}}
                 <button {{action "updateCourt"}}>Update Court Profile</button>
                 <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
             {{/unless}}
             <div class="">
-                Address: {{address}} <br />
-                Closes: {{whenClosed}}
-                {{#if otherNotes}}
-                    Other Notes: {{otherNotes}}
-                {{/if}}
+                <ul>
+                    <li>
+                        Address: {{address}}
+                    </li>
+                    <li>
+                        Closes: {{whenClosed}}
+                    </li>    
+                    {{#if otherNotes}}
+                        <li>
+                            Other Notes: {{otherNotes}}
+                        </li>
+                    {{/if}}
+                </ul>
             </div>
             {{#if isPosting}}
                 <ul>
@@ -286,10 +295,10 @@
                                         -&nbsp;{{user.handle}}
                                     </li>
                                     <li>
-                                    Might stay until: {{departureGuess}}
+                                        Might stay until: {{departureGuess}}
                                     </li>
                                     <li>
-                                    Comments: "{{alleyOopdateText}}"
+                                        Comments: "{{alleyOopdateText}}"
                                     </li>
                                 <ul>
                             </li>
@@ -302,8 +311,11 @@
             <div class="courtPhotos">
                 <h4>Recent Photos</h4>&nbsp;<button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button> 
                 {{#if 'controller.newCourtPhoto'}}
-                    Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
-                    <button {{action "uploadPhoto"}}>Upload this photo</button> 
+                    <div>
+                        Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
+                        <button {{action "uploadPhoto"}}>Upload this photo</button> 
+                        <button {{action "cancelUploadPhoto"}}>Nope photo sux</button> 
+                    </div>
                 {{/if}}
             
                 <div>

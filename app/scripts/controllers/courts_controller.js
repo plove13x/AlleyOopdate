@@ -46,6 +46,7 @@
 		    	var self = this;
 		    	var courtName = this.get('courtName');
 		    	var whenClosed = this.get('whenClosed');
+		    	var otherNotes = this.get('otherNotes');
 		    	var newAddress = this.get('newAddress');
 		    	var address = newAddress.replace(/\s+/g, '+');
 
@@ -60,7 +61,8 @@
 						address: newAddress,
 						latitude: latitude,
 						longitude: longitude,
-						whenClosed: whenClosed
+						whenClosed: whenClosed,
+						otherNotes: otherNotes
 					});
 					court.save().then(function(){
 						WGN.geoFire.set('court:'+court.get('id'), [latitude, longitude]).then(function() {
@@ -72,7 +74,8 @@
 		    	});
 
 				this.set('courtName', '');	
-				this.set('whenClosed',''); 
+				this.set('whenClosed','');
+				this.set('otherNotes', ''); 
 				this.set('newAddress', '');
 
 				this.set('isAddingCourt', false);

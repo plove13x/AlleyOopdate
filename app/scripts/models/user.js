@@ -15,7 +15,8 @@
 		longitude: DS.attr('number'),
 		location: function(){
 			return this.getProperties('latitude', 'longitude');
-		}.property('latitude', 'longitude')
+		}.property('latitude', 'longitude'),
+		courtVisuals: DS.hasMany('courtVisual')
 	});
 
 

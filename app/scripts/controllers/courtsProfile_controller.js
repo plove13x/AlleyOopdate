@@ -48,6 +48,7 @@
 				var courtName = this.get('name');
 
 				var whenClosed = this.get('whenClosed');
+				var otherNotes = this.get('otherNotes');
 		    	var newAddress = this.get('address');
 		    	var address = newAddress.replace(/\s+/g, '+');
 
@@ -59,7 +60,7 @@
 		    		var longitude = data.results[0].geometry.location.lng;
 
 					self.store.find('court', self.model.id).then(function(court){
-						var updateEvent = {id: self.model.id, name: courtName, whenClosed: whenClosed, address: newAddress, latitude: latitude,
+						var updateEvent = {id: self.model.id, name: courtName, whenClosed: whenClosed, otherNotes: otherNotes, address: newAddress, latitude: latitude,
 						longitude: longitude};
 	  					self.store.update('court', updateEvent);
 						// Ember.set(court.get('name'): courtName);
@@ -91,6 +92,7 @@
 				var self = this;
 				//connect upload to photo NEXT
 				var photo = this.store.createRecord('courtVisual', {
+					user: self.get('controllers.session.currentUser'),
 					court: self.model,
 					type: 'photo',
 					content: self.get('newCourtPhoto')
@@ -104,6 +106,10 @@
 				this.set('newCourtPhoto', '');
 				// console.log(this.model);
 			},
+
+			cancelUploadPhoto: function(){
+				this.set('newCourtPhoto', '');
+			}
 
 
 		}

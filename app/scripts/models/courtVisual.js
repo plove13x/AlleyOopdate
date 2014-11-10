@@ -5,7 +5,7 @@
 
 
     WGN.CourtVisual = DS.Model.extend({
-    	// ADD USER SAME WAY AS COURT
+    	user: DS.belongsTo('user'),
     	court: DS.belongsTo('court'),
     	type: DS.attr('string'), // 'vine' or 'photo'
   		content: DS.attr('string') // url for photo???
