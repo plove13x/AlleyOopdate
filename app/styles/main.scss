@@ -43,6 +43,11 @@ input {
     font-family: 'aaaiight', cursive;
 }
 
+.leftColumn h2 {
+    color: $mavsBlack2;
+ 
+}
+
 
 // APPLICATION STYLE
 
@@ -64,6 +69,8 @@ body {
 }
 
 header {
+    background: $mavsBlue2;
+    color: $mavsBlack2;
     border-bottom: 0.1em solid silver;
     padding: 1em 0;
     text-align: center;
@@ -184,6 +191,8 @@ footer {
     height: 3.5em;            /* 50px; */
     border-bottom: 0.1em solid silver;
     text-align: right;
+    // color: $mavsBlue2;
+    background: $mavsBlack2;
     
     // form {
     //     height: 100%;
@@ -215,6 +224,7 @@ footer {
 
 .courtFilterBox {
     text-align: center;
+    background: $mavsGray2;
 }
 
 .courtPhotoThumbnail {
