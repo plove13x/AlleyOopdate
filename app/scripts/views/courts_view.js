@@ -10,11 +10,11 @@
 		didInsertElement: function() {
 		    this._super();
 		    this.getUserCoords();
-		    // this.initializeMap();
 		},
 
 		userCoords: [32.830849, -96.769813],
 
+		radiusInKm: 8,
 
 		getUserCoords: function(){
 			var self = this;
@@ -22,7 +22,6 @@
 				var testLat = position.coords.latitude;
 				var testLng = position.coords.longitude;
 				var userCoords = [testLat, testLng];
-				console.log(testLat);
 				self.set('userCoords', userCoords);				/* check to make sure controller is still there */
 				self.initializeMap();
 			});
@@ -32,15 +31,9 @@
 
 			var map;
 
-			// Set the center as Granada Theater
-			var locations = {
-			  'TietzePark': [32.823454, -96.761275],
-			  'GranadaTheater': [32.830849, -96.769813],
-			};
-			// var center = locations['GranadaTheater'];
 			var center = this.get('userCoords');
 
-			var radiusInKm = 8;					/* was 0.5. 1? */
+			var radiusInKm = this.get('radiusInKm');					/* was 0.5. 1? */
 
 
 			/*************/
@@ -58,7 +51,6 @@
 			self.set('geoQuery', geoQuery);
 
 			geoQuery.on('key_entered', function(courtId, courtLocation) {
-				console.log('key_entered fired');
 				// Specify that the court has entered this query
 				courtId = courtId.split(':')[1];
 				courtsInQuery[courtId] = true;
@@ -77,8 +69,6 @@
 							// Create a new marker for the court
 							// court.marker = createCourtMarker(court, getCourtColor(court));
 							court.marker = createCourtMarker(court);
-							// console.log(court);
-							// console.log(court.marker);
 						}
 
 					});
@@ -144,11 +134,7 @@
 			/*  HELPER FUNCTIONS  */
 			/**********************/
 			/* Adds a marker for the inputted court to the map */						/* see if this is getting called w/o refresh!!! could just be not rendering to DOM */
-			// function createCourtMarker(court, courtColor) {
 			function createCourtMarker(court) {
-				// console.log(court);
-				// console.log(court.latitude);
-				console.log('createCourtMarker', map);
 				var marker = new google.maps.Marker({
 					// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
 					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
@@ -156,15 +142,12 @@
 					optimized: true,
 					map: map,
 					clickable: true,
-					click: console.log('test')
 					// anchorPoint: (x:2, y:4)
 			  	});
 
 				
 			  	google.maps.event.addListener(marker, 'click', function(){
-			  		console.log(self.get('controller'));
 			  		self.get('controller').transitionToRoute('/courts/'+court.id);
-			  		console.log(court);
 			  	});
 
 			    return marker;
@@ -174,7 +157,6 @@
 
 		willDestroyElement: function() {
 			var self = this;
-			console.log('no');
 			self.geoQuery.cancel();
 			this.set('map', null);
 		},
@@ -184,35 +166,18 @@
 			var searchCoords = this.get('controller.searchCoords');
 			// this.set('userCoords', searchCoords);
 			if (searchCoords) {
-				console.log(searchCoords);
 
 				this.set('userCoords', searchCoords);
-				console.log(this.get('userCoords'));
-				console.log(this.geoQuery);
 
 				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
-				// this.geoQuery.cancel();
-				// document.getElementById('pinnedMap').innerHTML = "";
 				if (this.get('geoQuery')) {
 					this.get('geoQuery').cancel();
 				}
-				console.log(this.geoQuery);
 				// ($('#pinnedMap')).html('');
 				this.initializeMap();
-				console.log(this.map);
 
 			};			
-			// console.log(searchCoords);
 		}.observes('controller.searchCoords'),
-
-		// loadGoogleMapsScript: function(){
-
-		// 	var self = this;
-		// 	window.map_callback = function() {
-		// 	    self.initializeMap();
-		// 	}
-		// 	window.map_callback();
-		// }
 
 	});
 
