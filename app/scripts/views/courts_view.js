@@ -14,7 +14,8 @@
 		    this.getUserCoords();
 		},
 
-		userCoords: [32.830849, -96.769813],
+		userCoords: [],
+		coordsInUse: [],
 
 		radiusInKm: 8,
 
@@ -24,7 +25,12 @@
 				var testLat = position.coords.latitude;
 				var testLng = position.coords.longitude;
 				var userCoords = [testLat, testLng];
-				self.set('userCoords', userCoords);				/* check to make sure controller is still there */
+				self.set('userCoords', userCoords);	
+				self.set('coordsInUse', userCoords);			/* check to make sure controller is still there */
+
+				localStorage.setItem('userCoords.lat', testLat);
+				localStorage.setItem('userCoords.lon', testLng);
+				// self.set(localStorage.userCoords, userCoords);
 				self.initializeGQ();
 				self.initializeMap();
 			});
@@ -32,7 +38,7 @@
 
 		initializeGQ: function() {
 			// Create a new GeoQuery instance
-			var center = this.get('userCoords');
+			var center = this.get('coordsInUse');
 			var radiusInKm = this.get('radiusInKm');
 			this.set('courtsInQuery', {});
 
@@ -48,7 +54,7 @@
 		initializeMap: function() {
 
 			var map;
-			var center = this.get('userCoords');
+			var center = this.get('coordsInUse');
 			var radiusInKm = this.get('radiusInKm');					/* was 0.5. 1? */
 
 			/*****************/
@@ -113,6 +119,10 @@
 							// Add the court to the list of courts in the query
 							courtsInQuery[courtId] = court;
 
+
+							//right now, its just id for court is true. instead, id should be model. instead of just on view, also set courtsinQuery on controller.
+
+
 							// Create a new marker for the court
 							// court.marker = createCourtMarker(court, getCourtColor(court));
 							court.marker = self.createCourtMarker(court);
@@ -159,7 +169,7 @@
 
 		updateMapCenter: function(){
 			var map = this.get('map');
-			var coords = this.get('userCoords');
+			var coords = this.get('coordsInUse');
 			var center = new google.maps.LatLng(coords[0], coords[1]);
 			map.setCenter(center);
 			var circle = this.get('circle');
@@ -179,7 +189,7 @@
 		searchQueryChanged: function() {
 			var searchCoords = this.get('controller.searchCoords');
 			if (searchCoords) {
-				this.set('userCoords', searchCoords);
+				this.set('coordsInUse', searchCoords);
 				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
 				// ($('#pinnedMap')).html('');
 				this.updateMapCenter();

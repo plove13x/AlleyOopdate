@@ -235,6 +235,7 @@
             -->
     <script type="text/x-handlebars" data-template-name="courts/profile">
             <h2>{{name}}</h2> 
+            <button {{action "Haversine"}}>H b</button>
             {{#unless isEditingCourt}}
                 <button {{action "editCourt"}}>Edit Court Profile</button>
             {{else}}

@@ -5,7 +5,7 @@
 
 
 	WGN.CourtsProfileController = Ember.ObjectController.extend({			/* Object Controller for court to which Alley Oopdate is being posted to, but array controller to display them all */
-		needs: ['session'],
+		needs: ['session', 'courts'],
 		isPosting: false,
 		isEditingCourt: false,
 		photos: Ember.computed.filterBy('model.courtVisuals', 'type', 'photo'),
@@ -19,6 +19,8 @@
 				var numberPeeps = this.get('numberPeeps');
 				var departureGuess = this.get('departureGuess');
 		    	var alleyOopdateText = this.get('alleyOopdateText');
+			    // var proximityToCourt = this.Haversine();
+			    // console.log(proximityToCourt);
 
 				var alleyOopdate = this.store.createRecord('alleyOopdate', {
 						numberPeeps: numberPeeps,
@@ -26,7 +28,8 @@
 						alleyOopdateText: alleyOopdateText,
 						timestamp: moment().format('Do MMMM YYYY > h:mm:ss a'),
 						user: this.get('controllers.session.currentUser'),
-						court: this.model
+						court: this.model,
+						verifiedAtCourt: false
 				});
 				this.get('model.alleyOopdates').addObject(alleyOopdate);
 				alleyOopdate.save();
@@ -132,6 +135,48 @@
       			this.model.save();
       			// this.get('model').save();
 				this.set('newVineUrl', '');
+			},
+
+			Haversine: function(){
+
+				Number.prototype.toRad = function() {
+				   return this * Math.PI / 180;
+				};
+
+				var lat2 = 42.741;
+				var lon2 = -71.3161;
+				var lat1 = 42.806911;
+				var lon1 = -71.290611;
+
+				lat1 = this.get('model.latitude');
+				lon1 = this.get('model.longitude');
+				
+				lat2 = +localStorage.getItem('userCoords.lat');
+				lon2 = +localStorage.getItem('userCoords.lon');
+
+				// lat2 = this.get('localStorage.userCoords[0]');
+				// lon2 = this.get('localStorage.userCoords[1]');
+				console.log(localStorage);
+				console.log(localStorage.getItem('userCoords.lat'));
+				console.log(localStorage.getItem('userCoords.lon'));
+
+				var R = 6371; // km
+				//has a problem with the .toRad() method below.
+				var x1 = lat2-lat1;
+				var dLat = x1.toRad();
+				var x2 = lon2-lon1;
+				var dLon = x2.toRad();
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1.toRad()) 
+				* Math.cos(lat2.toRad()) 
+				* Math.sin(dLon/2) 
+				* Math.sin(dLon/2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+				var d = R * c;
+
+				alert(d);
+				console.log(d);
+				return d;
+
 			},
 
 
