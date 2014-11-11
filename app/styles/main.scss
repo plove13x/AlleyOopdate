@@ -1,7 +1,55 @@
+// COLOR VARIABLES
+
+$mavsBlack: #292929;
+$mavsBlack2: RGBA(39, 39, 39, 1);
+$mavsBlue: #006AB6;
+$mavsBlue2: #1655BA;
+$mavsGray: #4B4F5B;
+$mavsGray2: RGBA(176, 174, 179, 1);
+
+
+// FONTS
+
+// font-family: 'Permanent Marker', cursive;
+// font-family: 'Rokkitt', serif;
+// font-family: 'Gruppo', cursive;
+// font-family: 'Titillium Web', sans-serif;
+
+@font-face {
+  font-family: 'aaaiight';
+  src: url('/styles/aaaiight/aaaiight.ttf');
+}
+
+
+// TEMP/IN PROGRESS/NEEDS TO BE ORGANIZED STYLE
+
+a {
+   text-decoration: none;
+   color: $mavsGray; 
+}
+
+input {
+    font-family: 'Gruppo', cursive;
+}
+
+.introText h1 {
+    color: $mavsBlack;
+    text-align: center;
+    font-family: 'aaaiight', cursive; 
+}
+
+.mavsBlack {
+    color: $mavsBlack2;
+    font-family: 'aaaiight', cursive;
+}
+
+
+// APPLICATION STYLE
+
 body {
-    background: #F6F5F6;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+    background: #F8F8F8;    // #F6F5F6;    // #FDFEFF;
+    font-family: 'Permanent Marker', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $mavsBlue;     // #333;
 }
 
 * {
@@ -21,8 +69,13 @@ header {
     text-align: center;
 }
 
+footer {
+    border-top: 0.1em solid silver;
+    text-align: center;
+}
 
-// BEGIN index Style
+
+// INDEX STYLE
 
 .leftColumn {
     display: inline-block;
@@ -49,16 +102,26 @@ header {
 
 .signIn {
     margin-top: 2em;
-    background-color: chartreuse;
+    padding: 1em;
+    // background-color: chartreuse;
+    background-color: $mavsGray2;
 }
 
 .register {
     margin-top: 1em;
-    background-color: fuchsia;
+    padding: 1em;
+    // background-color: fuchsia;
+    background-color: $mavsBlack2;
 }
 
 
-// BEGIN editProfile Style
+// EDITPROFILE STYLE
+
+.previousAvatar {
+    height: 150px;
+    width: 150px;
+    border-radius: 9px;
+}
 
 .avatarToUpload {
     // object-fit: contain;
@@ -68,15 +131,24 @@ header {
 }
 
 
-// BEGIN courts Style
+// COURTS STYLE
 
 .secondaryBG {
     position: relative;
+    background: url("/images/bballBGImage.png");
+    background: webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,.8)), color-stop(100%,rgba(0,0,0,.2))), url("http://www.dartmouthlakers.ca/wp-content/uploads/2012/03/basketball-texture-590x250.jpg");
+    background-size: cover;
     height: 17em;       /* 250px */
-    background-color: chartreuse;
-    background: url("http://wannadunk.com/wp-content/themes/eVid/timthumb.php?src=http://wannadunk.com/wp-content/uploads/2010/10/campbell-park.jpg&h=200&w=591&zc=1&q=90");
-    background: url("http://image.shutterstock.com/display_pic_with_logo/557335/557335,1284561818,2/stock-vector-vector-illustration-of-street-basketball-court-on-blacktop-61047421.jpg");
+
+    // background-color: chartreuse;
+    // background: url("http://wannadunk.com/wp-content/themes/eVid/timthumb.php?src=http://wannadunk.com/wp-content/uploads/2010/10/campbell-park.jpg&h=200&w=591&zc=1&q=90");
+    // background: url("http://image.shutterstock.com/display_pic_with_logo/557335/557335,1284561818,2/stock-vector-vector-illustration-of-street-basketball-court-on-blacktop-61047421.jpg");
+    
     border-bottom: 0.1em solid silver;
+
+
+  // // height: 300px;
+
 }
 
 .avatarBox {
@@ -150,11 +222,3 @@ header {
     width: 7em;
     height: 7em;
 }
-
-// END courts Style
-
-footer {
-    border-top: 0.1em solid silver;
-    text-align: center;
-}
-

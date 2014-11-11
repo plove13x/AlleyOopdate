@@ -15,7 +15,7 @@
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -31,7 +31,7 @@
 
         <div class="everythingContainer">
             <header>
-                Who&#8217;s Got Next Logo | Language: <select><option>English</option></select> 
+                Who Got Next Logo | Language: <select><option>English</option></select> 
                 {{#if currentUser}} | {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>{{/if}}
             </header>
 
@@ -40,7 +40,7 @@
                 {{outlet}}
 
                 <footer>
-                    Who&#8217;s Got Next &#169; 2014 Pat Love
+                    Who Got Next &#169; 2014 Pat Love
                 </footer>  
 
             </div>  <!-- END NOT HEADER -->
@@ -52,19 +52,22 @@
     <script type="text/x-handlebars" data-template-name="index">
        
         <div class="leftColumn">
-            <h1>Who&#8217;s Got Next?</h1>
-            <p>
-                Know where the action&#8217;s at before you go.
-            </p>
-            <p>
-                Who&#8217;s Got Next takes the guesswork out of determining where to find a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
-            </p>
+            <div class="introText">
+                <h1>Who Got Next?</h1>
+                <p>
+                    Know where the action&#8217;s at before you go.
+                </p>
+                <p>
+                    Who Got Next takes the guesswork out finding a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
+                </p>
+            </div>
             <div>
                 <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
             </div>
         </div>
         <div class="rightColumn">
             <div class="signIn">
+                Sign in Yo!
                 <form>
                     <div>
                         {{input type="email" value=email placeholder="email"}}
@@ -76,7 +79,7 @@
                 </form>
             </div>
             <div class="register">
-                Never asked "Who's Got Next before?" Get in the game in ten seconds!
+                Never asked "Who Got Next?" before? Get in the game in ten seconds!
                 <form>
                     <div>
                         {{input type="email" value=emailNU placeholder="email"}}
@@ -91,9 +94,6 @@
                         <button {{action "createUser"}}>Join "Who's Got Next!"</button>
                     </div>
                 </form>
-            </div>
-            <div class="ad">
-                Stupid Ad to keep this thang runnin&#8217; or maybe just above the footer?
             </div>
         </div>
 
@@ -113,7 +113,7 @@
             {{#if this.model.avatarUrl}}
                 <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
             {{else}}
-                <img src="http://fillmurray.com/150/150" />
+                <img class="previousAvatar" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
             {{/if}}
             <button {{action "addAvatar"}}>Rip a new pic</button>
             {{log avatarUrl}}
@@ -163,7 +163,7 @@
                 {{#if currentUser.avatarUrl}}
                     <img {{bind-attr src=currentUser.avatarUrl}}/>
                 {{else}}
-                    <img src="http://fillmurray.com/150/150" />
+                    <img src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
                 {{/if}}
 
                 </div>
@@ -197,6 +197,8 @@
 
                 </div>
                 <div class="leftColumn">
+                    
+                <h2>Courts</h2>
                     <ul>
                         {{#if this.model}}
                             {{#each filteredContent}}
@@ -243,7 +245,7 @@
                 <button {{action "updateCourt"}}>Update Court Profile</button>
                 <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
             {{/unless}}
-            <div class="">
+            <div class="mavsBlack">
                 <p>
                     Address: {{address}}
                 </p>
@@ -291,7 +293,7 @@
                                     -<span> </span>{{user.handle}}
                                 </p>
                                 <p>
-                                    Might stay until: {{departureGuess}}
+                                    User Might Leave: {{departureGuess}}
                                 </p>
                                 <p>
                                     Comments: "{{alleyOopdateText}}"
