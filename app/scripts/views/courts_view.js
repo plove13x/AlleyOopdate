@@ -27,70 +27,36 @@
 			});
 		},
 
-		initializeMap: function() {
-
-			var map;
-
-			var center = this.get('userCoords');
-
-			var radiusInKm = this.get('radiusInKm');					/* was 0.5. 1? */
-
-
-			/*************/
-			/*  GEOQUERY */
-			/*************/
-			var courtsInQuery = {};
-
+		initializeGQ: function() {
 			// Create a new GeoQuery instance
+			var center = this.get('userCoords');
+			var radiusInKm = this.get('radiusInKm');
+			this.set('courtsInQuery', {});
+
 			var geoQuery = WGN.geoFire.query({
 				center: center,
 				radius: radiusInKm
 			});
+			this.set('geoQuery', geoQuery);
+			geoQuery.on('key_entered', this.addCourtToMap.bind(this));
+			geoQuery.on('key_exited', this.removeCourtFromMap.bind(this));
+		},
 
+		initializeMap: function() {
+
+			var map;
+			var center = this.get('userCoords');
+			var radiusInKm = this.get('radiusInKm');					/* was 0.5. 1? */
+
+			/*************/
+			/*  GEOQUERY */
+			/*************/
+
+			this.initializeGQ();
+			
+			var geoQuery = this.get('geoQuery');	
+			var courtsInQuery = this.get ('courtsInQuery');		
 			var self = this;
-			self.set('geoQuery', geoQuery);
-
-			geoQuery.on('key_entered', function(courtId, courtLocation) {
-				// Specify that the court has entered this query
-				courtId = courtId.split(':')[1];
-				courtsInQuery[courtId] = true;
-
-					// Look up the court's data in the Transit Open Data Set
-					WGN.ref.child('courts').child(courtId).once('value', function(dataSnapshot) {
-						// Get the court data from the Open Data Set
-						var court = dataSnapshot.val();						/* I ADDED THIS VAR!!!!! */
-						court.id = courtId;
-						// If the court has not already exited this query in the time it took to look up its data in the Open Data
-						// Set, add it to the map
-						if (court !== null && courtsInQuery[courtId] === true) {
-							// Add the court to the list of courts in the query
-							courtsInQuery[courtId] = court;
-
-							// Create a new marker for the court
-							// court.marker = createCourtMarker(court, getCourtColor(court));
-							court.marker = createCourtMarker(court);
-						}
-
-					});
-
-			});
-
-
-			/* Removes court markers from the map when they exit the query */
-			geoQuery.on('key_exited', function(courtId, courtLocation) {
-				// Get the court from the list of courts in the query
-				courtId = courtId.split(':')[1];
-				var court = courtsInQuery[courtId];
-
-				// If the court's data has already been loaded from the Open Data Set, remove its marker from the map
-				if (court !== true) {
-					court.marker.setMap(null);
-				}
-
-				// Remove the court from the list of courts in the query
-				delete courtsInQuery[courtId];
-			});
-
 
 
 			/*****************/
@@ -129,30 +95,69 @@
 				});
 			}, 10);
 			google.maps.event.addListener(circle, 'drag', updateCriteria);				/* use ember dom event for drag */
+		},
 
-			/**********************/
-			/*  HELPER FUNCTIONS  */
-			/**********************/
-			/* Adds a marker for the inputted court to the map */						/* see if this is getting called w/o refresh!!! could just be not rendering to DOM */
-			function createCourtMarker(court) {
-				var marker = new google.maps.Marker({
-					// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
-					icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
-					position: new google.maps.LatLng(court.latitude, court.longitude),
-					optimized: true,
-					map: map,
-					clickable: true,
-					// anchorPoint: (x:2, y:4)
-			  	});
+		addCourtToMap: function(courtId, courtLocation) {
+				// Specify that the court has entered this query
+				var self = this;
+				var courtsInQuery = this.get('courtsInQuery');	
+				courtId = courtId.split(':')[1];
+				courtsInQuery[courtId] = true;
 
-				
-			  	google.maps.event.addListener(marker, 'click', function(){
-			  		self.get('controller').transitionToRoute('/courts/'+court.id);
-			  	});
+					// Look up the court's data in the Transit Open Data Set
+					WGN.ref.child('courts').child(courtId).once('value', function(dataSnapshot) {
+						// Get the court data from the Open Data Set
+						var court = dataSnapshot.val();						/* I ADDED THIS VAR!!!!! */
+						court.id = courtId;
+						// If the court has not already exited this query in the time it took to look up its data in the Open Data
+						// Set, add it to the map
+						if (court !== null && courtsInQuery[courtId] === true) {
+							// Add the court to the list of courts in the query
+							courtsInQuery[courtId] = court;
 
-			    return marker;
-			}
-		
+							// Create a new marker for the court
+							// court.marker = createCourtMarker(court, getCourtColor(court));
+							court.marker = self.createCourtMarker(court);
+						}
+
+					});
+
+		},
+
+		removeCourtFromMap: function(courtId, courtLocation) {
+				// Get the court from the list of courts in the query
+				courtId = courtId.split(':')[1];
+				var courtsInQuery = this.get('courtsInQuery');
+				var court = courtsInQuery[courtId];
+
+				// If the court's data has already been loaded from the Open Data Set, remove its marker from the map
+				if (court !== true) {
+					court.marker.setMap(null);
+				}
+
+				// Remove the court from the list of courts in the query
+				delete courtsInQuery[courtId];
+		},
+
+		/* Adds a marker for the inputted court to the map */						/* see if this is getting called w/o refresh!!! could just be not rendering to DOM */
+		createCourtMarker: function(court) {
+			var map = this.get('map');
+			var marker = new google.maps.Marker({
+				// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
+				icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
+				position: new google.maps.LatLng(court.latitude, court.longitude),
+				optimized: true,
+				map: map,
+				clickable: true,
+				// anchorPoint: (x:2, y:4)
+			});
+
+			
+			google.maps.event.addListener(marker, 'click', function(){
+				self.get('controller').transitionToRoute('/courts/'+court.id);
+			});
+
+		    return marker;
 		},
 
 		willDestroyElement: function() {
