@@ -116,7 +116,7 @@
                 <img class="previousAvatar" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
             {{/if}}
             <button {{action "addAvatar"}}>Rip a new pic</button>
-            {{log avatarUrl}}
+            {{!log avatarUrl}}
             {{#if avatarUrl}}
                 <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
 

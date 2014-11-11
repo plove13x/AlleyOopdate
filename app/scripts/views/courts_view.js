@@ -7,6 +7,8 @@
 
 	WGN.CourtsView = Ember.View.extend({
 
+		mapListeners: [],
+
 		didInsertElement: function() {
 		    this._super();
 		    this.getUserCoords();
@@ -23,6 +25,7 @@
 				var testLng = position.coords.longitude;
 				var userCoords = [testLat, testLng];
 				self.set('userCoords', userCoords);				/* check to make sure controller is still there */
+				self.initializeGQ();
 				self.initializeMap();
 			});
 		},
@@ -48,25 +51,15 @@
 			var center = this.get('userCoords');
 			var radiusInKm = this.get('radiusInKm');					/* was 0.5. 1? */
 
-			/*************/
-			/*  GEOQUERY */
-			/*************/
-
-			this.initializeGQ();
-			
-			var geoQuery = this.get('geoQuery');	
-			var courtsInQuery = this.get ('courtsInQuery');		
-			var self = this;
-
-
 			/*****************/
 			/*  GOOGLE MAPS  */
-			/*****************/		
+			/*****************/
+
 			// Get the location as a Google Maps latitude-longitude object
 			var mapCenter = new google.maps.LatLng(center[0], center[1]);
 
 			// Create the Google Map
-			map = new google.maps.Map(document.getElementById('pinnedMap'), {			/* Use ember get view's element */
+			map = new google.maps.Map(document.getElementById('pinnedMap'), {			/* TODO Use ember get view's element */
 				center: mapCenter,
 				zoom: 12,							/* Was 15. 13? */
 				mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -86,16 +79,21 @@
 				draggable: true
 			});
 
+			this.set('circle', circle);
+
 			//Update the query's criteria every time the circle is dragged
-			var updateCriteria = _.debounce(function() {
-				var latLng = circle.getCenter();
-				geoQuery.updateCriteria({
-			  		center: [latLng.lat(), latLng.lng()],
-			  		radius: radiusInKm
-				});
-			}, 10);
-			google.maps.event.addListener(circle, 'drag', updateCriteria);				/* use ember dom event for drag */
+			var listener = google.maps.event.addListener(circle, 'drag', this.updateCriteria.bind(this));
+			this.get('mapListeners').push(listener);
 		},
+
+		updateCriteria: _.debounce(function() {
+			var circle = this.get('circle');
+			var latLng = circle.getCenter();
+			this.get('geoQuery').updateCriteria({
+				center: [latLng.lat(), latLng.lng()],
+				radius: this.get('radiusInKm')
+			});
+		}, 10),
 
 		addCourtToMap: function(courtId, courtLocation) {
 				// Specify that the court has entered this query
@@ -119,9 +117,7 @@
 							// court.marker = createCourtMarker(court, getCourtColor(court));
 							court.marker = self.createCourtMarker(court);
 						}
-
 					});
-
 		},
 
 		removeCourtFromMap: function(courtId, courtLocation) {
@@ -153,34 +149,41 @@
 			});
 
 			
-			google.maps.event.addListener(marker, 'click', function(){
+			var listener = google.maps.event.addListener(marker, 'click', function(){
 				self.get('controller').transitionToRoute('/courts/'+court.id);
 			});
+			this.get('mapListeners').push(listener);
 
 		    return marker;
 		},
 
-		willDestroyElement: function() {
-			var self = this;
-			self.geoQuery.cancel();
-			this.set('map', null);
+		updateMapCenter: function(){
+			var map = this.get('map');
+			var coords = this.get('userCoords');
+			var center = new google.maps.LatLng(coords[0], coords[1]);
+			map.setCenter(center);
+			var circle = this.get('circle');
+			circle.setCenter(center);
 		},
 
+		willDestroyElement: function() {
+			this.get('mapListeners').forEach(function(l){
+				google.maps.event.removeListener(l);
+			});
+			this.set('mapListeners', []);
+			this.geoQuery.cancel();
+			this.set('map', null);
+			this.set('controller.searchCoords', null);
+		},
 
 		searchQueryChanged: function() {
 			var searchCoords = this.get('controller.searchCoords');
-			// this.set('userCoords', searchCoords);
 			if (searchCoords) {
-
 				this.set('userCoords', searchCoords);
-
 				// google.maps.event.clearInstanceListeners($('#pinnedMap'));
-				if (this.get('geoQuery')) {
-					this.get('geoQuery').cancel();
-				}
 				// ($('#pinnedMap')).html('');
-				this.initializeMap();
-
+				this.updateMapCenter();
+				this.updateCriteria();
 			};			
 		}.observes('controller.searchCoords'),
 
