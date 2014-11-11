@@ -45,7 +45,6 @@ input {
 
 .leftColumn h2 {
     color: $mavsBlack2;
- 
 }
 
 
@@ -87,6 +86,7 @@ footer {
 .leftColumn {
     display: inline-block;
     width: 36%;
+    font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
 }
 
 .rightColumn {

@@ -120,7 +120,8 @@
 							courtsInQuery[courtId] = court;
 
 
-							//right now, its just id for court is true. instead, id should be model. instead of just on view, also set courtsinQuery on controller.
+							// right now, its just id for court is true. instead, id should be model. 
+							// instead of just on view, also set courtsinQuery on controller.
 
 
 							// Create a new marker for the court
