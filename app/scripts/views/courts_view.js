@@ -152,6 +152,7 @@
 			var marker = new google.maps.Marker({
 				// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
 				icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
+				// icon: '/images/bball-hoop-256.png',
 				position: new google.maps.LatLng(court.latitude, court.longitude),
 				optimized: true,
 				map: map,
@@ -159,7 +160,7 @@
 				// anchorPoint: (x:2, y:4)
 			});
 
-			
+			var self = this;
 			var listener = google.maps.event.addListener(marker, 'click', function(){
 				self.get('controller').transitionToRoute('/courts/'+court.id);
 			});
