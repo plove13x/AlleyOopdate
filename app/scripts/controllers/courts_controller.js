@@ -5,7 +5,7 @@
 
 
 	WGN.CourtsController = Ember.ArrayController.extend({
-		needs: ['session'], 
+		needs: ['session', 'courtsProfile'], 
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		isAddingCourt: false,
 		searchCoords: null,

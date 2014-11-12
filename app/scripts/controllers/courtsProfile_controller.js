@@ -7,6 +7,7 @@
 	WGN.CourtsProfileController = Ember.ObjectController.extend({			/* Object Controller for court to which Alley Oopdate is being posted to, but array controller to display them all */
 		needs: ['session', 'courts'],
 		isPosting: false,
+		isVerified: false,
 		isEditingCourt: false,
 		photos: Ember.computed.filterBy('model.courtVisuals', 'type', 'photo'),
 		Haversine: function(){
@@ -46,7 +47,6 @@
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 				var d = R * c;
 
-				alert(d);
 				console.log(d);
 				return d;
 
@@ -55,30 +55,33 @@
 		actions: {
 			addAlleyOopdate: function(){
 				this.set('isPosting', true);
+				var proximityToCourt = this.Haversine();
+			    console.log(proximityToCourt);
+			    if (proximityToCourt <= 1) {
+			    	this.set('isVerified', true);
+			    	alert('VERIFIED: at the court!');
+			    } else {
+			    	this.set('isVerified', false);
+			    };
 			},
 
 			postAlleyOopdate: function(){
-
 				var numberPeeps = this.get('numberPeeps');
+				var arrivalTime = this.get('arrivalTime');
 				var departureGuess = this.get('departureGuess');
 		    	var alleyOopdateText = this.get('alleyOopdateText');
-
-			    var proximityToCourt = this.Haversine();
-			    console.log(proximityToCourt);
-			    if (proximityToCourt <= 1) {
-			    	var verify = true;
-			    } else {
-			    	var verify = false;
-			    };
+		    	var convoyQty = this.get('convoyQty');
 
 				var alleyOopdate = this.store.createRecord('alleyOopdate', {
-						numberPeeps: numberPeeps,
-						departureGuess: departureGuess,
-						alleyOopdateText: alleyOopdateText,
-						timestamp: moment().format('Do MMMM YYYY > h:mm:ss a'),
 						user: this.get('controllers.session.currentUser'),
 						court: this.model,
-						verifiedAtCourt: verify
+						verifiedAtCourt: this.get('isVerified'),
+						numberPeeps: numberPeeps,
+						arrivalTime: arrivalTime,
+						departureGuess: departureGuess,
+						convoyQty: convoyQty,
+						alleyOopdateText: alleyOopdateText,
+						timestamp: moment().format('Do MMMM YYYY > h:mm:ss a')
 				});
 				this.get('model.alleyOopdates').addObject(alleyOopdate);
 				alleyOopdate.save();

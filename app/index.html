@@ -222,14 +222,14 @@
 
                     {{outlet}}
                     
-                    {{#if 'controllers.session.currentUser'}}
+                    {{#unless controllers.courtsProfile.model.name}}
                         <button {{action "drawCourt"}}>Add a Court!</button>
-                    {{/if}}
+                    {{/unless}}
                 </div>
             </div>
 
     </script>
-
+    <!-- {{#if 'controllers.session.currentUser'}} -->
 
     <!--                      
             -->
@@ -259,21 +259,37 @@
                 {{/if}}
             </div>
             {{#if isPosting}}
-                <ul>
-                    <li>
-                        <label>How many people are there that seem down for a game?</label>{{input type="text" value=numberPeeps}}
-                    </li>
-                    <li>
-                        <label>About what time would you guess you&#8217;re gonna leave?</label>{{input type="text" value=departureGuess}}
-                    </li>
-                    <li>    
-                        <label>You got anything else to say?</label>{{input type="text" value=alleyOopdateText}}
-                    </li>
-                    <li>
-                        <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
-                        <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
-                    </li>
-                </ul>
+                {{#if controller.isVerified}}
+                    <p>
+                        <label>How many people are there that seem down for a game?<span> </span></label>{{input type="text" value=numberPeeps}}
+                    </p>
+                {{/if}}
+                {{#unless controller.isVerified}}
+                    <p>
+                        <label>What time are you gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
+                    </p>
+                {{/unless}}
+                <p>
+                    <label>About what time would you guess you&#8217;re gonna leave?<span> </span></label>{{input type="text" value=departureGuess}}
+                </p>
+                {{#unless controller.isVerified}}
+                    <p>
+                        {{input type="checkbox" checked=moPeeps}}<label>Bringing people with you?<span> </span></label>
+                        {{#if moPeeps}}
+                            <p>
+                                <label>Nice, how many ballers in total y&#8217;all got?<span> </span></label>{{input type="text" value=convoyQty}}
+                            </p>
+                        {{/if}}
+                    </p>
+                {{/unless}}
+                <p>    
+                    <label>Anything else to say? (optional)<span> </span></label>{{input type="text" value=alleyOopdateText}}
+                </p>
+
+                <p>
+                    <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
+                    <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
+                </p>
             {{/if}}
 
             <p>
@@ -284,20 +300,35 @@
                             <li>
                                 {{#if verifiedAtCourt}}
                                     <p>
-                                        +VERIFIED!
-                                        {{numberPeeps}}
+                                        !VERIFIED: at the court!
                                     </p>
                                 {{/if}}
                                 <p>
                                     {{timestamp}}<span> </span>
                                     -<span> </span>{{user.handle}}
                                 </p>
+                                {{#if numberPeeps}}
+                                    <p>
+                                        How many ballers are there right now?: {{numberPeeps}}
+                                    </p>
+                                {{/if}}
+                                {{#if arrivalTime}}
+                                    <p>
+                                        User 
+                                            {{#if convoyQty}}
+                                                ({{convoyQty}} peeps in total)
+                                            {{/if}}
+                                        plans to arrive at court: {{arrivalTime}}
+                                    </p>
+                                {{/if}}
                                 <p>
                                     User Might Leave: {{departureGuess}}
                                 </p>
-                                <p>
-                                    Comments: "{{alleyOopdateText}}"
-                                </p>
+                                {{#if alleyOopdateText}}
+                                    <p>
+                                        Comments: "{{alleyOopdateText}}"
+                                    </p>
+                                {{/if}}
                             </li>
                         {{/each}}
                     {{else}}
