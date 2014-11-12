@@ -8,7 +8,7 @@
 		handle: DS.attr('string'),
 	    email: DS.attr('string'),
 	    password: DS.attr('string'),
-		alleyOopdates: DS.hasMany('alleyOopdate'),
+		alleyOopdates: DS.hasMany('alleyOopdate', { async: true }),
 		avatarUrl: DS.attr('string'),
 		// courts: DS.hasMany('court'),
 		latitude: DS.attr('number'),
@@ -16,9 +16,9 @@
 		location: function(){
 			return this.getProperties('latitude', 'longitude');
 		}.property('latitude', 'longitude'),
-		courtVisuals: DS.hasMany('courtVisual'),
-		courtPhotos: DS.hasMany('courtPhoto'),
-		courtVines: DS.hasMany('courtVine')
+		// courtVisuals: DS.hasMany('courtVisual', { async: true }),
+		courtPhotos: DS.hasMany('courtPhoto', { async: true }),
+		courtVines: DS.hasMany('courtVine', { async: true })
 	});
 
 

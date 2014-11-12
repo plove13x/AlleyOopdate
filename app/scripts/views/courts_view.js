@@ -196,7 +196,7 @@
 				// ($('#pinnedMap')).html('');
 				this.updateMapCenter();
 				this.updateCriteria();
-			};			
+			}			
 		}.observes('controller.searchCoords'),
 
 	});

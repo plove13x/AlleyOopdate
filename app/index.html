@@ -117,9 +117,8 @@
             {{/if}}
             <button {{action "addAvatar"}}>Rip a new pic</button>
             {{!log avatarUrl}}
-            {{#if avatarUrl}}
-                <img class="avatarToUpload" {{bind-attr src=avatarUrl}}>
-
+            {{#if avatarToUpload}}
+                <img class="avatarToUpload" {{bind-attr src=avatarToUpload}}>
             {{/if}}
 
 
