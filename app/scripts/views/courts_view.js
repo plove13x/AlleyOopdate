@@ -151,8 +151,8 @@
 			var map = this.get('map');
 			var marker = new google.maps.Marker({
 				// icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=" + vehicle.vtype + "|bbT|" + vehicle.routeTag + "|" + vehicleColor + "|eee",
-				icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
-				// icon: '/images/bball-hoop-256.png',
+				// icon: 'https://31.media.tumblr.com/avatar_fe3197bc5e11_48.png',
+				icon: '/images/basketball56.png',
 				position: new google.maps.LatLng(court.latitude, court.longitude),
 				optimized: true,
 				map: map,

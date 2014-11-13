@@ -9,13 +9,14 @@
 		currentUser: Ember.computed.alias('controllers.session.currentUser'),
 		isAddingCourt: false,
 		searchCoords: null,
-		// sortAscending: true,
-  		// sortProperties: ['name'],
+		sortAscending: true,
+  		sortProperties: ['name'],
+
 		courtFilter: '',
 
 		filteredContent: function() {
 			var regExp = new RegExp(this.get('courtFilter').toLowerCase());
-				return this.get('content').filter(function(item) {
+				return this.get('arrangedContent').filter(function(item) {
 		  		return regExp.test(item.get('name').toLowerCase());
 			});
 		}.property('courtFilter', 'model.@each'),

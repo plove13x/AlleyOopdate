@@ -183,8 +183,10 @@
  -->    <script type="text/x-handlebars" data-template-name="courts">
     
             <div class="secondaryBG">
-                <div class="jGo">
-                    <img src='/images/WGN_logo.png' />
+                <div class="hundo">
+                    <div class="jGo autoCenter">
+                        <img src='/images/WGN_logo.png' />
+                    </div>
                 </div>
                 <div class="avatarBox">
                 {{#if currentUser.avatarUrl}}
@@ -349,18 +351,23 @@
 
             <div class="alleyOopdates spaceBottom">
             {{#unless isPosting}}
-                <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
+                <div class="hundo">
+                    <div class="autoCenter">
+                        <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
+                    </div>
+                </div>
             {{/unless}}
                 <ul>        
                     {{#if alleyOopdates}}
-                        {{#each alleyOopdates}}
+                        {{#each sortedOopdates}}
                             <li>
                                 
                                 <div class="relative">
-                                    <span class="timestamp">{{timestamp}} </span><span class="pMarker"> > </span>
+                                    <span class="timestamp">{{displayDate}} </span><span class="pMarker"> > </span>
                                     <div class="pushDown">
                                         <div class="iB">
-                                            {{user.handle}}<div>AO: {{user.alleyOopdates.length}}</div>
+                                            {{user.handle}}
+                                            <div>AO: {{user.alleyOopdates.length}}</div>
                                             <span> </span>
                                         </div>
                                         <div class="iB"><span> </span>
@@ -370,7 +377,7 @@
                                                 <img class="userPhotoAO" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
                                             {{/if}}
                                         </div>
-                                        
+
                                         {{#if verifiedAtCourt}}                                   
                                             <div class="verified">VERIFIED: at the court!</div>
                                         {{/if}}

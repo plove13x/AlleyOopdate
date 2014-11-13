@@ -10,6 +10,8 @@
 		isVerified: false,
 		isEditingCourt: false,
 		photos: Ember.computed.filterBy('model.courtVisuals', 'type', 'photo'),
+		oopdatesSorting: ['timestamp:desc'],
+		sortedOopdates: Ember.computed.sort('alleyOopdates', 'oopdatesSorting'),
 		Haversine: function(){
 
 				var self = this;
@@ -81,7 +83,8 @@
 						departureGuess: departureGuess,
 						convoyQty: convoyQty,
 						alleyOopdateText: alleyOopdateText,
-						timestamp: moment().format('Do MMMM YYYY - h:mm A')
+						timestamp: new Date(),
+						// timestamp: moment().format('Do MMMM YYYY - h:mm A')
 				});
 				this.get('model.alleyOopdates').addObject(alleyOopdate);
 				alleyOopdate.save();
