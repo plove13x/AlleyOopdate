@@ -219,7 +219,7 @@
                         <h2>Courts</h2>
                             <ul>
                                 {{#if this.model}}
-                                    {{#each filteredContent}}
+                                    {{#each courtsOnMap}}
                                         <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
                                     {{/each}}
                                 {{else}}

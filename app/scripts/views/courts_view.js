@@ -40,7 +40,7 @@
 			// Create a new GeoQuery instance
 			var center = this.get('coordsInUse');
 			var radiusInKm = this.get('radiusInKm');
-			this.set('courtsInQuery', {});
+			// this.set('courtsInQuery', {});
 
 			var geoQuery = WGN.geoFire.query({
 				center: center,
@@ -104,9 +104,9 @@
 		addCourtToMap: function(courtId, courtLocation) {
 				// Specify that the court has entered this query
 				var self = this;
-				var courtsInQuery = this.get('courtsInQuery');	
+				var courtsInQuery = this.get('controller.courtsInQuery');	
 				courtId = courtId.split(':')[1];
-				courtsInQuery[courtId] = true;
+				courtsInQuery.set(courtId, true);
 
 					// Look up the court's data in the Transit Open Data Set
 					WGN.ref.child('courts').child(courtId).once('value', function(dataSnapshot) {
@@ -115,9 +115,9 @@
 						court.id = courtId;
 						// If the court has not already exited this query in the time it took to look up its data in the Open Data
 						// Set, add it to the map
-						if (court !== null && courtsInQuery[courtId] === true) {
+						if (court !== null && courtsInQuery.get(courtId) === true) {
 							// Add the court to the list of courts in the query
-							courtsInQuery[courtId] = court;
+							courtsInQuery.set(courtId, court);
 
 
 							// right now, its just id for court is true. instead, id should be model. 
@@ -134,8 +134,8 @@
 		removeCourtFromMap: function(courtId, courtLocation) {
 				// Get the court from the list of courts in the query
 				courtId = courtId.split(':')[1];
-				var courtsInQuery = this.get('courtsInQuery');
-				var court = courtsInQuery[courtId];
+				var courtsInQuery = this.get('controller.courtsInQuery');
+				var court = courtsInQuery.get(courtId);
 
 				// If the court's data has already been loaded from the Open Data Set, remove its marker from the map
 				if (court !== true) {
@@ -143,7 +143,8 @@
 				}
 
 				// Remove the court from the list of courts in the query
-				delete courtsInQuery[courtId];
+				// delete courtsInQuery.[courtId];
+				courtsInQuery.set(courtId, null);
 		},
 
 		/* Adds a marker for the inputted court to the map */						/* see if this is getting called w/o refresh!!! could just be not rendering to DOM */

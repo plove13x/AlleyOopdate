@@ -11,7 +11,15 @@
 		searchCoords: null,
 		// sortAscending: true,
   		// sortProperties: ['name'],
+  		courtsInQuery: new Ember.Object(),
 		courtFilter: '',
+
+		courtsOnMap: function() {
+			var self = this;
+			return this.get('model').filter(function(court){
+				self.get('courtsInQuery').get(court.id);
+			});
+		}.property('courtsInQuery', 'model.@each'),
 
 		filteredContent: function() {
 			var regExp = new RegExp(this.get('courtFilter').toLowerCase());
