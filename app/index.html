@@ -345,7 +345,7 @@
                                 
                                 <p>
                                     <span class="timestamp">{{timestamp}}</span><span> </span>
-                                    ><span> </span>{{user.handle}}
+                                    ><span> </span>{{user.handle}}<img class="userPhotoAO" {{bind-attr src=user.avatarUrl}} />
                                     {{#if verifiedAtCourt}}                                   
                                         <span class="verified">VERIFIED: at the court!</span>
                                     {{/if}}
