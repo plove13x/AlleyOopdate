@@ -142,6 +142,15 @@ footer {
 .blackLink {
     color: $mavsBlack2;
     text-decoration: none;
+    font-family: 'Permanent Marker', cursive;
+}
+
+p {
+    font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+    color: $mavsBlack2;
 }
 
 
@@ -344,22 +353,53 @@ footer {
         font-style: italic;
 
         ul {
-            margin-top: 2.5em;
+            margin-top: 3em;
+        }
+
+        li {
+            margin-top: 3em;
         }
     }
 
+    .relative {
+        position: relative;
+        margin-bottom: 3em;
+    }
+
     .timestamp {
-        font-family: 'Gruppo', cursive;
+        font-family: 'Dosis', sans-serif;
+        // font-family: 'Gruppo', cursive;
         font-weight: 700;
+    }
+    
+    .pMarker {
+        font-family: 'Permanent Marker', cursive;  
+        padding-right: 0.5em;
+    }
+
+    .pushDown {
+        display: inline-block;
+        position: absolute;
+    }
+
+    .iB {
+        display: inline-block;
     }
 
     .userPhotoAO {
-        width: 25px;
-        height: 25px;
+        width: 32px;
+        height: 32px;
     }
 
     .verified {
         font-family: 'Permanent Marker', cursive;    
+        display: inline-block;
+        margin-top: 7px;
+        vertical-align: top;
+    }
+
+    .bold {
+        font-weight: 500;
     }
 
     .cPTU {

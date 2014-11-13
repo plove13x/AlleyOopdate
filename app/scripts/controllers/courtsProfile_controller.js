@@ -81,7 +81,7 @@
 						departureGuess: departureGuess,
 						convoyQty: convoyQty,
 						alleyOopdateText: alleyOopdateText,
-						timestamp: moment().format('Do MMMM YYYY - h:mm:ss a')
+						timestamp: moment().format('Do MMMM YYYY - h:mm A')
 				});
 				this.get('model.alleyOopdates').addObject(alleyOopdate);
 				alleyOopdate.save();
