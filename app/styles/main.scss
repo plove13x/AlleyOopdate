@@ -4,7 +4,7 @@ $mavsBlack: #292929;
 $mavsBlack2: RGBA(39, 39, 39, 1);
 $mavsBlue: #006AB6;
 $mavsBlue2: #1655BA;
-$mavsGray: #4B4F5B;
+$mavsGray: #4B4F5B; 
 $mavsGray2: RGBA(176, 174, 179, 1);
 
 
@@ -14,37 +14,35 @@ $mavsGray2: RGBA(176, 174, 179, 1);
 // font-family: 'Rokkitt', serif;
 // font-family: 'Gruppo', cursive;
 // font-family: 'Titillium Web', sans-serif;
+// font-family: 'Dosis', sans-serif;
+// font-family: 'Lato', sans-serif;
 
 @font-face {
   font-family: 'aaaiight';
   src: url('/styles/aaaiight/aaaiight.ttf');
 }
 
+@font-face {
+  font-family: 'ea';
+  src: url('/styles/ea_sports_covers_sc/EA Sports Covers SC 1.5.ttf');
+}
+
 
 // TEMP/IN PROGRESS/NEEDS TO BE ORGANIZED STYLE
 
+button {
+    background-color: $mavsBlue;
+    font-family: 'Gruppo', cursive;
+}
+
 a {
    text-decoration: none;
-   color: $mavsGray; 
+   color: #F8F8F8; 
 }
 
 input {
     font-family: 'Gruppo', cursive;
-}
-
-.introText h1 {
-    color: $mavsBlack;
-    text-align: center;
-    font-family: 'aaaiight', cursive; 
-}
-
-.mavsBlack {
-    color: $mavsBlack2;
-    font-family: 'aaaiight', cursive;
-}
-
-.leftColumn h2 {
-    color: $mavsBlack2;
+    padding: 2px 0 3px;
 }
 
 
@@ -71,9 +69,16 @@ header {
     background: $mavsBlue2;
     color: $mavsBlack2;
     border-bottom: 0.1em solid silver;
-    padding: 1em 0;
+    padding: 1em;
     text-align: center;
+    position: relative;
 }
+
+// .trNav {
+//     display: inline-block;
+//     position: absolute;
+//     top: 1em;
+// }
 
 footer {
     border-top: 0.1em solid silver;
@@ -83,28 +88,25 @@ footer {
 
 // INDEX STYLE
 
-.leftColumn {
+.indexLeftColumn {
     display: inline-block;
     width: 36%;
-    font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
+    // font-family: 'Permanent Marker', cursive;
+    font-family: 'Dosis', sans-serif;
+    // font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
+    // font-family: 'ea';
 }
 
-.rightColumn {
+.introText h1 {
+    color: $mavsBlack;
+    text-align: center;
+    font-family: 'aaaiight', cursive; 
+}
+
+.indexRightColumn {
     display: inline-block;
-    width: 63%;
+    width: 64%;
     vertical-align: top;
-
-    h2 {
-        display: inline-block;
-    }
-
-    h4 {
-        display: inline-block;
-    }
-
-    button {
-        display: inline-block;
-    }
 }
 
 .signIn {
@@ -161,7 +163,7 @@ footer {
 .jGo {
     position: absolute;
     top: 2em;
-    left: 18em;
+    left: 18.5em;
 }
 
 .avatarBox {
@@ -207,16 +209,14 @@ footer {
 
     .ollie {
         display: inline-block;
-        margin: 1em 0;
+        margin: 1em;
     }
 
 }
 
-
 .mainSection {
-
+    // white-space: nowrap;
 }
-
 
 #pinnedMap {
     width: 38em;    /*  %!!!!! */
@@ -231,10 +231,278 @@ footer {
 .courtFilterBox {
     text-align: center;
     background: $mavsGray2;
+
+    input {
+        margin-bottom: 0.5em;
+    }
 }
 
-.courtPhotoThumbnail {
-    // object-fit: contain;
-    width: 7em;
-    height: 7em;
+.twoColumns {
+    position: relative;
 }
+
+.leftColumn {
+    display: inline-block;
+    background: $mavsBlack2;
+    width: 36%;
+    // font-family: 'Permanent Marker', cursive;
+    font-family: 'Dosis', sans-serif;
+    // font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
+    // font-family: 'ea';
+
+    h2 {
+        color: #F8F8F8;
+        text-align: center;
+    }
+
+    a {
+        color: $mavsBlue2;
+    }
+
+    li {
+        color: $mavsGray;
+    }
+
+}
+
+.rightColumn {
+    display: inline-block;
+    // padding-left: 36%;       // IF YOU TRY TO DO MAKE LEFT COLUMN POSITION:ABSOLUTE...
+    width: 64%;    // 100%
+    vertical-align: top;
+
+    button {
+        display: inline-block;
+    }
+
+    h2.courtProfileName {
+        margin-left: 1em;
+        padding: 0.75em 1em;
+        display: inline-block;
+        width: 100%;
+        color: $mavsBlack2;
+        background-color: $mavsGray2;
+    }
+
+    .courtProfileInfo {
+        color: $mavsBlack2;
+        font-family: 'Dosis', sans-serif;
+        // font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        padding-left: 3em;
+
+        // font-family: 'aaaiight', cursive;
+    }
+
+    .blue {
+        color: $mavsBlue2;
+    }
+
+
+
+    .alleyOopdates {
+        // font-family: 'Lato', sans-serif;
+        font-family: 'Dosis', sans-serif;
+        font-weight: 300;
+        color: $mavsBlack2;
+        font-style: italic;
+
+        ul {
+            margin-top: 2em;
+        }
+    }
+
+    .timestamp {
+        font-family: 'Gruppo', cursive;
+        font-weight: 700;
+    }
+
+    .verified {
+        font-family: 'Permanent Marker', cursive;    
+    }
+
+    .visualListItems {
+        padding-left: 3em;
+    }
+
+    .courtPhotoThumbnail {
+        // object-fit: contain;
+        width: 7em;
+        height: 7em;
+    }
+
+
+
+    .courtHeaderSection {
+        position: relative;
+
+        h4 {
+            margin-left: 1.4em;
+            padding: 0.75em 1em;
+            width: 100%;
+            display: inline-block;
+            color: $mavsBlack2;
+            background-color: $mavsGray2;
+        }
+
+        .alignRight {
+            display: inline-block;
+            position: absolute;
+            right: 1em;
+        }
+
+        .AR1 {
+            top: 2.5em;
+        }
+
+        .AR2 {
+            top: 1.85em;
+        }
+    }
+
+    .spaceBottom {
+        margin-bottom: 3em;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 0.6em 1em 0.55em 1em;
+  margin-left: 13em;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #F8F8F8;
+  text-decoration: none;
+  background: $mavsBlue;
+  transform: translate3d(0, 0, 0);
+  transition: .1s background,
+              .1s transform;
+
+  &:hover {
+    background: darken($mavsBlue, 5);
+    transform: translate3d(0, 8px, 0);
+    
+    &:after,
+    &:before {
+      height: 0;
+      background: darken($mavsBlue, 10);
+    }
+  }
+
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 50%;
+    height: 8px;
+    background: darken($mavsBlue, 5);
+    transition: .1s height,
+                .1s background;
+  }
+
+  &:after {
+    right: 0;
+    transform: skewX(-45deg);
+    transform-origin: 0 0;
+  }
+
+  &:before {
+    left: 0;
+    transform: skewX(45deg);
+    transform-origin: 100% 0;
+  }
+}
+
+
+
+// <div class="absolute">
+//             <a href="" title="Button border lightblue" class="button btnFloat btnLightBlue">Float</a>
+// </div>
+
+
+// .absolute {
+//     position: absolute;
+// }
+
+// a.button {
+//   display: inline-block;
+//   position: relative;
+//   float: left;
+//   width: 120px;
+//   padding: 0;
+//   margin: 10px 20px 10px 0;
+//   font-weight: 600;
+//   text-align: center;
+//   line-height: 50px;
+//   color: #FFF;
+//   border-radius: 5px;
+//   transition: all 0.2s ;
+// }
+
+// .btnLightBlue {
+//   background: $mavsBlue;
+// }
+
+// .btnFloat {
+//   background: none;
+//   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+// }
+
+// .btnFloat:before {
+//   content: 'Edit Court Profile';
+//   font-size: 0.5em;
+//   display: inline-block;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 15em;
+//   height: 50px;
+//   border-radius: 5px;
+//   transition: all 0.2s ;
+// }
+
+// .btnLightBlue.btnFloat:before {
+//   background: $mavsBlue;
+// }
+
+// .btnFloat:before {
+//   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+// }
+
+// .btnFloat:hover:before {
+  
+// }
+
+// .btnFloat:hover:before {
+//   margin-top: -2px;
+//   margin-left: 0px;
+//   transform: scale(1.1,1.1);
+//   -ms-transform: scale(1.1,1.1);
+//   -webkit-transform: scale(1.1,1.1);
+//   box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+// }

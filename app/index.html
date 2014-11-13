@@ -15,7 +15,7 @@
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Lato:100,200,300,400,700,700italic|Dosis:400,500|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -26,13 +26,20 @@
         <![endif]-->
 
 
-
+<!-- Who Got Next
+                <div class="trNav">
+                    {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>
+                </div>-->
     <script type="text/x-handlebars" data-template-name="application">    
 
         <div class="everythingContainer">
             <header>
-                Who Got Next Logo | Language: <select><option>English</option></select> 
-                {{#if currentUser}} | {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>{{/if}}
+                Who Got Next
+                    {{#if currentUser}} | {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>
+                    {{else}}
+                        | Language: <select><option>English</option></select> 
+                    {{/if}} 
+            
             </header>
 
             <div class="notHeader">
@@ -50,8 +57,7 @@
 
 
     <script type="text/x-handlebars" data-template-name="index">
-       
-        <div class="leftColumn">
+        <div class="indexLeftColumn">
             <div class="introText">
                 <h1>Who Got Next?</h1>
                 <p>
@@ -64,8 +70,8 @@
             <div>
                 <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
             </div>
-        </div>
-        <div class="rightColumn">
+        </div><!--
+     --><div class="indexRightColumn">
             <div class="signIn">
                 Sign in Yo!
                 <form>
@@ -96,7 +102,6 @@
                 </form>
             </div>
         </div>
-
     </script>
 
 
@@ -118,13 +123,19 @@
             <button {{action "addAvatar"}}>Rip a new pic</button>
             {{!log avatarUrl}}
             {{#if avatarToUpload}}
+            Replace with:
                 <img class="avatarToUpload" {{bind-attr src=avatarToUpload}}>
             {{/if}}
 
 
         </div>
+        <div>
         Tighten your Handle: 
         {{input type="text" value=this.model.handle}}
+        </div>
+        <div>
+        Language: <select><option>English</option></select> 
+        </div>
         <button {{action "updateProfile"}}>Update Profile</button>
         <button {{action "doNotUpdate"}}>Cancel</button>
     </script>
@@ -178,10 +189,9 @@
                 
                 <div class="ollie">
 
-                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation placeholder="address"}}
-                    <button {{action "updateQueryLocation"}}>Peep Courts</button>
+                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation placeholder="address"}} 
+                    <button {{action "updateQueryLocation"}}>Peep Courts</button><span> </span>
 
-                
                 </div>
             </div>
             
@@ -194,72 +204,78 @@
                     <label>Filter by Name</label>
                     {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
                     {{#unless isEditing}}
-                        <button {{action "drawCourt"}}>Add a Court!</button>
+                        | <button {{action "drawCourt"}}>Add a Court!</button>
                     {{/unless}}
 
                 </div>
-                <div class="leftColumn">
-                    
-                <h2>Courts</h2>
-                    <ul>
-                        {{#if this.model}}
-                            {{#each filteredContent}}
-                                <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
-                            {{/each}}
-                        {{else}}
-                            No Courts in this location yet. Maybe you should add one!
-                        {{/if}} 
-                    </ul>
+                <div class="twoColumns">
+                    <div class="leftColumn">
+                        <h2>Courts</h2>
+                            <ul>
+                                {{#if this.model}}
+                                    {{#each filteredContent}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}} 
+                            </ul>
+                    </div><!--
+                 --><div class="rightColumn">
+                        {{#if isAddingCourt}}
+                            {{input type="text" value=courtName placeholder="Court Name"}}
+                            {{input type="text" value=newAddress placeholder="Court Address"}}
+                            {{input type="text" value=whenClosed placeholder="When Closed"}}
+                            {{input type="text" value=otherNotes placeholder="Other Notes"}}
+                            <button {{action "submitCourt"}}>Add Court to Database</button>
+                            <button {{action "cancelSubmit"}}>Cancel</button>
+                        {{/if}}
 
-                </div>
-                <div class="rightColumn">
-                    {{#if isAddingCourt}}
-                        {{input type="text" value=courtName placeholder="Court Name"}}
-                        {{input type="text" value=newAddress placeholder="Court Address"}}
-                        {{input type="text" value=whenClosed placeholder="When Closed"}}
-                        {{input type="text" value=otherNotes placeholder="Other Notes"}}
-                        <button {{action "submitCourt"}}>Add Court to Database</button>
-                        <button {{action "cancelSubmit"}}>Cancel</button>
-                    {{/if}}
-
-                    {{outlet}}
-                    
-                    {{#unless controllers.courtsProfile.model.name}}
-                        <button {{action "drawCourt"}}>Add a Court!</button>
-                    {{/unless}}
+                        {{outlet}}
+                        
+                        {{#unless controllers.courtsProfile.model.name}}
+                            <button {{action "drawCourt"}}>Add a Court!</button>
+                        {{/unless}}
+                    </div>
                 </div>
             </div>
-
     </script>
     <!-- {{#if 'controllers.session.currentUser'}} -->
 
     <!--                      
-            -->
+          // <h2 class="asdx">Court Profile</h2>  
+
+          <a href="#?" class="btn">Throw down a new Alley Oopdate!</a>-->
     <script type="text/x-handlebars" data-template-name="courts/profile">
-            <h2>{{name}}</h2> 
-            {{#unless isEditingCourt}}
-                <button {{action "editCourt"}}>Edit Court Profile</button>
-            {{else}}
-                {{input type="text" value=name placeholder="Court Name"}}
-                {{input type="text" value=address placeholder="Court Address"}}
-                {{input type="text" value=whenClosed placeholder="When Closed"}}
-                {{input type="text" value=otherNotes placeholder="Other Notes"}}
-                <button {{action "updateCourt"}}>Update Court Profile</button>
-                <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
-            {{/unless}}
-            <div class="mavsBlack">
+            
+            <div class="courtHeaderSection">
+                <h2 class="courtProfileName">{{name}}</h2><span> </span>
+                <div class="alignRight AR1">{{#unless isEditingCourt}}
+                    <button {{action "editCourt"}}>Edit Court Profile</button></div>
+                </div> 
+                {{/unless}}
+            </div>
+
+
+
+            
+            <div class="courtProfileInfo spaceBottom">
                 <p>
-                    Address: {{address}}
+                    <span class="blue">Address:</span> {{address}}
                 </p>
                 <p>
-                    Closes/Lights Go Off: {{whenClosed}}
+                    <span class="blue">Closes/Lights Go Off:</span> {{whenClosed}}
                 </p>    
                 {{#if otherNotes}}
                     <p>
-                        Other Notes: {{otherNotes}}
+                        <span class="blue">Other Notes:</span> {{otherNotes}}
                     </p>
                 {{/if}}
             </div>
+            
+            <h4>Recent Alley Oopdates</h4>
+            
+
             {{#if isPosting}}
                 {{#if controller.isVerified}}
                     <p>
@@ -276,11 +292,11 @@
                 </p>
                 {{#unless controller.isVerified}}
                     <p>
-                        {{input type="checkbox" checked=moPeeps}}<label>Bringing people with you?<span> </span></label>
+                        {{input type="checkbox" checked=moPeeps}}<label>Anybody coming with you?<span> </span></label>
                         {{#if moPeeps}}
-                            <p>
-                                <label>Nice, how many ballers in total y&#8217;all got?<span> </span></label>{{input type="text" value=convoyQty}}
-                            </p>
+                            
+                                <label>Nice, how many ballers in total?<span> </span></label>{{input type="text" value=convoyQty}}
+                            
                         {{/if}}
                     </p>
                 {{/unless}}
@@ -294,41 +310,41 @@
                 </p>
             {{/if}}
 
-            <p>
-            <h4>Recent Alley Oopdates</h4>{{#unless isPosting}}<span> </span><button {{action "addAlleyOopdate"}}>Throw down a new Alley Oopdate</button>{{/unless}}
+
+            <div class="alleyOopdates spaceBottom">
+            <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
                 <ul>        
                     {{#if alleyOopdates}}
                         {{#each alleyOopdates}}
                             <li>
-                                {{#if verifiedAtCourt}}
-                                    <p>
-                                        !VERIFIED: at the court!
-                                    </p>
-                                {{/if}}
+                                
                                 <p>
-                                    {{timestamp}}<span> </span>
-                                    -<span> </span>{{user.handle}}
+                                    <span class="timestamp">{{timestamp}}</span><span> </span>
+                                    ><span> </span>{{user.handle}}
+                                    {{#if verifiedAtCourt}}                                   
+                                        <span class="verified">VERIFIED: at the court!</span>
+                                    {{/if}}
                                 </p>
                                 {{#if numberPeeps}}
                                     <p>
-                                        How many ballers are there right now?: {{numberPeeps}}
+                                        <span class="blue">How many ballers are there right now?:</span> {{numberPeeps}}
                                     </p>
                                 {{/if}}
                                 {{#if arrivalTime}}
                                     <p>
-                                        User 
+                                        <span class="blue">Player 
                                             {{#if convoyQty}}
                                                 ({{convoyQty}} peeps in total)
                                             {{/if}}
-                                        plans to arrive at court: {{arrivalTime}}
+                                        plans to arrive at court:</span> {{arrivalTime}}
                                     </p>
                                 {{/if}}
                                 <p>
-                                    User Might Leave: {{departureGuess}}
+                                    <span class="blue">Player Might Leave:</span> {{departureGuess}}
                                 </p>
                                 {{#if alleyOopdateText}}
                                     <p>
-                                        Comments: "{{alleyOopdateText}}"
+                                        <span class="blue">Comments:</span> "{{alleyOopdateText}}"
                                     </p>
                                 {{/if}}
                             </li>
@@ -337,9 +353,15 @@
                         No recent Alley Oopdates for this court.
                     {{/if}}
                 </ul>
-            </p>
-            <div class="courtPhotos">
-                <h4>Recent Photos</h4><span> </span><button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button> 
+            </div>
+
+            <div class="courtPhotos spaceBottom">
+
+                <div class="courtHeaderSection">
+                    <h4>Recent Photos</h4><span> </span>
+                    <div class="alignRight AR2"><button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button></div>
+                </div>    
+
                 {{#if 'controller.newCourtPhoto'}}
                     <div>
                         Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
@@ -348,19 +370,27 @@
                     </div>
                 {{/if}}
             
-                <div>
+                <div class="visualListItems">
                     {{#each courtPhotos}}
                         <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
                     {{/each}}
                 </div>
+
             </div> 
-            <div class="courtVines">
-                <h4>Recent Vine Videos</h4><span> </span>{{input type="text" value=newVineUrl placeholder='new vine URL'}}<span> </span><button {{action "enterVineUrl"}}>Add a new vine of this court</button>
-                <div>
+
+            <div class="courtVines spaceBottom">
+
+                <div class="courtHeaderSection">
+                    <h4>Recent Vine Videos</h4><span> </span>
+                    <div class="alignRight AR2">{{input type="text" value=newVineUrl placeholder='new vine URL'}}<span> </span><button {{action "enterVineUrl"}}>Add a new vine of this court</button></div>
+                </div>
+            
+                <div class="visualListItems">
                     {{#each courtVines}}
                         <iframe class="vine-embed" {{bind-attr src=content}} width="250" height="250" frameborder="0"></iframe>
                     {{/each}}
                 </div>
+
             </div>
             
     </script>
