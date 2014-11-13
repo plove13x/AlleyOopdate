@@ -67,11 +67,19 @@ body {
 
 header {
     background: $mavsBlue2;
-    color: $mavsBlack2;
+    color: #F8F8F8;
     border-bottom: 0.1em solid silver;
     padding: 1em;
     text-align: center;
     position: relative;
+
+    a {
+        color: $mavsBlack2;
+    }
+
+    span {
+        color: $mavsGray2;
+    }
 }
 
 // .trNav {
@@ -83,6 +91,9 @@ header {
 footer {
     border-top: 0.1em solid silver;
     text-align: center;
+    background: $mavsBlue2;
+    color: $mavsBlack2;
+    padding: 1em 0;
 }
 
 
@@ -230,12 +241,16 @@ footer {
 
 .courtFilterBox {
     text-align: center;
+    height: 30px;       //56 px would match bar up top...
     background: $mavsGray2;
+    font-family: 'Permanent Marker', cursive;
 
     input {
         margin-bottom: 0.5em;
     }
 }
+
+
 
 .twoColumns {
     position: relative;
@@ -279,9 +294,10 @@ footer {
         margin-left: 1em;
         padding: 0.75em 1em;
         display: inline-block;
-        width: 100%;
+        width: 96.5%;
         color: $mavsBlack2;
         background-color: $mavsGray2;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .courtProfileInfo {
@@ -339,7 +355,7 @@ footer {
         h4 {
             margin-left: 1.4em;
             padding: 0.75em 1em;
-            width: 100%;
+            width: 96.5%;
             display: inline-block;
             color: $mavsBlack2;
             background-color: $mavsGray2;
@@ -368,8 +384,28 @@ footer {
 
 
 
+.offsetMiddleBar {
+    width: 100%;
+    text-align: center;
+    background: $mavsBlack2;
+    height: 30px;       //56 px would match bar up top...
+}
 
+.ifPostingAO {
+    margin-left: 2em;
+}
 
+.cPTU {
+
+    margin-left: 2em;
+    margin-bottom: 2em;
+
+    .courtPhotoToUpload {
+        height: 200px;
+        width: 200px;
+    }
+
+}
 
 
 

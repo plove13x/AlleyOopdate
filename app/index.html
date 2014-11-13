@@ -35,9 +35,10 @@
         <div class="everythingContainer">
             <header>
                 Who Got Next
-                    {{#if currentUser}} | {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>
+                    {{#if currentUser}} 
+                        <span>| </span>{{#link-to 'editProfile'}}Edit Profile{{/link-to}}<span> | </span><a href="" {{action "signOut"}}>Sign Out</a>
                     {{else}}
-                        | Language: <select><option>English</option></select> 
+                        <span>| </span>Language: <select><option>English</option></select> 
                     {{/if}} 
             
             </header>
@@ -200,16 +201,21 @@
                     <img src="/images/loading-map.gif" />
                 </div>
 
-                <div class="courtFilterBox">
-                    <label>Filter by Name</label>
-                    {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
-                    {{#unless isEditing}}
-                        | <button {{action "drawCourt"}}>Add a Court!</button>
-                    {{/unless}}
-
-                </div>
+                
                 <div class="twoColumns">
                     <div class="leftColumn">
+
+
+                        <div class="courtFilterBox">
+                            <label>Filter by Name</label>
+                            {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+                            {{#unless isEditing}}
+                                | <button {{action "drawCourt"}}>Add a Court!</button>
+                            {{/unless}}
+
+                        </div>
+
+
                         <h2>Courts</h2>
                             <ul>
                                 {{#if this.model}}
@@ -222,6 +228,10 @@
                             </ul>
                     </div><!--
                  --><div class="rightColumn">
+                        <div class="offsetMiddleBar">
+                        Court Profile
+                        </div>
+
                         {{#if isAddingCourt}}
                             {{input type="text" value=courtName placeholder="Court Name"}}
                             {{input type="text" value=newAddress placeholder="Court Address"}}
@@ -250,16 +260,26 @@
             
             <div class="courtHeaderSection">
                 <h2 class="courtProfileName">{{name}}</h2><span> </span>
-                <div class="alignRight AR1">{{#unless isEditingCourt}}
-                    <button {{action "editCourt"}}>Edit Court Profile</button></div>
-                </div> 
-                {{/unless}}
+                <div class="alignRight AR1">
+                    {{#unless isEditingCourt}}
+                        <button {{action "editCourt"}}>Edit Court Profile</button>         
+                    {{/unless}}
+                </div>    
             </div>
 
-
-
-            
             <div class="courtProfileInfo spaceBottom">
+
+                {{#if isEditingCourt}}
+                    <div>
+                        {{input type="text" value=name placeholder="Court Name"}}
+                        {{input type="text" value=address placeholder="Court Address"}}
+                        {{input type="text" value=whenClosed placeholder="When Closed"}}
+                        {{input type="text" value=otherNotes placeholder="Other Notes"}}
+                        <button {{action "updateCourt"}}>Update Court Profile</button>
+                        <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
+                    </div>
+                {{/if}}
+
                 <p>
                     <span class="blue">Address:</span> {{address}}
                 </p>
@@ -273,46 +293,51 @@
                 {{/if}}
             </div>
             
-            <h4>Recent Alley Oopdates</h4>
-            
 
-            {{#if isPosting}}
-                {{#if controller.isVerified}}
+            <div class="courtHeaderSection">
+                <h4>Recent Alley Oopdates</h4>
+            </div>
+            
+            <div class="ifPostingAO">
+                {{#if isPosting}}
+                    {{#if controller.isVerified}}
+                        <p>
+                            <label>How many people are there that seem down for a game?<span> </span></label>{{input type="text" value=numberPeeps}}
+                        </p>
+                    {{/if}}
+                    {{#unless controller.isVerified}}
+                        <p>
+                            <label>What time are you gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
+                        </p>
+                    {{/unless}}
                     <p>
-                        <label>How many people are there that seem down for a game?<span> </span></label>{{input type="text" value=numberPeeps}}
+                        <label>About what time would you guess you&#8217;re gonna leave?<span> </span></label>{{input type="text" value=departureGuess}}
+                    </p>
+                    {{#unless controller.isVerified}}
+                        <p>
+                            {{input type="checkbox" checked=moPeeps}}<label>Anybody coming with you?<span> </span></label>
+                            {{#if moPeeps}}
+                                
+                                    <label>Nice, how many ballers in total?<span> </span></label>{{input type="text" value=convoyQty}}
+                                
+                            {{/if}}
+                        </p>
+                    {{/unless}}
+                    <p>    
+                        <label>Anything else to say? (optional)<span> </span></label>{{input type="text" value=alleyOopdateText}}
+                    </p>
+
+                    <p>
+                        <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
+                        <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
                     </p>
                 {{/if}}
-                {{#unless controller.isVerified}}
-                    <p>
-                        <label>What time are you gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
-                    </p>
-                {{/unless}}
-                <p>
-                    <label>About what time would you guess you&#8217;re gonna leave?<span> </span></label>{{input type="text" value=departureGuess}}
-                </p>
-                {{#unless controller.isVerified}}
-                    <p>
-                        {{input type="checkbox" checked=moPeeps}}<label>Anybody coming with you?<span> </span></label>
-                        {{#if moPeeps}}
-                            
-                                <label>Nice, how many ballers in total?<span> </span></label>{{input type="text" value=convoyQty}}
-                            
-                        {{/if}}
-                    </p>
-                {{/unless}}
-                <p>    
-                    <label>Anything else to say? (optional)<span> </span></label>{{input type="text" value=alleyOopdateText}}
-                </p>
-
-                <p>
-                    <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
-                    <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
-                </p>
-            {{/if}}
-
+            </div>
 
             <div class="alleyOopdates spaceBottom">
-            <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
+            {{#unless isPosting}}
+                <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
+            {{/unless}}
                 <ul>        
                     {{#if alleyOopdates}}
                         {{#each alleyOopdates}}
@@ -363,8 +388,8 @@
                 </div>    
 
                 {{#if 'controller.newCourtPhoto'}}
-                    <div>
-                        Photo to upload: <img class="" {{bind-attr src=newCourtPhoto}}>
+                    <div class="cPTU">
+                        Photo to upload: <img class="courtPhotoToUpload" {{bind-attr src=newCourtPhoto}}>
                         <button {{action "uploadPhoto"}}>Upload this photo</button> 
                         <button {{action "cancelUploadPhoto"}}>Nope photo sux</button> 
                     </div>
