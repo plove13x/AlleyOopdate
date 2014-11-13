@@ -98,7 +98,7 @@
                         {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=40}} 
                     </div>
                     <div>    
-                        <button {{action "createUser"}}>Join "Who's Got Next!"</button>
+                        <button {{action "createUser"}}>Join "Who Got Next"!</button>
                     </div>
                 </form>
             </div>
@@ -108,7 +108,7 @@
 
     <script type="text/x-handlebars" data-template-name="welcome">
         <h1>You Got Next.</h1>
-        <p>{{#link-to 'editProfile'}}Add an avatar now?{{/link-to}}</p>
+        <p>{{#link-to 'editProfile' class='blackLink'}}Add an avatar now?{{/link-to}}</p>
         <button {{action "proceedToCourts"}}>I&#8217;m ready to ball</button>
     </script>
 
@@ -307,7 +307,7 @@
                     {{/if}}
                     {{#unless controller.isVerified}}
                         <p>
-                            <label>What time are you gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
+                            <label>What time do you think you are gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
                         </p>
                     {{/unless}}
                     <p>
@@ -315,7 +315,7 @@
                     </p>
                     {{#unless controller.isVerified}}
                         <p>
-                            {{input type="checkbox" checked=moPeeps}}<label>Anybody coming with you?<span> </span></label>
+                            {{input type="checkbox" checked=moPeeps}}<span> </span><label>Anybody coming with you?<span> </span></label>
                             {{#if moPeeps}}
                                 
                                     <label>Nice, how many ballers in total?<span> </span></label>{{input type="text" value=convoyQty}}

@@ -101,9 +101,10 @@ footer {
 
 .indexLeftColumn {
     display: inline-block;
-    width: 36%;
+    width: 40%;
     // font-family: 'Permanent Marker', cursive;
     font-family: 'Dosis', sans-serif;
+    margin-top: 1em;
     // font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
     // font-family: 'ea';
 }
@@ -116,7 +117,8 @@ footer {
 
 .indexRightColumn {
     display: inline-block;
-    width: 64%;
+    width: 58%;
+    margin-left: 1em;
     vertical-align: top;
 }
 
@@ -132,6 +134,14 @@ footer {
     padding: 1em;
     // background-color: fuchsia;
     background-color: $mavsBlack2;
+}
+
+
+// WELCOME STYLE
+
+.blackLink {
+    color: $mavsBlack2;
+    text-decoration: none;
 }
 
 
@@ -239,6 +249,12 @@ footer {
     // width: 100%;
 }
 
+
+.twoColumns {
+    position: relative;
+}
+
+
 .courtFilterBox {
     text-align: center;
     height: 30px;       //56 px would match bar up top...
@@ -250,11 +266,13 @@ footer {
     }
 }
 
-
-
-.twoColumns {
-    position: relative;
+.offsetMiddleBar {
+    width: 100%;
+    text-align: center;
+    background: $mavsBlack2;
+    height: 30px;       //56 px would match bar up top...
 }
+
 
 .leftColumn {
     display: inline-block;
@@ -314,7 +332,9 @@ footer {
         color: $mavsBlue2;
     }
 
-
+    .ifPostingAO {
+        margin-left: 2em;
+    }   
 
     .alleyOopdates {
         // font-family: 'Lato', sans-serif;
@@ -324,7 +344,7 @@ footer {
         font-style: italic;
 
         ul {
-            margin-top: 2em;
+            margin-top: 2.5em;
         }
     }
 
@@ -335,6 +355,18 @@ footer {
 
     .verified {
         font-family: 'Permanent Marker', cursive;    
+    }
+
+    .cPTU {
+
+        margin-left: 2em;
+        margin-bottom: 2em;
+
+        .courtPhotoToUpload {
+            height: 200px;
+            width: 200px;
+        }
+
     }
 
     .visualListItems {
@@ -384,39 +416,6 @@ footer {
 
 
 
-.offsetMiddleBar {
-    width: 100%;
-    text-align: center;
-    background: $mavsBlack2;
-    height: 30px;       //56 px would match bar up top...
-}
-
-.ifPostingAO {
-    margin-left: 2em;
-}
-
-.cPTU {
-
-    margin-left: 2em;
-    margin-bottom: 2em;
-
-    .courtPhotoToUpload {
-        height: 200px;
-        width: 200px;
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -427,6 +426,7 @@ footer {
   position: relative;
   text-align: center;
   padding: 0.6em 1em 0.55em 1em;
+  margin-top: 0.5em;
   margin-left: 13em;
   text-transform: uppercase;
   font-weight: 400;
