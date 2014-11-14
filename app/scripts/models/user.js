@@ -10,7 +10,7 @@
 	    password: DS.attr('string'),
 		alleyOopdates: DS.hasMany('alleyOopdate', { async: true }),
 		avatarUrl: DS.attr('string'),
-		// courts: DS.hasMany('court'),
+		courts: DS.hasMany('court'),
 		latitude: DS.attr('number'),
 		longitude: DS.attr('number'),
 		location: function(){

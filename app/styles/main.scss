@@ -33,6 +33,7 @@ $mavsGray2: RGBA(176, 174, 179, 1);
 button {
     background-color: $mavsBlue;
     font-family: 'Gruppo', cursive;
+    color: #F8F8F8;
 }
 
 a {
@@ -176,6 +177,11 @@ h1 {
     width: 300px;
     height: 300px;
     border-radius: 9px;    
+}
+
+.ePButton {
+    background-color: $mavsBlack2;
+    color: #F8F8F8;
 }
 
 
@@ -365,9 +371,9 @@ h1 {
 
 
         ul {
-            margin-top: 3em;
+            margin-top: 3.5em;
             list-style-type: none;
-            list-style-image: url('/images/oop.png'); 
+            list-style-image: url('/images/38394.png'); 
         }
 
         li {
@@ -382,24 +388,26 @@ h1 {
 
     .relative {
         position: relative;
-        margin-bottom: 3.5em;
+        margin-bottom: 2.5em;
     }
 
     .timestamp {
         font-family: 'Dosis', sans-serif;
         // font-family: 'Gruppo', cursive;
         font-weight: 700;
+        vertical-align: bottom;
     }
     
     .pMarker {
         font-family: 'Permanent Marker', cursive;  
         padding-right: 0.5em;
+        vertical-align: bottom;
     }
 
     .pushDown {
         display: inline-block;
         position: absolute;
-        top: 2em;
+        top: 0.5em;
     }
 
     .iB {
