@@ -373,46 +373,55 @@ h1 {
         ul {
             margin-top: 3.5em;
             list-style-type: none;
-            list-style-image: url('/images/38394.png'); 
+            // list-style-image: url('/images/38394.png'); 
         }
 
         li {
             margin-top: 3em;
-            margin-left: 2.5em;
+            margin-left: 0.5em;
         }
 
         p {
-            margin-left: 1.25em;
+            margin-left: 2em;
         }
     }
 
     .relative {
         position: relative;
         margin-bottom: 2.5em;
+
+        img {
+            vertical-align: middle;
+        }
     }
 
     .timestamp {
         font-family: 'Dosis', sans-serif;
         // font-family: 'Gruppo', cursive;
         font-weight: 700;
-        vertical-align: bottom;
+        // vertical-align: bottom;
     }
     
     .pMarker {
         font-family: 'Permanent Marker', cursive;  
         padding-right: 0.5em;
-        vertical-align: bottom;
+        // vertical-align: bottom;
     }
 
     .pushDown {
         display: inline-block;
         position: absolute;
-        top: 0.5em;
+        // top: 0.5em;
     }
 
     .iB {
         display: inline-block;
         font-style: normal;
+        vertical-align: top;
+
+        img {
+            vertical-align: top;
+        }
     }
 
     .userPhotoAO {
