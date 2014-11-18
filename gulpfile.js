@@ -105,7 +105,7 @@ gulp.task('deploy', function() {
 
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras']);
+gulp.task('build', ['html', 'images', 'fonts', 'extras', 'patFonts']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
