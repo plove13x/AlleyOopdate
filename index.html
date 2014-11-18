@@ -1,0 +1,474 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>WhozGotNext</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- This is where four unused lines of vendor.css and bower were removed -->
+
+        <link rel="stylesheet" href="styles/main.css">
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Lato:100,200,300,400,700,700italic|Dosis:400,500|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
+        <script src="scripts/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+<!-- Who Got Next
+                <div class="trNav">
+                    {{#link-to 'editProfile'}}Edit Profile{{/link-to}} | <button {{action "signOut"}}>Sign Out</button>
+                </div>-->
+    <script type="text/x-handlebars" data-template-name="application">    
+
+        <div class="everythingContainer">
+            <header>
+                Who Got Next
+                    {{#if currentUser}} 
+                        <span>| </span>{{#link-to 'editProfile'}}Edit Profile{{/link-to}}<span> | </span><a href="" {{action "signOut"}}>Sign Out</a>
+                    {{else}}
+                        <span>| </span>Language: <select><option>English</option></select> 
+                    {{/if}} 
+            
+            </header>
+
+            <div class="notHeader">
+
+                {{outlet}}
+
+                <footer>
+                    Who Got Next &#169; 2014 Pat Love
+                </footer>  
+
+            </div>  <!-- END NOT HEADER -->
+        </div>      <!-- END EVERYTHING CONTAINER -->
+
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name="index">
+        <div class="indexLeftColumn">
+            <div class="introText">
+                <h1>Who Got Next?</h1>
+                <p>
+                    Know where the action&#8217;s at before you go.
+                </p>
+                <p>
+                    Who Got Next takes the guesswork out finding a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
+                </p>
+            </div>
+            <div>
+                <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
+            </div>
+        </div><!--
+     --><div class="indexRightColumn">
+            <div class="signIn">
+                Sign in Yo!
+                <form>
+                    <div>
+                        {{input type="email" value=email placeholder="email"}}
+                    </div>
+                    <div>
+                        {{input type="password" value=password placeholder="password"}}
+                        <button {{action "signIn"}}>Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="register">
+                Never asked "Who Got Next?" before? Get in the game in ten seconds!
+                <form>
+                    <div>
+                        {{input type="email" value=emailNU placeholder="email"}}
+                    </div>
+                    <div>
+                        {{input type="password" value=passwordNU placeholder="password"}}
+                    </div>
+                    <div>
+                        {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=40}} 
+                    </div>
+                    <div>    
+                        <button {{action "createUser"}}>Join "Who Got Next"!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+
+
+    <!-- <button {{action "proceedToCourts"}}>I&#8217;m ready to ball</button> -->
+    <script type="text/x-handlebars" data-template-name="welcome">
+        <h1>You Got Next.</h1>
+        <p>Using You Got Next is easy. On the main page (where you&#8217;ll be in just a second), your current location will be geolocated and you will see a map that is marked up with courts nearby. Feel free to drag the circle around to see what&#8217;s just a little bit further away. Above and to the right of the map, you will also see an input box where you can reset the center of the map to anywhere in the world where people may be hoopin&#8217;.</p>
+        <p>
+        You can then click on either a marker on the map or the name of a court in the list on the bottom-left sector of the page. Once you&#8217;ve selected a court, its profile will load in the bottom-right region. In this section you&#8217;ll be able to see the court&#8217;s essential details as well as photos, vine videos, and Alley Oopdates that have been posted by users.
+        </p>
+        <p> 
+        The crux of Who Got Next is the Alley Oopdate. These allow ballers to see - before they even leave the crib or office - if there are people who are down to play pickup games who are either at or going to a certain court. When an Alley Oopdate is posted by a user from within viewing distance of the court, Who Got Next affixes a "Verified: at the Court!" label to the Alley Oopdate, and this user will be asked to report on how many people are actually at the court at that exact moment. Technology...wow.
+        </p>
+        <p>
+        You&#8217;ll get the hang of it quickly, so instead of any more small talk, let&#8217;s just hit the court. Welcome to Who Got Next.
+        </p>
+        <p>
+        {{#link-to 'editProfile' class='blackLink'}}Add an avatar now?{{/link-to}}<span> | </span>{{#link-to 'courts' class='blackLink'}}I&#8217;m ready to ball{{/link-to}}
+        </p>
+        
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name="editProfile">
+        <div>
+            Current Avatar: 
+            {{#if this.model.avatarUrl}}
+                <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
+            {{else}}
+                <img class="previousAvatar" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
+            {{/if}}
+            <button {{action "addAvatar"}} class="ePButton">Rip a new pic</button>
+            {{!log avatarUrl}}
+            {{#if avatarToUpload}}
+            Replace with:
+                <img class="avatarToUpload" {{bind-attr src=avatarToUpload}}>
+            {{/if}}
+
+
+        </div>
+        <div>
+            Tighten your Handle: 
+            {{input type="text" value=this.model.handle}}
+        </div>
+        <div>
+            Language: <select><option>English</option></select> 
+        </div>
+        <p>
+            <button {{action "updateProfile"}} class="ePButton">Update Profile</button>
+            <button {{action "doNotUpdate"}} class="ePButton">Cancel</button>
+        </p>
+    </script>
+
+
+
+
+
+                                    <!-- <img src="/images/sf-vehicles.png" /> -->
+
+
+
+                                    <!-- {{#unless 'controller.filteredContent'}}
+                                {{#if this.model}}
+                                    {{#each}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}}
+
+                            {{else}}
+                                {{#if this.model}}
+                                    {{#each filteredContent}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}}
+                            {{/unless}}
+ -->    <script type="text/x-handlebars" data-template-name="courts">
+    
+            <div class="secondaryBG">
+                <div class="hundo">
+                    <div class="jGo autoCenter">
+                        <img src='images/WGN_logo.png' />
+                    </div>
+                </div>
+                <div class="avatarBox">
+                {{#if currentUser.avatarUrl}}
+                    <img {{bind-attr src=currentUser.avatarUrl}}/>
+                {{else}}
+                    <img src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
+                {{/if}}
+
+                </div>
+                <div class="handleDisplay">
+                    <span>{{currentUser.handle}}</span>
+                </div>
+            </div>
+
+            <div class="navBar">
+                
+                <div class="ollie">
+
+                    <label>Set a new location:</label> {{input type="text" value=newSearchLocation placeholder="address"}} 
+                    <button {{action "updateQueryLocation"}}>Peep Courts</button><span> </span>
+
+                </div>
+            </div>
+            
+            <div class="mainSection">
+                <div id="pinnedMap">
+                    <img src="images/loading-map.gif" />
+                </div>
+
+                
+                <div class="twoColumns">
+                    <div class="leftColumn">
+
+
+                        <div class="courtFilterBox">
+                            <label>Filter by Name</label>
+                            {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+                            {{#unless isEditing}}
+                                | <button {{action "drawCourt"}}>Add a Court!</button>
+                            {{/unless}}
+
+                        </div>
+
+
+                        <h2>Courts</h2>
+                            <ul>
+                                {{#if this.model}}
+                                    {{#each filteredContent}}
+                                        <li><p>{{#link-to 'courts.profile' this}}{{name}}{{/link-to}}</p>{{address}}</li>
+                                    {{/each}}
+                                {{else}}
+                                    No Courts in this location yet. Maybe you should add one!
+                                {{/if}} 
+                            </ul>
+                    </div><!--
+                 --><div class="rightColumn">
+                        <div class="offsetMiddleBar">
+                        Court Profile
+                        </div>
+
+                        {{#if isAddingCourt}}
+                            {{input type="text" value=courtName placeholder="Court Name"}}
+                            {{input type="text" value=newAddress placeholder="Court Address"}}
+                            {{input type="text" value=whenClosed placeholder="When Closed"}}
+                            {{input type="text" value=otherNotes placeholder="Other Notes"}}
+                            <button {{action "submitCourt"}}>Add Court to Database</button>
+                            <button {{action "cancelSubmit"}}>Cancel</button>
+                        {{/if}}
+
+                        {{outlet}}
+                        
+                        {{#unless controllers.courtsProfile.model.name}}
+                            <button {{action "drawCourt"}}>Add a Court!</button>
+                        {{/unless}}
+                    </div>
+                </div>
+            </div>
+    </script>
+    <!-- {{#if 'controllers.session.currentUser'}} -->
+
+    <!--                      
+          // <h2 class="asdx">Court Profile</h2>  
+
+          <a href="#?" class="btn">Throw down a new Alley Oopdate!</a>-->
+    <script type="text/x-handlebars" data-template-name="courts/profile">
+            
+            <div class="courtHeaderSection">
+                <h2 class="courtProfileName">{{name}}</h2><span> </span>
+                <div class="alignRight AR1">
+                    {{#unless isEditingCourt}}
+                        <button {{action "editCourt"}}>Edit Court Profile</button>         
+                    {{/unless}}
+                </div>    
+            </div>
+
+            <div class="courtProfileInfo spaceBottom">
+
+                {{#if isEditingCourt}}
+                    <div>
+                        {{input type="text" value=name placeholder="Court Name"}}
+                        {{input type="text" value=address placeholder="Court Address"}}
+                        {{input type="text" value=whenClosed placeholder="When Closed"}}
+                        {{input type="text" value=otherNotes placeholder="Other Notes"}}
+                        <button {{action "updateCourt"}}>Update Court Profile</button>
+                        <button {{action "cancelCourtProfileUpdate"}}>Cancel</button>
+                    </div>
+                {{/if}}
+
+                <p>
+                    <span class="blue">Address:</span> {{address}}
+                </p>
+                <p>
+                    <span class="blue">Closes/Lights Go Off:</span> {{whenClosed}}
+                </p>    
+                {{#if otherNotes}}
+                    <p>
+                        <span class="blue">Other Notes:</span> {{otherNotes}}
+                    </p>
+                {{/if}}
+            </div>
+            
+
+            <div class="courtHeaderSection">
+                <h4>Recent Alley Oopdates</h4>
+            </div>
+            
+            <div class="ifPostingAO">
+                {{#if isPosting}}
+                    {{#if controller.isVerified}}
+                        <p>
+                            <label>How many people are there that seem down for a game?<span> </span></label>{{input type="text" value=numberPeeps}}
+                        </p>
+                    {{/if}}
+                    {{#unless controller.isVerified}}
+                        <p>
+                            <label>What time do you think you are gonna get to the court?<span> </span></label>{{input type="text" value=arrivalTime}}
+                        </p>
+                    {{/unless}}
+                    <p>
+                        <label>About what time would you guess you&#8217;re gonna leave?<span> </span></label>{{input type="text" value=departureGuess}}
+                    </p>
+                    {{#unless controller.isVerified}}
+                        <p>
+                            {{input type="checkbox" checked=moPeeps}}<span> </span><label>Anybody coming with you?<span> </span></label>
+                            {{#if moPeeps}}
+                                
+                                    <label>Nice, how many ballers in total?<span> </span></label>{{input type="text" value=convoyQty}}
+                                
+                            {{/if}}
+                        </p>
+                    {{/unless}}
+                    <p>    
+                        <label>Anything else to say? (optional)<span> </span></label>{{input type="text" value=alleyOopdateText}}
+                    </p>
+
+                    <p>
+                        <button {{action "postAlleyOopdate"}}>Post Alley Oopdate</button>
+                        <button {{action "cancelAlleyOopdate"}}>Nah Not Sure Yet</button>
+                    </p>
+                {{/if}}
+            </div>
+
+            <div class="alleyOopdates spaceBottom">
+            {{#unless isPosting}}
+                <div class="hundo">
+                    <div class="autoCenter">
+                        <a href="" {{action "addAlleyOopdate"}} class="btn">Throw down a new Alley Oopdate!</a>
+                    </div>
+                </div>
+            {{/unless}}
+                <ul>        
+                    {{#if alleyOopdates}}
+                        {{#each sortedOopdates}}
+                            <li>
+                                
+                                <div class="relative">
+                                    <img src="images/38394.png" /><span class="timestamp"> {{displayDate}} </span><span class="pMarker"> > </span>
+                                    <div class="pushDown">
+                                        <div class="iB">
+                                            {{user.handle}}
+                                            <div>AO: {{user.alleyOopdates.length}}</div>
+                                            <span> </span>
+                                        </div>
+                                        <div class="iB"><span> </span>
+                                            {{#if user.avatarUrl}}
+                                                <img class="userPhotoAO" {{bind-attr src=user.avatarUrl}} />
+                                            {{else}}
+                                                <img class="userPhotoAO" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
+                                            {{/if}}
+                                        </div>
+
+                                        {{#if verifiedAtCourt}}                                   
+                                            <div class="verified">VERIFIED: at the court!</div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                {{#if numberPeeps}}
+                                    <p>
+                                        <span class="blue">How many ballers are there right now?:</span> <span class="bold">{{numberPeeps}}</span>
+                                    </p>
+                                {{/if}}
+                                {{#if arrivalTime}}
+                                    <p>
+                                        <span class="blue">Player 
+                                            {{#if convoyQty}}
+                                                ({{convoyQty}} peeps in total)
+                                            {{/if}}
+                                        plans to arrive at court:</span> <span class="bold">{{arrivalTime}}</span>
+                                    </p>
+                                {{/if}}
+                                <p>
+                                    <span class="blue">Player Might Leave:</span> <span class="bold">{{departureGuess}}</span>
+                                </p>
+                                {{#if alleyOopdateText}}
+                                    <p>
+                                        <span class="blue">Comments:</span> <span class="bold">"{{alleyOopdateText}}"</span>
+                                    </p>
+                                {{/if}}
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        No recent Alley Oopdates for this court.
+                    {{/if}}
+                </ul>
+            </div>
+
+            <div class="courtPhotos spaceBottom">
+
+                <div class="courtHeaderSection">
+                    <h4>Recent Photos</h4><span> </span>
+                    <div class="alignRight AR2"><button {{action "pickPhotoToUpload"}}>Add a new photo of this court</button></div>
+                </div>    
+
+                {{#if 'controller.newCourtPhoto'}}
+                    <div class="cPTU">
+                        Photo to upload: <img class="courtPhotoToUpload" {{bind-attr src=newCourtPhoto}}>
+                        <button {{action "uploadPhoto"}}>Upload this photo</button> 
+                        <button {{action "cancelUploadPhoto"}}>Nope photo sux</button> 
+                    </div>
+                {{/if}}
+            
+                <div class="visualListItems">
+                    {{#each courtPhotos}}
+                        <img class="courtPhotoThumbnail" {{bind-attr src=content}}/>
+                    {{/each}}
+                </div>
+
+            </div> 
+
+            <div class="courtVines spaceBottom">
+
+                <div class="courtHeaderSection">
+                    <h4>Recent Vine Videos</h4><span> </span>
+                    <div class="alignRight AR2">{{input type="text" value=newVineUrl placeholder='new vine URL'}}<span> </span><button {{action "enterVineUrl"}}>Add a new vine of this court</button></div>
+                </div>
+            
+                <div class="visualListItems">
+                    {{#each courtVines}}
+                        <iframe class="vine-embed" {{bind-attr src=content}} width="250" height="250" frameborder="0"></iframe>
+                    {{/each}}
+                </div>
+
+            </div>
+            
+    </script>
+
+
+
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+
+
+
+
+        <script src="scripts/vendor.js"></script>
+
+
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+        <script src="scripts/main.js"></script>
+</body>
+</html>
