@@ -19,12 +19,14 @@ $mavsGray2: RGBA(176, 174, 179, 1);
 
 @font-face {
   font-family: 'aaaiight';
-  src: url('/styles/aaaiight/aaaiight.ttf');
+  src: url('../images/aaaiight/aaaiight.ttf');
 }
+
+// paths modified from url('/styles/aaaiight/...
 
 @font-face {
   font-family: 'ea';
-  src: url('/styles/ea_sports_covers_sc/EA Sports Covers SC 1.5.ttf');
+  src: url('../images/ea_sports_covers_sc/EA Sports Covers SC 1.5.ttf');
 }
 
 
@@ -189,7 +191,7 @@ h1 {
 
 .secondaryBG {
     position: relative;
-    background: url("/images/bballBGImage.png");
+    background: url("../images/bballBGImage.png");
     background: webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,.8)), color-stop(100%,rgba(0,0,0,.2))), url("http://www.dartmouthlakers.ca/wp-content/uploads/2012/03/basketball-texture-590x250.jpg");
     background-size: cover;
     height: 17em;       /* 250px */
