@@ -65,6 +65,17 @@ gulp.task('fonts', function () {
         .pipe($.size());
 });
 
+
+
+gulp.task('patFonts', function () {
+    return gulp.src('app/patFonts/**/*')
+        .pipe(gulp.dest('dist/patFonts'))
+        .pipe($.size());
+});
+
+
+
+
 gulp.task('extras', function () {
     return gulp.src(['app/*.*', '!app/*.html'], { dot: true })
         .pipe(gulp.dest('dist'));
@@ -146,7 +157,8 @@ gulp.task('watch', ['connect', 'serve'], function () {
         'app/*.html',
         '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
-        'app/images/**/*'
+        'app/images/**/*',
+        'app/patFonts/**/*'
     ]).on('change', function (file) {
         server.changed(file.path);
     });
@@ -154,5 +166,6 @@ gulp.task('watch', ['connect', 'serve'], function () {
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
+    gulp.watch('app/patFonts/**/*', ['patFonts']);
     gulp.watch('bower.json', ['wiredep']);
 });
