@@ -12,6 +12,11 @@
 		photos: Ember.computed.filterBy('model.courtVisuals', 'type', 'photo'),
 		oopdatesSorting: ['timestamp:desc'],
 		sortedOopdates: Ember.computed.sort('alleyOopdates', 'oopdatesSorting'),
+		init: function () {
+			this.set('isPosting', false);
+			// alert('Yo');
+		},
+
 		Haversine: function(){
 
 				var self = this;

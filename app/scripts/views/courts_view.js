@@ -183,7 +183,9 @@
 				google.maps.event.removeListener(l);
 			});
 			this.set('mapListeners', []);
-			this.geoQuery.cancel();
+			if (this.geoQuery) {
+				this.geoQuery.cancel();				
+			}
 			this.set('map', null);
 			this.set('controller.searchCoords', null);
 		},

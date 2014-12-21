@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>WhozGotNext</title>
+        <title>Alley Oopdate</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -12,7 +12,7 @@
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Lato:100,200,300,400,700,700italic|Dosis:400,500|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Dosis:400,500|Gruppo' rel='stylesheet' type='text/css'>
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -65,9 +65,9 @@
                     Alley Oopdate takes the guesswork out of finding a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
                 </p>
             </div>
-            <div>
-                <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
-            </div>
+
+
+
         </div><!--
      --><div class="indexRightColumn">
             <div class="signIn">
@@ -92,13 +92,16 @@
                         {{input type="password" value=passwordNU placeholder="password"}}
                     </div>
                     <div>
-                        {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=40}} 
+                        {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=35}} 
                     </div>
                     <div>    
                         <button {{action "createUser"}}>Join "Alley Oopdate"!</button>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="indexBtmSldr">
+            <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
         </div>
     </script>
 
@@ -222,7 +225,7 @@
 
                         <div class="courtFilterBox">
                             <label>Filter by Name</label>
-                            {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+                            {{input type='text' class='' size='17' value=courtFilter placeholder="Filter Courts by Name"}}
                             {{#unless isEditing}}
                                 | <button {{action "drawCourt"}}>Add a Court!</button>
                             {{/unless}}

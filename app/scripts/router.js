@@ -48,6 +48,11 @@
 		model: function(params){
 			return this.store.find('court', params.court_id);
 		},
+
+		setupController: function(controller, model){
+    		this._super(controller, model);
+			controller.set('isPosting', false);
+		}
 	});
 
 
