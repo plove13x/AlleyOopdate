@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>WhozGotNext</title>
+        <title>Alley Oopdate</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -10,7 +10,7 @@
         <!-- This is where four unused lines of vendor.css and bower were removed -->
 
         <link rel="stylesheet" href="styles/main.css">
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Lato:100,200,300,400,700,700italic|Dosis:400,500|Rokkitt:400,700|Titillium+Web:200,600,400|Gruppo' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Dosis:400,500|Gruppo' rel='stylesheet' type='text/css'>
         <script src="scripts/vendor/modernizr.js"></script>
     </head>
     <body>
@@ -27,7 +27,7 @@
 
         <div class="everythingContainer">
             <header>
-                Who Got Next
+                Alley Oopdate
                     {{#if currentUser}} 
                         <span>| </span>{{#link-to 'editProfile'}}Edit Profile{{/link-to}}<span> | </span><a href="" {{action "signOut"}}>Sign Out</a>
                     {{else}}
@@ -41,7 +41,7 @@
                 {{outlet}}
 
                 <footer>
-                    Who Got Next &#169; 2014 Pat Love
+                    Alley Oopdate &#169; 2014 Pat Love
                 </footer>  
 
             </div>  <!-- END NOT HEADER -->
@@ -53,17 +53,17 @@
     <script type="text/x-handlebars" data-template-name="index">
         <div class="indexLeftColumn">
             <div class="introText">
-                <h1>Who Got Next?</h1>
+                <h1>Who Got Next? ... Anyone?</h1>
                 <p>
                     Know where the action&#8217;s at before you go.
                 </p>
                 <p>
-                    Who Got Next takes the guesswork out finding a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
+                    Alley Oopdate takes the guesswork out of finding a good pickup hoops game. Simply search for courts around you and see where "Alley Oopdates" have been posted recently by other users. Gone are the days of wondering if it&#8217;s worth your while to hit up the park...just make sure you&#8217;re ready to ball.
                 </p>
             </div>
-            <div>
-                <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
-            </div>
+
+
+
         </div><!--
      --><div class="indexRightColumn">
             <div class="signIn">
@@ -79,7 +79,7 @@
                 </form>
             </div>
             <div class="register">
-                Never asked "Who Got Next?" before? Get in the game in ten seconds!
+                Never thrown down an "Alley Oopdate" before? Get in the game in ten seconds!
                 <form>
                     <div>
                         {{input type="email" value=emailNU placeholder="email"}}
@@ -88,13 +88,16 @@
                         {{input type="password" value=passwordNU placeholder="password"}}
                     </div>
                     <div>
-                        {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=40}} 
+                        {{input type="text" value=handleNU placeholder="handle (name you go by on the court)" size=35}} 
                     </div>
                     <div>    
-                        <button {{action "createUser"}}>Join "Who Got Next"!</button>
+                        <button {{action "createUser"}}>Join "Alley Oopdate"!</button>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="indexBtmSldr">
+            <img src="https://aloneinthegreenroom.files.wordpress.com/2010/12/white-men-cant_l_jpg.jpg" />
         </div>
     </script>
 
@@ -218,7 +221,7 @@
 
                         <div class="courtFilterBox">
                             <label>Filter by Name</label>
-                            {{input type='text' class='' value=courtFilter placeholder="Filter Courts by Name"}}
+                            {{input type='text' class='' size='17' value=courtFilter placeholder="Filter Courts by Name"}}
                             {{#unless isEditing}}
                                 | <button {{action "drawCourt"}}>Add a Court!</button>
                             {{/unless}}
