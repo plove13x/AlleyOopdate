@@ -600,6 +600,14 @@ h1 {
     .avatarBox, .handleDisplay {
         display: none;
     }
+
+    .rightColumn .pushDown {
+        display: block;
+    }
+
+    .rightColumn .relative {
+        margin-bottom: 5em;
+    }
 }
 
 @media (min-width: 666px) and (max-width: 866px) {
@@ -624,6 +632,16 @@ h1 {
 
     .rightColumn .visualListItems {
         margin-top: 2.5em;
+    }
+}
+
+@media (min-width: 666px) and (max-width: 1000px) {
+    .rightColumn .pushDown {
+        display: block;
+    }
+
+    .rightColumn .relative {
+        margin-bottom: 4em;
     }
 }
 
