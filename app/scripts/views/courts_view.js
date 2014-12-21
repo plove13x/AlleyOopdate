@@ -85,6 +85,10 @@
 				draggable: true
 			});
 
+			if ( $( window ).width() <= 1000 ) {
+				circle.radius = ((radiusInKm) * 500);
+			}
+
 			this.set('circle', circle);
 
 			//Update the query's criteria every time the circle is dragged
