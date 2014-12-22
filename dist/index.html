@@ -53,7 +53,7 @@
     <script type="text/x-handlebars" data-template-name="index">
         <div class="indexLeftColumn">
             <div class="introText">
-                <h1>Who Got Next? ... Anyone?</h1>
+                <h1>Who Got Next?</h1><h3> ... Anyone?</h3>
                 <p>
                     Know where the action&#8217;s at before you go.
                 </p>
@@ -76,6 +76,8 @@
                         {{input type="password" value=password placeholder="password"}}
                         <button {{action "signIn"}}>Sign In</button>
                     </div>
+                    <div class="sIError">
+                    </div>
                 </form>
             </div>
             <div class="register">
@@ -93,6 +95,8 @@
                     <div>    
                         <button {{action "createUser"}}>Join "Alley Oopdate"!</button>
                     </div>
+                    <div class="cUError">
+                    </div>
                 </form>
             </div>
         </div>
@@ -104,52 +108,55 @@
 
     <!-- <button {{action "proceedToCourts"}}>I&#8217;m ready to ball</button> -->
     <script type="text/x-handlebars" data-template-name="welcome">
+        <div class="welcomeContent">
         <h1>You Got Next.</h1>
-        <p>Using You Got Next is easy. On the main page (where you&#8217;ll be in just a second), your current location will be geolocated and you will see a map that is marked up with courts nearby. Feel free to drag the circle around to see what&#8217;s just a little bit further away. Above and to the right of the map, you will also see an input box where you can reset the center of the map to anywhere in the world where people may be hoopin&#8217;.</p>
+        <p>Using Alley Oopdate is easy. On the main page (where you&#8217;ll be in just a second), your current location will be geolocated and you will see a map that is marked up with courts nearby. Feel free to drag the circle around to see what&#8217;s just a little bit further away. Above and to the right of the map, you will also see an input box where you can reset the center of the map to anywhere in the world where people may be hoopin&#8217;.</p>
         <p>
         You can then click on either a marker on the map or the name of a court in the list on the bottom-left sector of the page. Once you&#8217;ve selected a court, its profile will load in the bottom-right region. In this section you&#8217;ll be able to see the court&#8217;s essential details as well as photos, vine videos, and Alley Oopdates that have been posted by users.
         </p>
         <p> 
-        The crux of Who Got Next is the Alley Oopdate. These allow ballers to see - before they even leave the crib or office - if there are people who are down to play pickup games who are either at or going to a certain court. When an Alley Oopdate is posted by a user from within viewing distance of the court, Who Got Next affixes a "Verified: at the Court!" label to the Alley Oopdate, and this user will be asked to report on how many people are actually at the court at that exact moment. Technology...wow.
+        Alley Oopdates allow ballers to see - before they even leave the crib or office - if there are people who are down to play pickup games who are either at or going to a certain court. When an Alley Oopdate is posted by a user from within viewing distance of the court, a "Verified: at the Court!" label will be affixed to this Alley Oopdate, and this user will be asked to report on how many people are actually at the court at that exact moment. Technology...wow.
         </p>
         <p>
-        You&#8217;ll get the hang of it quickly, so instead of any more small talk, let&#8217;s just hit the court. Welcome to Who Got Next.
+        You&#8217;ll get the hang of it quickly, so instead of any more small talk, let&#8217;s just hit the court.
         </p>
         <p>
         {{#link-to 'editProfile' class='blackLink'}}Add an avatar now?{{/link-to}}<span> | </span>{{#link-to 'courts' class='blackLink'}}I&#8217;m ready to ball{{/link-to}}
         </p>
-        
+        </div>
     </script>
 
 
     <script type="text/x-handlebars" data-template-name="editProfile">
-        <div>
-            Current Avatar: 
-            {{#if this.model.avatarUrl}}
-                <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
-            {{else}}
-                <img class="previousAvatar" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
-            {{/if}}
-            <button {{action "addAvatar"}} class="ePButton">Rip a new pic</button>
-            {{!log avatarUrl}}
-            {{#if avatarToUpload}}
-            Replace with:
-                <img class="avatarToUpload" {{bind-attr src=avatarToUpload}}>
-            {{/if}}
+        <div class="welcomeContent">
+            <div>
+                Current Avatar: 
+                {{#if this.model.avatarUrl}}
+                    <img class="avatarToUpload" {{bind-attr src=this.model.avatarUrl}}>
+                {{else}}
+                    <img class="previousAvatar" src="http://phoenixlivingonthecheap.com/wp-content/uploads/2013/09/basketball-square.jpg" />
+                {{/if}}
+                <button {{action "addAvatar"}} class="ePButton">Rip a new pic</button>
+                {{!log avatarUrl}}
+                {{#if avatarToUpload}}
+                Replace with:
+                    <img class="avatarToUpload" {{bind-attr src=avatarToUpload}}>
+                {{/if}}
 
 
+            </div>
+            <div>
+                Tighten your Handle: 
+                {{input type="text" value=this.model.handle}}
+            </div>
+            <div>
+                Language: <select><option>English</option></select> 
+            </div>
+            <p>
+                <button {{action "updateProfile"}} class="ePButton">Update Profile</button>
+                <button {{action "doNotUpdate"}} class="ePButton">Cancel</button>
+            </p>
         </div>
-        <div>
-            Tighten your Handle: 
-            {{input type="text" value=this.model.handle}}
-        </div>
-        <div>
-            Language: <select><option>English</option></select> 
-        </div>
-        <p>
-            <button {{action "updateProfile"}} class="ePButton">Update Profile</button>
-            <button {{action "doNotUpdate"}} class="ePButton">Cancel</button>
-        </p>
     </script>
 
 
@@ -178,12 +185,15 @@
                                     No Courts in this location yet. Maybe you should add one!
                                 {{/if}}
                             {{/unless}}
- -->    <script type="text/x-handlebars" data-template-name="courts">
+ -->    
+
+        <!-- <img src='images/WGN_logo.png' /> -->
+        <script type="text/x-handlebars" data-template-name="courts">
     
             <div class="secondaryBG">
                 <div class="hundo">
                     <div class="jGo autoCenter">
-                        <img src='images/WGN_logo.png' />
+                        <img src='images/silhBall.png' />
                     </div>
                 </div>
                 <div class="avatarBox">
@@ -381,10 +391,13 @@
                                         {{/if}}
                                     </div>
                                 </div>
+
                                 {{#if numberPeeps}}
+
                                     <p>
                                         <span class="blue">How many ballers are there right now?:</span> <span class="bold">{{numberPeeps}}</span>
                                     </p>
+
                                 {{/if}}
                                 {{#if arrivalTime}}
                                     <p>
