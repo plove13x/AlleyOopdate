@@ -64,6 +64,7 @@ body {
     background: #F8F8F8;    // #F6F5F6;    // #FDFEFF;
     font-family: 'Permanent Marker', "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: $mavsBlue;     // #333;
+    margin: 0;
 }
 
 * {
@@ -120,12 +121,12 @@ footer {
     // font-family: 'Rokkitt', serif;      // affecting both pages, maybe take out
     // font-family: 'ea';
 
-    p:nth-child(2) {
+    p:nth-child(3) {
         margin-top: 2em;
     }
 }
 
-.introText h1 {
+.introText h1, h3 {
     color: $mavsBlack;
     text-align: center;
     font-family: 'aaaiight', cursive; 
@@ -150,6 +151,11 @@ footer {
     padding: 1em;
     // background-color: fuchsia;
     background-color: $mavsBlack2;
+}
+
+.sIError, .cUError {
+    padding-top: 0.5em;
+    font-family: 'Dosis', sans-serif;
 }
 
 .indexBtmSldr {
@@ -594,7 +600,7 @@ h1 {
 
 @media (max-width: 665px) {
     #pinnedMap {
-        width: 87.5%;
+        width: 85%;
     }
 
     .avatarBox, .handleDisplay {
@@ -612,7 +618,7 @@ h1 {
 
 @media (min-width: 666px) and (max-width: 866px) {
     #pinnedMap {
-        width: 80%;
+        width: 75%;
     }
 }
 
@@ -646,7 +652,21 @@ h1 {
 }
 
 
-// INDEX MEDIA QUERIES
+// INDEX/WELCOME/EDIT PROFILE MEDIA QUERIES
+
+@media (min-width: 689px) and (max-width: 1024px) {
+    .indexLeftColumn {
+        padding-left: 1em;
+    }
+
+    .indexRightColumn {
+        padding-right: 1em;
+    }
+
+    .welcomeContent {
+        margin: 0 1em;
+    }
+}
 
 @media (max-width: 688px) {
 
@@ -664,6 +684,10 @@ h1 {
 
     .indexBtmSldr {
         width: 85%;
+    }
+
+    .welcomeContent {
+        margin: 0 1em;
     }
 
 }

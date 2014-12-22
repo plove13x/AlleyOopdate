@@ -39,7 +39,8 @@
 							});
 
 	            		} else {
-	            			console.log('error!');
+	            			$('.cUError').html(error);
+	            			console.log(error);
 	            		}
 	            	});
 		        });
@@ -61,7 +62,8 @@
 									self.transitionToRoute('courts');	
 								});
 							} else {
-								console.log('error!');
+								$('.sIError').html(error);
+								console.log(error);
 							}
 						});	
 					});

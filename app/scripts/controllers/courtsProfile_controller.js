@@ -183,18 +183,26 @@
 
 			enterVineUrl: function(){
 				var newVineUrl = this.get('newVineUrl');
-				var vine = this.store.createRecord('courtVine', {
-					user: this.get('controllers.session.currentUser'),
-					court: this.model,
-					content: newVineUrl+'/embed/simple?audio=1'
-				});
+				var reqStr = 'https://vine.co/v/';
 
-				this.get('model.courtVines').addObject(vine);
-				// this.get('courtVines').addObject(vine);
-				vine.save();
-      			this.model.save();
-      			// this.get('model').save();
-				this.set('newVineUrl', '');
+				if (newVineUrl.indexOf(reqStr) >= 0) { 
+
+					var vine = this.store.createRecord('courtVine', {
+						user: this.get('controllers.session.currentUser'),
+						court: this.model,
+						content: newVineUrl+'/embed/simple?audio=1'
+					});
+
+					this.get('model.courtVines').addObject(vine);
+					// this.get('courtVines').addObject(vine);
+					vine.save();
+	      			this.model.save();
+	      			// this.get('model').save();
+					this.set('newVineUrl', '');
+
+				} else {
+					alert('There seems to be a problem with your Vine link. All Vines start with "https://vine.co/v/", followed by a distinct identifier code for that video. For example, "https://vine.co/v/hw5D7dhHlD7" is correctly formatted (but don\'t include the quote marks when you submit the link). Feel free to try again: YOU CAN DO IT!');
+				}
 			}
 
 		}
